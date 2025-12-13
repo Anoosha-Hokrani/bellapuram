@@ -57,62 +57,63 @@ function toggleCode(id){
         <div class="title">Smart Waste Collection & Recycling Management</div>
         <p>Problem statement:Bellapuram requires an intelligent waste management system that can efficiently register waste sources, prioritize hazardous waste, and monitor both city and aquatic pollution levels in real time.
 The system must optimize truck routing, recycling plant allocation, and marine waste network construction using fast, scalable algorithms without vectors.
-It should support high-speed searching, sorting, and reporting across industrial, household, and ocean-based waste logs while ensuring low operational cost and maximum sustainability.
+It should support high-speed searching, sorting, and reporting across industrial, household, and ocean-based waste logs while ensuring low operational cost and maximum sustainability. </p>
 
-🟦 1. Waste Source Registry (AVL Tree)
-Algorithm: AVL Tree
-Reason: Fast O(log n) insert/search for households, industries, ports, sea aquatic waste nodes; no vectors.
+<p>
+<p>🟦 1. Waste Source Registry (AVL Tree)</p>
+<p>Algorithm: AVL Tree</p>
+<p>Reason: Fast O(log n) insert/search for households, industries, ports, sea aquatic waste nodes; no vectors.</p>
 
-🟩 2. Waste Type Priority (Max-Heap)
-Algorithm: Max-Heap
-Reason: Collect highest-priority waste first (medical > chemical > marine plastic > household).
+<p>🟩 2. Waste Type Priority (Max-Heap)</p>
+<p>Algorithm: Max-Heap</p>
+<p>Reason: Collect highest-priority waste first (medical > chemical > marine plastic > household).</p>
 
-🟧 3. Sea Aquatic Waste Tracking (Min-Heap)
-Algorithm: Min-Heap
-Reason: Quickly identify lowest-quantity ocean pollution zones for early warnings.
+<p>🟧 3. Sea Aquatic Waste Tracking (Min-Heap)</p>
+<p>Algorithm: Min-Heap</p>
+<p>Reason: Quickly identify lowest-quantity ocean pollution zones for early warnings.</p>
 
-🟨 4. Route Optimization (Dijkstra / Bellman–Ford / Floyd)
-Algorithm:
-Dijkstra → positive weights
-Bellman–Ford → negative penalties (toll/traffic)
-Floyd–Warshall → all-pairs
-Reason: Fastest routes for trucks from waste bins → recycling → factories (array-based graphs).
+<p>🟨 4. Route Optimization (Dijkstra / Bellman–Ford / Floyd)</p>
+<p>Algorithm:</p>
+<p>Dijkstra → positive weights</p>
+<p>Bellman–Ford → negative penalties (toll/traffic)</p>
+<p>Floyd–Warshall → all-pairs</p>
+<p>Reason: Fastest routes for trucks from waste bins → recycling → factories (array-based graphs).</p>
 
-🟥 5. Recycling Plant Selection (Min-Heap)
-Algorithm: Min-Heap
-Reason: Choose plant with lowest cost/load/distance.
+<p>🟥 5. Recycling Plant Selection (Min-Heap)</p>
+<p>Algorithm: Min-Heap</p>
+<p>Reason: Choose plant with lowest cost/load/distance.</p>
 
-🟫 6. Industrial Waste Logs (Merge Sort)
-Algorithm: Merge Sort
-Reason: Sort waste quantities/toxicity for daily reporting; O(n log n).
+<p>🟫 6. Industrial Waste Logs (Merge Sort)</p>
+<p>Algorithm: Merge Sort</p>
+<p>Reason: Sort waste quantities/toxicity for daily reporting; O(n log n).</p>
 
-🟪 7. Factory Production Registry (Red–Black Tree)
-Algorithm: Red–Black Tree
-Reason: Quick O(log n) lookup of recycling output (plastic pellets, biomass fuel, marine polymer products).
+<p>🟪 7. Factory Production Registry (Red–Black Tree)</p>
+<p>Algorithm: Red–Black Tree</p>
+<p>Reason: Quick O(log n) lookup of recycling output (plastic pellets, biomass fuel, marine polymer products).</p>
 
-🟦 8. Pattern Matching in Reports (KMP)
-Algorithm: KMP
-Reason: Fast search for terms like “plastic”, “hazardous”, “marine spill” inside long logs.
+<p>🟦 8. Pattern Matching in Reports (KMP)</p>
+<p>Algorithm: KMP</p>
+<p>Reason: Fast search for terms like “plastic”, “hazardous”, “marine spill” inside long logs.</p>
 
-🟫 9. Truck Assignment Sorting (Selection / Quick Sort)
-Algorithm: Selection Sort or Quick Sort
-Reason: Sort trucks by capacity, battery %, speed; no vectors required.
+<p>🟫 9. Truck Assignment Sorting (Selection / Quick Sort)</p>
+<p>Algorithm: Selection Sort or Quick Sort</p>
+<p>Reason: Sort trucks by capacity, battery %, speed; no vectors required.</p>
 
-🟩 10. Aquatic Waste Collection Network (Kruskal / Prim)
-Algorithm: Kruskal + Prim (MST)
-Reason: Build lowest-cost marine waste buoy→boat→dock network.
+<p>🟩 10. Aquatic Waste Collection Network (Kruskal / Prim)</p>
+<p>Algorithm: Kruskal + Prim (MST)</p>
+<p>Reason: Build lowest-cost marine waste buoy→boat→dock network.</p>
 
-🟦 11. System Report Generation (Merge Sort + Tree Traversal)
-Algorithm: Merge Sort + Inorder Traversal
-Reason: Sorted city + sea waste reports by zone, date, industry
+<p>🟦 11. System Report Generation (Merge Sort + Tree Traversal)</p>
+<p>Algorithm: Merge Sort + Inorder Traversal</p>
+<p>Reason: Sorted city + sea waste reports by zone, date, industry</p>
 
-🌱 Sustainable Development Goals (SDGs)
-SDG 11: Sustainable Cities and Communities – promotes waste reduction and urban sustainability.
-SDG 12: Responsible Consumption and Production – recycling and reducing waste.
-SDG 14: Life Below Water – reduces sea/river pollution.
-SDG 6: Clean Water and Sanitation – prevents contamination from waste.
+<p>🌱 Sustainable Development Goals (SDGs)</p>
+<p>SDG 11: Sustainable Cities and Communities – promotes waste reduction and urban sustainability.</p>
+<p>SDG 12: Responsible Consumption and Production – recycling and reducing waste.</p>
+<p>SDG 14: Life Below Water – reduces sea/river pollution.</p>
+<p>SDG 6: Clean Water and Sanitation – prevents contamination from waste.</p>
 
-.</p>
+
         <div class="code-button" onclick="toggleCode('wasteCode')">Show Code</div>
         <div id="wasteCode" class="code-section">
 #include <bits/stdc++.h>
@@ -1042,37 +1043,37 @@ void loadFactoriesCSV(const char* fname) {
         <div class="title">Smart Parking System</div>
         <p>Bellapuram’s commercial and entertainment zones need an intelligent parking system that can quickly assign vehicles to the best available slot while handling VIP, EV, and cold-chain requirements.
 The system must track slots, prioritize special vehicles, guide drivers using shortest-path routing, and ensure sensor-based safety before allocation.
-Its goal is to reduce congestion, speed up slot discovery, and generate accurate occupancy and billing reports.
+Its goal is to reduce congestion, speed up slot discovery, and generate accurate occupancy and billing reports.</p>
 
-🅿 Parking Slot Registry
-AVL Tree
-Fast O(log n) insertion/search; handles reserved/EV/cold-chain slots.
+<p>🅿 Parking Slot Registry</p>
+<p>AVL Tree</p>
+<p>Fast O(log n) insertion/search; handles reserved/EV/cold-chain slots.</p>
 
-🌟 VIP / Special Car Queue
-Max Heap
-Prioritizes VIP, EV, cold-chain vehicles for assignment.
+<p>🌟 VIP / Special Car Queue</p>
+<p>Max Heap</p>
+<p>Prioritizes VIP, EV, cold-chain vehicles for assignment.</p>
 
-🚗 Shortest Path Routing
-Dijkstra (adjacency matrix)
-Guides cars to nearest available slot (multi-zone).
+<p>🚗 Shortest Path Routing</p>
+<p>Dijkstra (adjacency matrix)</p>
+<p>Guides cars to nearest available slot (multi-zone).</p>
 
-📝 Parking Reports / Billing
-Merge Sort
-Generates sorted reports by occupancy or revenue.
+<p>📝 Parking Reports / Billing</p>
+<p>Merge Sort</p>
+<p>Generates sorted reports by occupancy or revenue.</p>
 
-🔔 Sensor Alerts / Preventive Measures
-Slot struct contains sensor flag; prevents assignment to blocked/over-occupied slots.
+<p>🔔 Sensor Alerts / Preventive Measures</p>
+<p>Slot struct contains sensor flag; prevents assignment to blocked/over-occupied slots.</p>
 
-⚡ EV & Cold-Chain Vehicles
-Slot attributes ev and coldchain; ensures proper zone assignment.
+<p>⚡ EV & Cold-Chain Vehicles</p>
+<p>Slot attributes ev and coldchain; ensures proper zone assignment.</p>
 
-⏱ Time-Based Billing
-Revenue = timeIn * rate; tracks per-car occupancy.
+<p>⏱ Time-Based Billing</p>
+<p>Revenue = timeIn * rate; tracks per-car occupancy.</p>
 
-🌱 Sustainable Development Goals (SDGs)
-SDG 11: Sustainable Cities and Communities – reduces congestion and optimizes urban mobility.
-SDG 7: Affordable and Clean Energy – includes EV charging stations for clean transport.
-SDG 9: Industry, Innovation, and Infrastructure – smart infrastructure for parking management.
+<p>🌱 Sustainable Development Goals (SDGs)<p>
+<p>SDG 11: Sustainable Cities and Communities – reduces congestion and optimizes urban mobility.</p>
+<p>SDG 7: Affordable and Clean Energy – includes EV charging stations for clean transport.</p>
+<p>SDG 9: Industry, Innovation, and Infrastructure – smart infrastructure for parking management.
 
 </p>
         <div class="code-button" onclick="toggleCode('parkingCode')">Show Code</div>
@@ -1332,48 +1333,48 @@ int main(){
         <p>Probkem statement: Bellapuram needs a smart system to manage solar and wind energy efficiently across all zones.
 The grid must prioritize high-output plants, detect low production quickly, and balance energy distribution.
 It should maintain a fast plant registry and support real-time routing with minimal power loss.
+</p>
+<p>1. Power Plant Priority</p>
+<p>Algorithm Used: Max Heap</p>
+<p>Purpose:</p>
+<p>Selects the highest-producing solar or wind plant first.</p>
+<p>Ensures the grid pulls energy from the most efficient source.</p>
+<p>Useful during peak hours to maximize output.</p>
 
-1. Power Plant Priority
-Algorithm Used: Max Heap
-Purpose:
-Selects the highest-producing solar or wind plant first.
-Ensures the grid pulls energy from the most efficient source.
-Useful during peak hours to maximize output.
+<p>2. Solar/Wind Production Logs</p>
+<p>Algorithm Used: Min Heap</p>
+<p>Purpose:</p>
+<p>Identifies the lowest-producing plant immediately.</p>
+<p>Helps detect performance degradation.</p>
+<p>Supports automatic maintenance scheduling.</p>
 
-2. Solar/Wind Production Logs
-Algorithm Used: Min Heap
-Purpose:
-Identifies the lowest-producing plant immediately.
-Helps detect performance degradation.
-Supports automatic maintenance scheduling.
+3. Load Distribution Across City</p>
+<p>Algorithm Used: Dijkstra OR Bellman-Ford (no vectors, array-only implementation)</p>
+<p>Purpose:</p>
+<p>Computes the shortest-loss electrical path from plant → zone.</p>
+<p>Balances loads across residential, industrial, and commercial areas.</p>
+<p>Prevents overload on specific grid lines.</p>
 
-3. Load Distribution Across City
-Algorithm Used: Dijkstra OR Bellman-Ford (no vectors, array-only implementation)
-Purpose:
-Computes the shortest-loss electrical path from plant → zone.
-Balances loads across residential, industrial, and commercial areas.
-Prevents overload on specific grid lines.
+<p>4. Sorting of Daily Power Generation</p>
+<p>Algorithm Used: Merge Sort (no vectors, pure array)</p>
+<p>Purpose:</p>
+<p>Sorts daily solar/wind energy records.</p>
+<p>Helps grid operators generate reports.</p>
+<p>Stable and efficient for large datasets.</p>
 
-4. Sorting of Daily Power Generation
-Algorithm Used: Merge Sort (no vectors, pure array)
-Purpose:
-Sorts daily solar/wind energy records.
-Helps grid operators generate reports.
-Stable and efficient for large datasets.
+<p>5. Plant Registry & Database</p>
+<p>Algorithm Used: AVL Tree</p>
+<p>Purpose:</p>
+<p>Stores and searches all solar and wind plants efficiently.</p>
+<p>Ensures O(log n) lookup for:</p>
+<p>Fault detection</p>
+<p>Updating plant output</p>
+<p>Adding new renewable stations</p>
 
-5. Plant Registry & Database
-Algorithm Used: AVL Tree
-Purpose:
-Stores and searches all solar and wind plants efficiently.
-Ensures O(log n) lookup for:
-Fault detection
-Updating plant output
-Adding new renewable stations
-
-🌱 Sustainable Development Goals (SDGs)
-SDG 7: Affordable and Clean Energy – promotes renewable energy generation.
-SDG 13: Climate Action – reduces carbon emissions by replacing fossil fuels.
-SDG 9: Industry, Innovation, and Infrastructure – smart energy grids enhance infrastructure.
+<p>🌱 Sustainable Development Goals (SDGs)</p>
+<p>SDG 7: Affordable and Clean Energy – promotes renewable energy generation.</p>
+<p>SDG 13: Climate Action – reduces carbon emissions by replacing fossil fuels.</p>
+<p>SDG 9: Industry, Innovation, and Infrastructure – smart energy grids enhance infrastructure.
 
 </p>
         <div class="code-button" onclick="toggleCode('energyCode')">Show Code</div>
@@ -1713,47 +1714,47 @@ int main() {
         <p>Problem statement: Bellapuram Port requires an intelligent cargo management system that can efficiently prioritize, store, track, and route thousands of shipments daily.
 The system must optimize port operations—including berthing, container handling, storage, and inland cargo movement—using fast data-structure-based decision making.
 It should ensure real-time cargo prioritization, rapid search and scheduling, and optimal routing to minimize delays across the entire logistics chain.
+</p>
+<p>📦 Cargo Priority Handling – Max Heap</p>
+<p>Manages cargo based on priority score (perishables, urgent shipments).</p>
+<p>Max-Heap ensures O(log n) insertion & extraction of highest priority cargo.</p>
 
-📦 Cargo Priority Handling – Max Heap
-Manages cargo based on priority score (perishables, urgent shipments).
-Max-Heap ensures O(log n) insertion & extraction of highest priority cargo.
+<p>🏗️ Container Storage & Organization – AVL Tree</p>
+<p>Stores container IDs in balanced tree for fast O(log n) insert/search.</p>
+<p>Keeps warehouse management efficient and avoids unbalanced storage delays.</p>
 
-🏗️ Container Storage & Organization – AVL Tree
-Stores container IDs in balanced tree for fast O(log n) insert/search.
-Keeps warehouse management efficient and avoids unbalanced storage delays.
+<p>🔍 Cargo Search Index – Red-Black Tree</p>
+<p>Allows quick lookup of cargo by ID in O(log n).</p>
+<p>Efficient for queries and tracking shipment locations.</p>
 
-🔍 Cargo Search Index – Red-Black Tree
-Allows quick lookup of cargo by ID in O(log n).
-Efficient for queries and tracking shipment locations.
+<p>📜 Manifest Sorting – QuickSort (array-based)</p>
+<p>Sorts cargo manifest by ID for easy reporting & retrieval.</p>
+<p>O(n log n) average performance, no vectors used.</p>
 
-📜 Manifest Sorting – QuickSort (array-based)
-Sorts cargo manifest by ID for easy reporting & retrieval.
-O(n log n) average performance, no vectors used.
+<p>⚓ Berth Assignment & Scheduling – Min Heap</p>
+<p>Assigns ships to earliest available berth.</p>
+<p>Min-Heap ensures fastest assignment and updates berth availability efficiently.</p>
 
-⚓ Berth Assignment & Scheduling – Min Heap
-Assigns ships to earliest available berth.
-Min-Heap ensures fastest assignment and updates berth availability efficiently.
+<p>🛣️ Truck / Cargo Routing – Dijkstra (array + custom min-heap)</p>
+<p>Finds shortest route from port to warehouse/warehouse to city.</p>
+<p>Supports planning optimal cargo delivery routes without vectors.</p>
 
-🛣️ Truck / Cargo Routing – Dijkstra (array + custom min-heap)
-Finds shortest route from port to warehouse/warehouse to city.
-Supports planning optimal cargo delivery routes without vectors.
+<p>🌐 Graph Representation – Adjacency Matrix</p>
+<p>Represents port and city network.</p>
+<p>Fast edge access, simple fixed-size array for small-medium networks.</p>
 
-🌐 Graph Representation – Adjacency Matrix
-Represents port and city network.
-Fast edge access, simple fixed-size array for small-medium networks.
+<p>💡 Path Retrieval – Parent array</p>
+<p>Reconstructs shortest path for cargo delivery.</p>
+<p>No dynamic arrays needed, simple fixed-size implementation.</p>
 
-💡 Path Retrieval – Parent array
-Reconstructs shortest path for cargo delivery.
-No dynamic arrays needed, simple fixed-size implementation.
+<p>📝 Key Advantages & Reasoning</p>
+<p>O(log n) operations for heap/tree → efficient cargo management.</p>
+<p>Sorting & routing algorithms ensure timely and cost-effective delivery.</p>
 
-📝 Key Advantages & Reasoning
-O(log n) operations for heap/tree → efficient cargo management.
-Sorting & routing algorithms ensure timely and cost-effective delivery.
-
-🌱 Sustainable Development Goals (SDGs)
-SDG 8: Decent Work and Economic Growth – efficient logistics supports trade and jobs.
-SDG 9: Industry, Innovation, and Infrastructure – modern port and cargo systems.
-SDG 12: Responsible Consumption and Production – optimized logistics reduces waste/energy use.
+<p>🌱 Sustainable Development Goals (SDGs)</p>
+<p>SDG 8: Decent Work and Economic Growth – efficient logistics supports trade and jobs.</p>
+<p>SDG 9: Industry, Innovation, and Infrastructure – modern port and cargo systems.</p>
+<p>SDG 12: Responsible Consumption and Production – optimized logistics reduces waste/energy use.
 
 </p>
         <div class="code-button" onclick="toggleCode('portCode')">Show Code</div>
@@ -2266,42 +2267,42 @@ int main() {
         <p>Bellapuram requires an intelligent transport routing system that can efficiently guide commuters across buses, metros, and feeder routes.
 The system must account for dynamic factors like traffic congestion, toll penalties, and network connectivity.
 It should provide both real-time shortest paths and robust route planning across the entire city-wide mobility network.
+</p>
+<p>🚦 Shortest Route – Dijkstra</p>
+<p>Finds the quickest path from a source to all destinations.</p>
+<p>Efficient for positive travel times between city nodes.</p>
 
-🚦 Shortest Route – Dijkstra
-Finds the quickest path from a source to all destinations.
-Efficient for positive travel times between city nodes.
+<p>🛣️ Routes with Penalties – Bellman-Ford</p>
+<p>Computes paths even with negative weights like traffic fines, toll discounts, or delays.</p>
+<p>Ensures optimal route selection under varying conditions.</p>
 
-🛣️ Routes with Penalties – Bellman-Ford
-Computes paths even with negative weights like traffic fines, toll discounts, or delays.
-Ensures optimal route selection under varying conditions.
+<p>🌐 Network Exploration – BFS / DFS</p>
+<p>Traverses the transport network to check connectivity.</p>
+<p>Useful for identifying reachable areas or planning new connections.</p>
 
-🌐 Network Exploration – BFS / DFS
-Traverses the transport network to check connectivity.
-Useful for identifying reachable areas or planning new connections.
+<p>📊 All-Pairs Shortest Paths – Floyd-Warshall</p>
+<p>Finds shortest paths between every pair of nodes.</p>
+<p>Useful for traffic prediction, planning alternative routes, and route optimization.</p>
 
-📊 All-Pairs Shortest Paths – Floyd-Warshall
-Finds shortest paths between every pair of nodes.
-Useful for traffic prediction, planning alternative routes, and route optimization.
+<p>📋 Graph Representation – Adjacency Matrix</p>
+<p>Stores distances between all nodes in a fixed-size 2D array.</p>
+<p>Fast access, simple implementation, suitable for small-medium city graphs.</p>
 
-📋 Graph Representation – Adjacency Matrix
-Stores distances between all nodes in a fixed-size 2D array.
-Fast access, simple implementation, suitable for small-medium city graphs.
+<p>🔢 Distance & Visited Tracking – Arrays</p>
+<p>Keeps track of shortest distances and visited nodes efficiently.</p>
+<p>Fixed memory usage, easy to implement without vectors.</p>
 
-🔢 Distance & Visited Tracking – Arrays
-Keeps track of shortest distances and visited nodes efficiently.
-Fixed memory usage, easy to implement without vectors.
+<p>🛠️ Queue for BFS – Array-based Queue</p>
+<p>Ensures FIFO processing of nodes for level-order traversal.</p>
+<p>Lightweight and predictable memory usage.</p>
 
-🛠️ Queue for BFS – Array-based Queue
-Ensures FIFO processing of nodes for level-order traversal.
-Lightweight and predictable memory usage.
+<p>💡 Efficiency Notes</p>
+<p>Algorithms run in O(V^2) (Dijkstra with arrays) or O(V^3) (Floyd-Warshall).</p>
 
-💡 Efficiency Notes
-Algorithms run in O(V^2) (Dijkstra with arrays) or O(V^3) (Floyd-Warshall).
-
-🌱 Sustainable Development Goals (SDGs)
-SDG 11: Sustainable Cities and Communities – efficient public transit reduces traffic congestion.
-SDG 13: Climate Action – minimizes carbon footprint of transportation.
-SDG 9: Industry, Innovation, and Infrastructure – smart transport management infrastructure.
+<p>🌱 Sustainable Development Goals (SDGs)</p>
+<p>SDG 11: Sustainable Cities and Communities – efficient public transit reduces traffic congestion.</p>
+<p>SDG 13: Climate Action – minimizes carbon footprint of transportation.</p>
+<p>SDG 9: Industry, Innovation, and Infrastructure – smart transport management infrastructure.
 
 
 </p>
@@ -2825,24 +2826,24 @@ int main(){
         <div class="title">Emergency Response Dispatch System</div>
         <p>Bellapuram needs a real-time hydrology-based emergency system that can predict short-term flooding, proactively close risky roads, and pre-position rescue units before conditions escalate.
 The system must analyze rainfall and river-level sensor data to forecast danger, activate pumps to reduce flood impact, and guide emergency vehicles through safe, updated routes.
-Its goal is to minimize response time, prevent casualties, and ensure coordinated flood management across all city zones.
+Its goal is to minimize response time, prevent casualties, and ensure coordinated flood management across all city zones.</p>
 
-🔵 Flood prediction: predictFloodAdvance(minsAhead,…) uses current rainfall/river figures to forecast a short-term increase per sensor.
-Why: allows pre-warning and staging before conditions worsen.
+<p>🔵 Flood prediction: predictFloodAdvance(minsAhead,…) uses current rainfall/river figures to forecast a short-term increase per sensor.</p>
+<p>Why: allows pre-warning and staging before conditions worsen.</p>
 
-🟢 Proactive road closures: proactiveRoadClosures() marks edges proactivelyClosed = true when forecasted increase passes threshold.
-Why: prevents vehicles/public from moving into soon-to-be-impassable routes.
+<p>🟢 Proactive road closures: proactiveRoadClosures() marks edges proactivelyClosed = true when forecasted increase passes threshold.</p>
+<p>Why: prevents vehicles/public from moving into soon-to-be-impassable routes.</p>
 
-🟡 Pre-positioning vehicles/pumps: prepositionVehicles() stages ambulances and pump vehicles at safe nearby nodes for fast response.
-Why: lowers response time once flooding starts.
+<p>🟡 Pre-positioning vehicles/pumps: prepositionVehicles() stages ambulances and pump vehicles at safe nearby nodes for fast response.</p>
+<p>Why: lowers response time once flooding starts.</p>
 
-🔴 Activate pumps: activatePumpsAtNode() temporarily increases node drainage capacity (simulated).
-Why: preventive pumping can reduce local flood risk.
+<p>🔴 Activate pumps: activatePumpsAtNode() temporarily increases node drainage capacity (simulated).</p>
+<p>Why: preventive pumping can reduce local flood risk.</p>
 
-🌱 Sustainable Development Goals (SDGs)
-SDG 3: Good Health and Well-being – rapid response saves lives.
-SDG 11: Sustainable Cities and Communities – disaster preparedness and resilience.
-SDG 9: Industry, Innovation, and Infrastructure – smart communication and emergency tech.
+<p>🌱 Sustainable Development Goals (SDGs)</p>
+<p>SDG 3: Good Health and Well-being – rapid response saves lives.</p>
+<p>SDG 11: Sustainable Cities and Communities – disaster preparedness and resilience.</p>
+<p>SDG 9: Industry, Innovation, and Infrastructure – smart communication and emergency tech.
 
 </p>
 
@@ -3654,50 +3655,50 @@ int main() {
         <div class="title">Smart Housing Allocation System</div>
         <p>Bellapuram needs an intelligent housing allocation system that can efficiently manage applicants, prioritize needy families, and assign the best available houses based on distance, affordability, and availability.
 The system must ensure fast registry lookup, priority-based selection, accurate proximity evaluation, and conflict-free final allocations.
-It should support quick searching, stable report generation, and maintain scalable, real-time housing records across all residential zones.
+It should support quick searching, stable report generation, and maintain scalable, real-time housing records across all residential zones.</p>
 
-🔵 1. Applicant Registry (AVL Tree)
-Algorithm/Data Structure: AVL Tree
-Why: ⚡ O(log n) insert/search, 📌 sorted Applicant IDs, 📁 ideal for verification & updates.
+<p>🔵 1. Applicant Registry (AVL Tree)</p>
+<p>Algorithm/Data Structure: AVL Tree</p>
+<p>Why: ⚡ O(log n) insert/search, 📌 sorted Applicant IDs, 📁 ideal for verification & updates.</p>
 
-🔵 2. Applicant Priority Queue (Max-Heap)
-Algorithm/Data Structure: Array-based Max-Heap
-Why: 🏆 allocates most-needy applicant first, ⚡ O(log n) operations, 🧮 uses priority score.
+<p>🔵 2. Applicant Priority Queue (Max-Heap)</p>
+<p>Algorithm/Data Structure: Array-based Max-Heap</p>
+<p>Why: 🏆 allocates most-needy applicant first, ⚡ O(log n) operations, 🧮 uses priority score.</p>
 
-🔵 3. House Inventory & Selection (Min-Heap)
-Data Structure: Fixed array + Min-Heap
-Why: 🏠 fast “cheapest/best house” retrieval, ⚡ O(log m) insert/remove, 🎯 optimal house picking.
+<p>🔵 3. House Inventory & Selection (Min-Heap)</p>
+<p>Data Structure: Fixed array + Min-Heap</p>
+<p>Why: 🏠 fast “cheapest/best house” retrieval, ⚡ O(log m) insert/remove, 🎯 optimal house picking.</p>
 
-🔵 4. Proximity Evaluation (Dijkstra — No Vectors)
-Algorithm: Dijkstra with adjacency matrix
-Why: 📍 computes distance from applicant → houses, 🧠 used in scoring, 📌 vector-free.
-Complexity: O(V²)
+<p>🔵 4. Proximity Evaluation (Dijkstra — No Vectors)</p>
+<p>Algorithm: Dijkstra with adjacency matrix</p>
+<p>Why: 📍 computes distance from applicant → houses, 🧠 used in scoring, 📌 vector-free.</p>
+<p>Complexity: O(V²)</p>
 
-🔵 5. Allocation Index (Red–Black Tree)
-Data Structure: Red–Black Tree (ApplicantID → HouseID)
-Why: 🔍 O(log n) lookup, 🏷️ clean allocation mapping, 🧹 prevents conflicts.
+<p>🔵 5. Allocation Index (Red–Black Tree)</p>
+<p>Data Structure: Red–Black Tree (ApplicantID → HouseID)</p>
+<p>Why: 🔍 O(log n) lookup, 🏷️ clean allocation mapping, 🧹 prevents conflicts.</p>
 
-🔵 6. Sorting Applicants (Merge Sort)
-Algorithm: Merge Sort (array-based)
-Why: 🧾 stable, fast O(n log n), 💼 ideal for generating reports.
+<p>🔵 6. Sorting Applicants (Merge Sort)</p>
+<p>Algorithm: Merge Sort (array-based)</p>
+<p>Why: 🧾 stable, fast O(n log n), 💼 ideal for generating reports.</p>
 
-🔵 7. Name Search (KMP Algorithm)
-Algorithm: KMP (C-string matching)
-Why: 🔎 fast partial name search, 🚀 O(n + m), 📂 works well for large lists.
+<p>🔵 7. Name Search (KMP Algorithm)</p>
+<p>Algorithm: KMP (C-string matching)</p>
+<p>Why: 🔎 fast partial name search, 🚀 O(n + m), 📂 works well for large lists.</p>
 
-📈 Complexity Summary
+<p>📈 Complexity Summary</p>
 
-AVL → O(log n)
-Max-Heap → O(log n)
-Min-Heap → O(log m)
-Dijkstra → O(V²)
-Merge Sort → O(n log n)
-KMP → O(n + m)
+<p>AVL → O(log n)</p>
+<p>Max-Heap → O(log n)</p>
+<p>Min-Heap → O(log m)</p>
+<p>Dijkstra → O(V²)</p>
+<p>Merge Sort → O(n log n)</p>
+<p>KMP → O(n + m)</p>
 
-🌱 Sustainable Development Goals (SDGs)
-SDG 11: Sustainable Cities and Communities – equitable and efficient housing allocation.
-SDG 1: No Poverty – prioritizes vulnerable populations.
-SDG 10: Reduced Inequalities – ensures fair access to housing.
+<p>🌱 Sustainable Development Goals (SDGs)</p>
+<p>SDG 11: Sustainable Cities and Communities – equitable and efficient housing allocation.</p>
+<p>SDG 1: No Poverty – prioritizes vulnerable populations.</p>
+<p>SDG 10: Reduced Inequalities – ensures fair access to housing.</p>
 
 </p>
         <div class="code-button" onclick="toggleCode('housingCode')">Show Code</div>
@@ -4214,35 +4215,35 @@ int main() {
         <div class="title">Smart Market & Commercial Price Analyzer</div>
         <p>Bellapuram requires an intelligent price-analysis system to monitor, compare, and manage commodity prices across all commercial zones in real time.
 The system must efficiently store, sort, search, and update product and price data while detecting abnormal spikes or inflation patterns.
-It should support fast zone-wise comparisons and provide reliable alerts to help authorities, vendors, and consumers make data-driven decisions.
+It should support fast zone-wise comparisons and provide reliable alerts to help authorities, vendors, and consumers make data-driven decisions.</p>
 
-1. Unstable prices in coastal trading city
-Solved using:
-Merge Sort / Quick Sort for daily price ordering
-Max-Heap to detect price spikes
-Helps government + traders catch fake inflation
+<p>1. Unstable prices in coastal trading city</p>
+<p>Solved using:</p>
+<p>Merge Sort / Quick Sort for daily price ordering</p>
+<p>Max-Heap to detect price spikes</p>
+<p>Helps government + traders catch fake inflation</p>
 
-2. Wrong or manipulated commercial data
-Solved using:
-KMP & Rabin–Karp name search
-BST/AVL (extendable) for unique storage
-Ensures accurate, tamper-proof commodity records
+<p>2. Wrong or manipulated commercial data</p>
+<p>Solved using:</p>
+<p>KMP & Rabin–Karp name search</p>
+<p>BST/AVL (extendable) for unique storage</p>
+<p>Ensures accurate, tamper-proof commodity records</p>
 
-3. Market zoning & regulation
-Zone-wise price lists can be run separately:
-Zone-A wholesale
-Zone-B retail
-Zone-C coastal import yard
+<p>3. Market zoning & regulation</p>
+<p>Zone-wise price lists can be run separately:</p>
+<p>Zone-A wholesale</p>
+<p>Zone-B retail</p>
+<p>Zone-C coastal import yard</p>
 
-Sorted comparison helps detect:
-Illegal overpricing
-Price dumping
-Tax evasion
+<p>Sorted comparison helps detect:</p>
+<p>Illegal overpricing</p>
+<p>Price dumping</p>
+<p>Tax evasion</p>
 
-🌱 Sustainable Development Goals (SDGs)
-SDG 8: Decent Work and Economic Growth – supports market efficiency and fair trade.
-SDG 12: Responsible Consumption and Production – price transparency encourages sustainable purchasing.
-SDG 9: Industry, Innovation, and Infrastructure – digital market intelligence infrastructure.
+<p>🌱 Sustainable Development Goals (SDGs)</p>
+<p>SDG 8: Decent Work and Economic Growth – supports market efficiency and fair trade.</p>
+<p>SDG 12: Responsible Consumption and Production – price transparency encourages sustainable purchasing.</p>
+<p>SDG 9: Industry, Innovation, and Infrastructure – digital market intelligence infrastructure.
 
 </p>
         <div class="code-button" onclick="toggleCode('marketCode')">Show Code</div>
@@ -4471,54 +4472,54 @@ int main() {
         <div class="title">Industrial Logistics & Supply Chain Manager</div>
         <p>Bellapuram needs a smart logistics system to manage warehouses, prioritize urgent shipments, and protect cold-chain goods.
 The system must monitor temperature deviations, assign trucks efficiently, and compute optimal or penalty-adjusted delivery routes.
-Its focus is fast, reliable, and cost-efficient movement of industrial cargo across the city.
+Its focus is fast, reliable, and cost-efficient movement of industrial cargo across the city.</p>
 
-🔵 1. Warehouse Registry (AVL Tree)
-Algorithm / Data structure: AVL tree (pointer + arrays) storing Warehouse records.
-Reason: O(log n) insert/search by warehouse ID — fast lookup for cold-storage availability and capacity checks.
+<p>🔵 1. Warehouse Registry (AVL Tree)</p>
+<p>Algorithm / Data structure: AVL tree (pointer + arrays) storing Warehouse records.</p>
+<p>Reason: O(log n) insert/search by warehouse ID — fast lookup for cold-storage availability and capacity checks.</p>
 
-🔵 2. Shipment Priority Queue (Max-Heap)
-Algorithm / Data structure: Array-based Max-Heap for shipments.
-Reason: Prioritises urgent/cold shipments (higher priority) so scarce trucks are assigned to most critical deliveries; push/pop in O(log n).
+<p>🔵 2. Shipment Priority Queue (Max-Heap)</p>
+<p>Algorithm / Data structure: Array-based Max-Heap for shipments.</p>
+<p>Reason: Prioritises urgent/cold shipments (higher priority) so scarce trucks are assigned to most critical deliveries; push/pop in O(log n).</p>
 
-🔵 3. Cold-Chain Temperature Monitoring (Temp Sensors + Heap)
-Algorithm / Data structure: Temperature sensors per node; max-heap on deviation from target temperature.
-Reason: Quickly identify worst temperature deviators — generate alerts and trigger emergency holds or rerouting to protect perishables.
+<p>🔵 3. Cold-Chain Temperature Monitoring (Temp Sensors + Heap)</p>
+<p>Algorithm / Data structure: Temperature sensors per node; max-heap on deviation from target temperature.</p>
+<p>Reason: Quickly identify worst temperature deviators — generate alerts and trigger emergency holds or rerouting to protect perishables.</p>
 
-🔵 4. Route Planning (Dijkstra)
-Algorithm: Dijkstra (array-based adjacency matrix).
-Reason: Fast shortest-path routing (travel time/cost) from trucks to pickup and destination nodes; used for truck selection and ETA estimates.
+<p>🔵 4. Route Planning (Dijkstra)</p>
+<p>Algorithm: Dijkstra (array-based adjacency matrix).</p>
+<p>Reason: Fast shortest-path routing (travel time/cost) from trucks to pickup and destination nodes; used for truck selection and ETA estimates.</p>
 
-🔵 5. Alternate / Penalty Routes (Bellman–Ford)
-Algorithm: Bellman–Ford (edge-list).
-Reason: Model routes with penalties (cold-penalty; traffic/toll negative/positive adjustments), detect suboptimal paths, and handle graphs with special edge costs.
+<p>🔵 5. Alternate / Penalty Routes (Bellman–Ford)</p>
+<p>Algorithm: Bellman–Ford (edge-list).</p>
+<p>Reason: Model routes with penalties (cold-penalty; traffic/toll negative/positive adjustments), detect suboptimal paths, and handle graphs with special edge costs.</p>
 
-🔵 6. Network Design (Kruskal & Prim)
-Algorithms: Kruskal (edge-sorting + union-find) and Prim (array-based).
-Reason: Design minimal-cost distribution backbone connecting hubs/warehouses (helps plan placement of cold-chains and main lanes).
+<p>🔵 6. Network Design (Kruskal & Prim)</p>
+<p>Algorithms: Kruskal (edge-sorting + union-find) and Prim (array-based).</p>
+<p>Reason: Design minimal-cost distribution backbone connecting hubs/warehouses (helps plan placement of cold-chains and main lanes).</p>
 
-🔵 7. Manifest Sorting (Merge Sort)
-Algorithm: Merge Sort on array of manifest entries.
-Reason: Stable O(n log n) sorting for manifests and reports (sort by priority, produce printable load lists).
+<p>🔵 7. Manifest Sorting (Merge Sort)</p>
+<p>Algorithm: Merge Sort on array of manifest entries.</p>
+<p>Reason: Stable O(n log n) sorting for manifests and reports (sort by priority, produce printable load lists).</p>
 
-🔵 8. Tracking & Search (KMP)
-Algorithm: Knuth–Morris–Pratt substring search for tracking codes.
-Reason: Fast search in lists of tracking codes for queries like partial tracking numbers or pattern matches.
+<p>🔵 8. Tracking & Search (KMP)</p>
+<p>Algorithm: Knuth–Morris–Pratt substring search for tracking codes.</p>
+<p>Reason: Fast search in lists of tracking codes for queries like partial tracking numbers or pattern matches.</p>
 
-🔵 9. Truck Scheduling & Selection (Greedy + Dijkstra)
-Algorithm/Approach: Greedy truck assignment — choose nearest available truck with required capacity using Dijkstra distances.
-Reason: Practical, fast, and effective for real-time dispatch; respects cold requirements by prioritising cold-capable hubs.
+<p>🔵 9. Truck Scheduling & Selection (Greedy + Dijkstra)</p>
+<p>Algorithm/Approach: Greedy truck assignment — choose nearest available truck with required capacity using Dijkstra distances.</p>
+<p>Reason: Practical, fast, and effective for real-time dispatch; respects cold requirements by prioritising cold-capable hubs.</p>
 
-🔵 10. Cold-Chain Emergency Handling (Alerts + Holds)
-Mechanisms: On large temperature deviation, the system:
-flags shipments for hold,chooses nearest cold warehouse (AVL lookup),notifies operators (console/alert).
-Reason: Prevent temperature-sensitive cargo loss; enable human operator action or automated re-routing
+<p>🔵 10. Cold-Chain Emergency Handling (Alerts + Holds)</p>
+<p>Mechanisms: On large temperature deviation, the system:</p>
+<p>flags shipments for hold,chooses nearest cold warehouse (AVL lookup),notifies operators (console/alert).</p>
+<p>Reason: Prevent temperature-sensitive cargo loss; enable human operator action or automated re-routing</p>
 
-🌱 Sustainable Development Goals (SDGs)
-SDG 8: Decent Work and Economic Growth – efficient supply chains enhance productivity.
-SDG 9: Industry, Innovation, and Infrastructure – modern industrial logistics.
-SDG 12: Responsible Consumption and Production – optimized logistics reduces waste and energy usage.
-SDG 13: Climate Action – cold-chain and optimized transport reduce emissions.
+<p>🌱 Sustainable Development Goals (SDGs)</p>
+<p>SDG 8: Decent Work and Economic Growth – efficient supply chains enhance productivity.</p>
+<p>SDG 9: Industry, Innovation, and Infrastructure – modern industrial logistics.</p>
+<p>SDG 12: Responsible Consumption and Production – optimized logistics reduces waste and energy usage.</p>
+<p>SDG 13: Climate Action – cold-chain and optimized transport reduce emissions.</p>
 
 
 </p>
