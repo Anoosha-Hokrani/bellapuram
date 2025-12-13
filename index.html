@@ -1,127 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Bellasagaram – Smart City Systems</title>
-<style>
-    body { font-family: Arial, sans-serif; margin: 0; background:#0c1220; color:#fff; }
-    header { background:#1b2a4a; padding:30px; text-align:center; }
-    h1 { margin:0; font-size:32px; }
-    h2 { margin:5px 0 0; font-size:18px; color:#a9c4ff; }
-
-    .container { padding:20px; }
-    .tabs { display:flex; flex-wrap:wrap; gap:10px; }
-    .tab { background:#152039; padding:12px 18px; border-radius:8px; cursor:pointer; }
-    .tab:hover { background:#22345e; }
-
-    .content-box { margin-top:20px; padding:20px; background:#152039; border-radius:8px; }
-    .title { font-size:22px; margin-bottom:10px; }
-
-    .code-button { margin-top:10px; background:#2d4a94; padding:8px 12px; border-radius:6px; cursor:pointer; display:inline-block; }
-    .code-section { display:none; background:#000; color:#00ffea; padding:15px; margin-top:10px; border-radius:6px; font-family:monospace; white-space:pre-wrap; }
-</style>
-<script>
-function showTab(id){
-    document.querySelectorAll('.content-box').forEach(c=>c.style.display='none');
-    document.getElementById(id).style.display='block';
-}
-function toggleCode(id){
-    let sec = document.getElementById(id);
-    sec.style.display = sec.style.display==='block' ? 'none' : 'block';
-}
-</script>
+  <meta charset="UTF-8" />
+  <title>Bellasagaram | Anoosha Hokrani</title>
+  <style>
+    body{margin:0;font-family:Segoe UI,Arial;background:#0b1220;color:#e5e7eb}
+    header{padding:30px;background:#0f172a}
+    h1{margin:0;font-size:32px}
+    p{line-height:1.6}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;padding:30px}
+    .card{background:#111827;border-radius:14px;padding:20px;cursor:pointer;transition:.3s}
+    .card:hover{transform:scale(1.03);background:#1e293b}
+    .card span{font-size:22px}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center}
+    .modal-content{background:#020617;width:85%;max-height:85%;overflow:auto;border-radius:16px;padding:30px}
+    .close{float:right;font-size:22px;cursor:pointer}
+    button{background:#2563eb;border:none;color:white;padding:10px 16px;border-radius:8px;cursor:pointer;margin-top:10px}
+    pre{background:#020617;padding:15px;border-radius:10px;overflow:auto;display:none;white-space:pre-wrap}
+    h3{margin-top:25px}
+  </style>
 </head>
 <body>
 <header>
-    <h1>Anoosha Hokrani</h1>
-    <h2>Project Bellasagaram – Smart City Systems</h2>
+  <h1>Anoosha Hokrani</h1>
+  <p>Smart City Systems & Infrastructure – Project Bellasagaram</p>
 </header>
 
-<div class="container">
-    <div class="tabs">
-        <div class="tab" onclick="showTab('waste')">1. Smart Waste Management ⭐</div>
-        <div class="tab" onclick="showTab('parking')">2. Smart Parking ⭐</div>
-        <div class="tab" onclick="showTab('energy')">3. Renewable Energy Grid ⭐</div>
-        <div class="tab" onclick="showTab('port')">4. Port Cargo Allocation ⭐</div>
-        <div class="tab" onclick="showTab('fleet')">5. Public Transport Fleet ⭐</div>
-        <div class="tab" onclick="showTab('water')">6. Water Distribution ⭐</div>
-        <div class="tab" onclick="showTab('emergency')">7. Emergency Dispatch ⭐</div>
-        <div class="tab" onclick="showTab('housing')">8. Smart Housing ⭐</div>
-        <div class="tab" onclick="showTab('market')">9. Market Analyzer ⭐</div>
-        <div class="tab" onclick="showTab('logistics')">10. Logistics Manager ⭐</div>
-    </div>
+<div class="grid">
+  <div class="card" onclick="openModal('waste')">♻️ Smart Waste Collection</div>
+  <div class="card" onclick="openModal('parking')">🅿 Smart Parking System</div>
+  <div class="card" onclick="openModal('energy')">☀ Renewable Energy Grid</div>
+  <div class="card" onclick="openModal('cargo')">📦 Port Cargo Scheduling</div>
+  <div class="card" onclick="openModal('transport')">🚌 Public Transport Optimization</div>
+  <div class="card" onclick="openModal('water')">💧 Water Distribution System</div>
+  <div class="card" onclick="openModal('emergency')">🚨 Emergency Dispatch System</div>
+  <div class="card" onclick="openModal('housing')">🏠 Smart Housing Allocation</div>
+  <div class="card" onclick="openModal('market')">📊 Smart Market Analyzer</div>
+  <div class="card" onclick="openModal('logistics')">🚚 Industrial Logistics</div>
+</div>
 
-    <!-- Smart Waste Management -->
-    <div id="waste" class="content-box" style="display:block;">
-        <div class="title">Smart Waste Collection & Recycling Management</div>
-        <p>Problem statement:Bellapuram requires an intelligent waste management system that can efficiently register waste sources, prioritize hazardous waste, and monitor both city and aquatic pollution levels in real time.
-The system must optimize truck routing, recycling plant allocation, and marine waste network construction using fast, scalable algorithms without vectors.
-It should support high-speed searching, sorting, and reporting across industrial, household, and ocean-based waste logs while ensuring low operational cost and maximum sustainability. </p>
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">✖</span>
+    <h2 id="title"></h2>
+    <div id="desc"></div>
+    <button onclick="toggleCode()">View Algorithm Code</button>
+    <pre id="code"></pre>
+  </div>
+</div>
 
-<p>
-<p>🟦 1. Waste Source Registry (AVL Tree)</p>
-<p>Algorithm: AVL Tree</p>
-<p>Reason: Fast O(log n) insert/search for households, industries, ports, sea aquatic waste nodes; no vectors.</p>
-
-<p>🟩 2. Waste Type Priority (Max-Heap)</p>
-<p>Algorithm: Max-Heap</p>
-<p>Reason: Collect highest-priority waste first (medical > chemical > marine plastic > household).</p>
-
-<p>🟧 3. Sea Aquatic Waste Tracking (Min-Heap)</p>
-<p>Algorithm: Min-Heap</p>
-<p>Reason: Quickly identify lowest-quantity ocean pollution zones for early warnings.</p>
-
-<p>🟨 4. Route Optimization (Dijkstra / Bellman–Ford / Floyd)</p>
-<p>Algorithm:</p>
-<p>Dijkstra → positive weights</p>
-<p>Bellman–Ford → negative penalties (toll/traffic)</p>
-<p>Floyd–Warshall → all-pairs</p>
-<p>Reason: Fastest routes for trucks from waste bins → recycling → factories (array-based graphs).</p>
-
-<p>🟥 5. Recycling Plant Selection (Min-Heap)</p>
-<p>Algorithm: Min-Heap</p>
-<p>Reason: Choose plant with lowest cost/load/distance.</p>
-
-<p>🟫 6. Industrial Waste Logs (Merge Sort)</p>
-<p>Algorithm: Merge Sort</p>
-<p>Reason: Sort waste quantities/toxicity for daily reporting; O(n log n).</p>
-
-<p>🟪 7. Factory Production Registry (Red–Black Tree)</p>
-<p>Algorithm: Red–Black Tree</p>
-<p>Reason: Quick O(log n) lookup of recycling output (plastic pellets, biomass fuel, marine polymer products).</p>
-
-<p>🟦 8. Pattern Matching in Reports (KMP)</p>
-<p>Algorithm: KMP</p>
-<p>Reason: Fast search for terms like “plastic”, “hazardous”, “marine spill” inside long logs.</p>
-
-<p>🟫 9. Truck Assignment Sorting (Selection / Quick Sort)</p>
-<p>Algorithm: Selection Sort or Quick Sort</p>
-<p>Reason: Sort trucks by capacity, battery %, speed; no vectors required.</p>
-
-<p>🟩 10. Aquatic Waste Collection Network (Kruskal / Prim)</p>
-<p>Algorithm: Kruskal + Prim (MST)</p>
-<p>Reason: Build lowest-cost marine waste buoy→boat→dock network.</p>
-
-<p>🟦 11. System Report Generation (Merge Sort + Tree Traversal)</p>
-<p>Algorithm: Merge Sort + Inorder Traversal</p>
-<p>Reason: Sorted city + sea waste reports by zone, date, industry</p>
-
-<p>🌱 Sustainable Development Goals (SDGs)</p>
-<p>SDG 11: Sustainable Cities and Communities – promotes waste reduction and urban sustainability.</p>
-<p>SDG 12: Responsible Consumption and Production – recycling and reducing waste.</p>
-<p>SDG 14: Life Below Water – reduces sea/river pollution.</p>
-<p>SDG 6: Clean Water and Sanitation – prevents contamination from waste.</p>
-
-
-        <div class="code-button" onclick="toggleCode('wasteCode')">Show Code</div>
-        <div id="wasteCode" class="code-section">
-#include <bits/stdc++.h>
+<script>
+const data={
+  waste:{
+    title:'Smart Waste Collection & Recycling Management',
+    desc:`<h3>Problem Statement</h3>
+    <p>Urban and marine waste collection is inefficient due to fixed routes, poor prioritization of hazardous waste, and lack of real-time recycling plant selection.</p>
+    <h3>System Approach</h3>
+    <p>The system registers waste sources using AVL Trees, prioritizes waste types via Max-Heaps, optimizes truck routes using Dijkstra/Bellman–Ford, and selects recycling plants with Min-Heaps.</p>
+    <h3>Algorithms Used</h3>
+    <p>AVL Tree, Max Heap, Min Heap, Dijkstra, Bellman–Ford, Merge Sort, KMP, Kruskal/Prim</p>`,
+    code:`#include <bits/stdc++.h>
 using namespace std;
 
 /* ===========================
-   CONFIG
-   =========================== */
+**   CONFIG**
+**   =========================== */**
 const int MAX_NODES = 80;
 const int MAX_REQUESTS = 1000;
 const int MAX_TRUCKS = 80;
@@ -130,67 +73,67 @@ const int MAX_FACTORIES = 80;
 const int INF = 1000000000;
 
 /* ===========================
-   ENUMS & NAMES
-   =========================== */
+**   ENUMS & NAMES**
+**   =========================== */**
 enum WasteType { W_HOUSEHOLD=0, W_COMMERCIAL=1, W_INDUSTRIAL=2, W_SEA_AQUATIC=3, W_HAZARDOUS=4 };
 const char* WasteTypeName[] = {"Household","Commercial","Industrial","Sea/Aquatic","Hazardous"};
 
 /* ===========================
-   DATA STRUCTS
-   =========================== */
+**   DATA STRUCTS**
+**   =========================== */**
 struct Request {
-    int id;
-    int node;           // location node
-    WasteType type;
-    int volume;         // liters
-    int priority;       // computed priority (higher = more urgent)
-    int timestamp;      // request creation time (simulated minutes)
-    bool processed;
-    bool assigned;      // assigned to vehicle
-    int assignedVehicleId; // id of truck/boat
+**    int id;**
+**    int node;           // location node**
+**    WasteType type;**
+**    int volume;         // liters**
+**    int priority;       // computed priority (higher = more urgent)**
+**    int timestamp;      // request creation time (simulated minutes)**
+**    bool processed;**
+**    bool assigned;      // assigned to vehicle**
+**    int assignedVehicleId; // id of truck/boat**
 };
 
 struct VehicleCommon {
-    int id;
-    int currentNode;
-    int capacity;
-    int load;           // liters loaded
-    bool available;
-    int speed;          // units (distance) per simulated minute
-    int destNode;       // destination node if moving, -1 if idle
-    int remainingDist;  // remaining distance units to destination
-    int assignedRequestIdx; // index in requests array, or -1
+**    int id;**
+**    int currentNode;**
+**    int capacity;**
+**    int load;           // liters loaded**
+**    bool available;**
+**    int speed;          // units (distance) per simulated minute**
+**    int destNode;       // destination node if moving, -1 if idle**
+**    int remainingDist;  // remaining distance units to destination**
+**    int assignedRequestIdx; // index in requests array, or -1**
 };
 
 struct Truck {
-    VehicleCommon c;
+**    VehicleCommon c;**
 };
 
 struct Boat {
-    VehicleCommon c;
-    bool sea_enabled; // true for boats
+**    VehicleCommon c;**
+**    bool sea_enabled; // true for boats**
 };
 
 struct Factory {
-    int id;
-    char name[64];
-    int node;
-    int capacityIn;
-    int storedRaw;
-    int producedUnits;
-    bool handlesSea;
+**    int id;**
+**    char name[64];**
+**    int node;**
+**    int capacityIn;**
+**    int storedRaw;**
+**    int producedUnits;**
+**    bool handlesSea;**
 };
 
 struct RegistryItem {
-    int id;
-    char name[64];
-    int node;
-    bool isFactory;
+**    int id;**
+**    char name[64];**
+**    int node;**
+**    bool isFactory;**
 };
 
 /* ===========================
-   GLOBAL STORAGE (arrays)
-   =========================== */
+**   GLOBAL STORAGE (arrays)**
+**   =========================== */**
 Request requests[MAX_REQUESTS]; int requestsCount = 0;
 int requestHeapArr[MAX_REQUESTS]; int requestHeapSize = 0; // max-heap indexes into requests[]
 
@@ -204,593 +147,593 @@ int nodesCount = 0;
 int adjMat[MAX_NODES][MAX_NODES];
 
 void initGraph(int n) {
-    nodesCount = n;
-    for (int i=0;i<n;i++) for (int j=0;j<n;j++) adjMat[i][j] = (i==j?0:INF);
+**    nodesCount = n;**
+**    for (int i=0;i<n;i++) for (int j=0;j<n;j++) adjMat[i][j] = (i==j?0:INF);**
 }
 void addEdge(int u,int v,int w) {
-    if (u<0||v<0||u>=nodesCount||v>=nodesCount) return;
-    adjMat[u][v] = w; adjMat[v][u] = w;
+**    if (u<0||v<0||u>=nodesCount||v>=nodesCount) return;**
+**    adjMat[u][v] = w; adjMat[v][u] = w;**
 }
 
 /* ===========================
-   AVL Registry (no vectors)
-   =========================== */
+**   AVL Registry (no vectors)**
+**   =========================== */**
 struct AVLNode {
-    RegistryItem it;
-    AVLNode *left, *right;
-    int height;
-    AVLNode(const RegistryItem &x) { it = x; left = right = nullptr; height = 1; }
+**    RegistryItem it;**
+**    AVLNode *left, *right;**
+**    int height;**
+**    AVLNode(const RegistryItem &x) { it = x; left = right = nullptr; height = 1; }**
 };
 AVLNode* registryRoot = nullptr;
 int avlHeight(AVLNode* n) { return n ? n->height : 0; }
 AVLNode* rightRotateAVL(AVLNode* y) {
-    AVLNode* x = y->left; AVLNode* T2 = x->right;
-    x->right = y; y->left = T2;
-    y->height = 1 + max(avlHeight(y->left), avlHeight(y->right));
-    x->height = 1 + max(avlHeight(x->left), avlHeight(x->right));
-    return x;
+**    AVLNode* x = y->left; AVLNode* T2 = x->right;**
+**    x->right = y; y->left = T2;**
+**    y->height = 1 + max(avlHeight(y->left), avlHeight(y->right));**
+**    x->height = 1 + max(avlHeight(x->left), avlHeight(x->right));**
+**    return x;**
 }
 AVLNode* leftRotateAVL(AVLNode* x) {
-    AVLNode* y = x->right; AVLNode* T2 = y->left;
-    y->left = x; x->right = T2;
-    x->height = 1 + max(avlHeight(x->left), avlHeight(x->right));
-    y->height = 1 + max(avlHeight(y->left), avlHeight(y->right));
-    return y;
+**    AVLNode* y = x->right; AVLNode* T2 = y->left;**
+**    y->left = x; x->right = T2;**
+**    x->height = 1 + max(avlHeight(x->left), avlHeight(x->right));**
+**    y->height = 1 + max(avlHeight(y->left), avlHeight(y->right));**
+**    return y;**
 }
 AVLNode* avlInsert(AVLNode* node, const RegistryItem &it) {
-    if (!node) return new AVLNode(it);
-    if (it.id < node->it.id) node->left = avlInsert(node->left, it);
-    else if (it.id > node->it.id) node->right = avlInsert(node->right, it);
-    else return node;
-    node->height = 1 + max(avlHeight(node->left), avlHeight(node->right));
-    int balance = avlHeight(node->left) - avlHeight(node->right);
-    if (balance > 1 && it.id < node->left->it.id) return rightRotateAVL(node);
-    if (balance < -1 && it.id > node->right->it.id) return leftRotateAVL(node);
-    if (balance > 1 && it.id > node->left->it.id) { node->left = leftRotateAVL(node->left); return rightRotateAVL(node); }
-    if (balance < -1 && it.id < node->right->it.id) { node->right = rightRotateAVL(node->right); return leftRotateAVL(node); }
-    return node;
+**    if (!node) return new AVLNode(it);**
+**    if (it.id < node->it.id) node->left = avlInsert(node->left, it);**
+**    else if (it.id > node->it.id) node->right = avlInsert(node->right, it);**
+**    else return node;**
+**    node->height = 1 + max(avlHeight(node->left), avlHeight(node->right));**
+**    int balance = avlHeight(node->left) - avlHeight(node->right);**
+**    if (balance > 1 && it.id < node->left->it.id) return rightRotateAVL(node);**
+**    if (balance < -1 && it.id > node->right->it.id) return leftRotateAVL(node);**
+**    if (balance > 1 && it.id > node->left->it.id) { node->left = leftRotateAVL(node->left); return rightRotateAVL(node); }**
+**    if (balance < -1 && it.id < node->right->it.id) { node->right = rightRotateAVL(node->right); return leftRotateAVL(node); }**
+**    return node;**
 }
 AVLNode* avlSearch(AVLNode* root, int id) {
-    if (!root) return nullptr;
-    if (id == root->it.id) return root;
-    if (id < root->it.id) return avlSearch(root->left, id);
-    return avlSearch(root->right, id);
+**    if (!root) return nullptr;**
+**    if (id == root->it.id) return root;**
+**    if (id < root->it.id) return avlSearch(root->left, id);**
+**    return avlSearch(root->right, id);**
 }
 void registerEntity(int id, const char* name, int node, bool isFactory) {
-    RegistryItem it; it.id = id; strncpy(it.name, name, sizeof(it.name)-1); it.name[sizeof(it.name)-1]=0; it.node = node; it.isFactory = isFactory;
-    registryRoot = avlInsert(registryRoot, it);
+**    RegistryItem it; it.id = id; strncpy(it.name, name, sizeof(it.name)-1); it.name[sizeof(it.name)-1]=0; it.node = node; it.isFactory = isFactory;**
+**    registryRoot = avlInsert(registryRoot, it);**
 }
 
 /* ===========================
-   MAX-HEAP: request priority queue (priority by priority, then earlier timestamp)
-   computePriority includes hazardous strong bias
-   =========================== */
+**   MAX-HEAP: request priority queue (priority by priority, then earlier timestamp)**
+**   computePriority includes hazardous strong bias**
+**   =========================== */**
 int computePriority(WasteType t, int volume, int timestamp, bool urgentFlag=false) {
-    int base = 0;
-    if (t == W_HAZARDOUS) base += 200;
-    else if (t == W_SEA_AQUATIC) base += 120;
-    else if (t == W_INDUSTRIAL) base += 100;
-    else if (t == W_COMMERCIAL) base += 60;
-    else base += 30;
-    int volScore = min(100, volume / 5);
-    int urgency = urgentFlag ? 100 : 0;
-    int timePenalty = timestamp/100; // older smaller timestamp => less penalty, but keep small impact
-    return base + volScore + urgency - timePenalty;
+**    int base = 0;**
+**    if (t == W_HAZARDOUS) base += 200;**
+**    else if (t == W_SEA_AQUATIC) base += 120;**
+**    else if (t == W_INDUSTRIAL) base += 100;**
+**    else if (t == W_COMMERCIAL) base += 60;**
+**    else base += 30;**
+**    int volScore = min(100, volume / 5);**
+**    int urgency = urgentFlag ? 100 : 0;**
+**    int timePenalty = timestamp/100; // older smaller timestamp => less penalty, but keep small impact**
+**    return base + volScore + urgency - timePenalty;**
 }
 void requestHeapPush(int reqIdx) {
-    requestHeapArr[requestHeapSize] = reqIdx;
-    int i = requestHeapSize++;
-    while (i != 0) {
-        int p = (i-1)/2;
-        Request &cur = requests[ requestHeapArr[i] ];
-        Request &par = requests[ requestHeapArr[p] ];
-        if (cur.priority > par.priority || (cur.priority==par.priority && cur.timestamp < par.timestamp)) {
-            int tmp = requestHeapArr[i]; requestHeapArr[i] = requestHeapArr[p]; requestHeapArr[p] = tmp;
-            i = p;
-        } else break;
-    }
+**    requestHeapArr[requestHeapSize] = reqIdx;**
+**    int i = requestHeapSize++;**
+**    while (i != 0) {**
+**        int p = (i-1)/2;**
+**        Request &cur = requests[ requestHeapArr[i] ];**
+**        Request &par = requests[ requestHeapArr[p] ];**
+**        if (cur.priority > par.priority || (cur.priority==par.priority && cur.timestamp < par.timestamp)) {**
+**            int tmp = requestHeapArr[i]; requestHeapArr[i] = requestHeapArr[p]; requestHeapArr[p] = tmp;**
+**            i = p;**
+**        } else break;**
+**    }**
 }
 int requestHeapPop() {
-    if (requestHeapSize == 0) return -1;
-    int root = requestHeapArr[0];
-    requestHeapArr[0] = requestHeapArr[--requestHeapSize];
-    int i = 0;
-    while (true) {
-        int l = 2*i+1, r = 2*i+2, largest = i;
-        if (l < requestHeapSize) {
-            Request &L = requests[ requestHeapArr[l] ], &I = requests[ requestHeapArr[largest] ];
-            if (L.priority > I.priority || (L.priority==I.priority && L.timestamp < I.timestamp)) largest = l;
-        }
-        if (r < requestHeapSize) {
-            Request &R = requests[ requestHeapArr[r] ], &I = requests[ requestHeapArr[largest] ];
-            if (R.priority > I.priority || (R.priority==I.priority && R.timestamp < I.timestamp)) largest = r;
-        }
-        if (largest != i) { int tmp = requestHeapArr[i]; requestHeapArr[i] = requestHeapArr[largest]; requestHeapArr[largest] = tmp; i = largest; }
-        else break;
-    }
-    return root;
+**    if (requestHeapSize == 0) return -1;**
+**    int root = requestHeapArr[0];**
+**    requestHeapArr[0] = requestHeapArr[--requestHeapSize];**
+**    int i = 0;**
+**    while (true) {**
+**        int l = 2*i+1, r = 2*i+2, largest = i;**
+**        if (l < requestHeapSize) {**
+**            Request &L = requests[ requestHeapArr[l] ], &I = requests[ requestHeapArr[largest] ];**
+**            if (L.priority > I.priority || (L.priority==I.priority && L.timestamp < I.timestamp)) largest = l;**
+**        }**
+**        if (r < requestHeapSize) {**
+**            Request &R = requests[ requestHeapArr[r] ], &I = requests[ requestHeapArr[largest] ];**
+**            if (R.priority > I.priority || (R.priority==I.priority && R.timestamp < I.timestamp)) largest = r;**
+**        }**
+**        if (largest != i) { int tmp = requestHeapArr[i]; requestHeapArr[i] = requestHeapArr[largest]; requestHeapArr[largest] = tmp; i = largest; }**
+**        else break;**
+**    }**
+**    return root;**
 }
 
 /* ===========================
-   Add / load / save requests
-   =========================== */
+**   Add / load / save requests**
+**   =========================== */**
 void addRequest(int node, WasteType wt, int volume, int timestamp, bool urgent=false) {
-    if (requestsCount >= MAX_REQUESTS) { cout << "Request storage full\n"; return; }
-    Request &r = requests[requestsCount];
-    r.id = 100000 + requestsCount;
-    r.node = node; r.type = wt; r.volume = volume; r.timestamp = timestamp;
-    r.priority = computePriority(wt, volume, timestamp, urgent);
-    r.processed = false; r.assigned = false; r.assignedVehicleId = -1;
-    requestHeapPush(requestsCount);
-    requestsCount++;
+**    if (requestsCount >= MAX_REQUESTS) { cout << "Request storage full\n"; return; }**
+**    Request &r = requests[requestsCount];**
+**    r.id = 100000 + requestsCount;**
+**    r.node = node; r.type = wt; r.volume = volume; r.timestamp = timestamp;**
+**    r.priority = computePriority(wt, volume, timestamp, urgent);**
+**    r.processed = false; r.assigned = false; r.assignedVehicleId = -1;**
+**    requestHeapPush(requestsCount);**
+**    requestsCount++;**
 }
 void saveRequestsCSV(const char* fname) {
-    ofstream f(fname);
-    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }
-    f<<"id,node,type,volume,priority,timestamp,processed\n";
-    for (int i=0;i<requestsCount;i++) {
-        f<<requests[i].id<<","<<requests[i].node<<","<<int(requests[i].type)<<","<<requests[i].volume<<","<<requests[i].priority<<","<<requests[i].timestamp<<","<<requests[i].processed<<"\n";
-    }
-    f.close(); cout<<"Requests saved to "<<fname<<"\n";
+**    ofstream f(fname);**
+**    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }**
+**    f<<"id,node,type,volume,priority,timestamp,processed\n";**
+**    for (int i=0;i<requestsCount;i++) {**
+**        f<<requests[i].id<<","<<requests[i].node<<","<<int(requests[i].type)<<","<<requests[i].volume<<","<<requests[i].priority<<","<<requests[i].timestamp<<","<<requests[i].processed<<"\n";**
+**    }**
+**    f.close(); cout<<"Requests saved to "<<fname<<"\n";**
 }
 void loadRequestsCSV(const char* fname) {
-    ifstream f(fname);
-    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }
-    string line; getline(f,line); // header
-    requestsCount = 0; requestHeapSize = 0;
-    while(getline(f,line) && requestsCount < MAX_REQUESTS) {
-        // parse CSV simple
-        int id,node,type,volume,priority,timestamp,processed;
-        char buf[512]; strncpy(buf,line.c_str(),511); buf[511]=0;
-        // naive parse with sscanf
-        if (sscanf(buf,"%d,%d,%d,%d,%d,%d,%d",&id,&node,&type,&volume,&priority,&timestamp,&processed) >= 7) {
-            Request &r = requests[requestsCount];
-            r.id = id; r.node = node; r.type = (WasteType)type; r.volume = volume; r.priority = priority; r.timestamp = timestamp; r.processed = processed; r.assigned=false; r.assignedVehicleId=-1;
-            requestHeapPush(requestsCount);
-            requestsCount++;
-        }
-    }
-    f.close(); cout<<"Loaded "<<requestsCount<<" requests from "<<fname<<"\n";
+**    ifstream f(fname);**
+**    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }**
+**    string line; getline(f,line); // header**
+**    requestsCount = 0; requestHeapSize = 0;**
+**    while(getline(f,line) && requestsCount < MAX_REQUESTS) {**
+**        // parse CSV simple**
+**        int id,node,type,volume,priority,timestamp,processed;**
+**        char buf[512]; strncpy(buf,line.c_str(),511); buf[511]=0;**
+**        // naive parse with sscanf**
+**        if (sscanf(buf,"%d,%d,%d,%d,%d,%d,%d",&id,&node,&type,&volume,&priority,&timestamp,&processed) >= 7) {**
+**            Request &r = requests[requestsCount];**
+**            r.id = id; r.node = node; r.type = (WasteType)type; r.volume = volume; r.priority = priority; r.timestamp = timestamp; r.processed = processed; r.assigned=false; r.assignedVehicleId=-1;**
+**            requestHeapPush(requestsCount);**
+**            requestsCount++;**
+**        }**
+**    }**
+**    f.close(); cout<<"Loaded "<<requestsCount<<" requests from "<<fname<<"\n";**
 }
 
 /* ===========================
-   Trucks & Boats management
-   =========================== */
+**   Trucks & Boats management**
+**   =========================== */**
 void addTruck(int id, int startNode, int capacity, int speed) {
-    if (trucksCount >= MAX_TRUCKS) { cout<<"Truck capacity full\n"; return; }
-    trucks[trucksCount].c.id = id; trucks[trucksCount].c.currentNode = startNode; trucks[trucksCount].c.capacity = capacity; trucks[trucksCount].c.load = 0; trucks[trucksCount].c.available = true; trucks[trucksCount].c.speed = speed; trucks[trucksCount].c.destNode = -1; trucks[trucksCount].c.remainingDist = 0; trucks[trucksCount].c.assignedRequestIdx = -1; trucksCount++;
+**    if (trucksCount >= MAX_TRUCKS) { cout<<"Truck capacity full\n"; return; }**
+**    trucks[trucksCount].c.id = id; trucks[trucksCount].c.currentNode = startNode; trucks[trucksCount].c.capacity = capacity; trucks[trucksCount].c.load = 0; trucks[trucksCount].c.available = true; trucks[trucksCount].c.speed = speed; trucks[trucksCount].c.destNode = -1; trucks[trucksCount].c.remainingDist = 0; trucks[trucksCount].c.assignedRequestIdx = -1; trucksCount++;**
 }
 void addBoat(int id, int startNode, int capacity, int speed) {
-    if (boatsCount >= MAX_BOATS) { cout<<"Boat capacity full\n"; return; }
-    boats[boatsCount].c.id = id; boats[boatsCount].c.currentNode = startNode; boats[boatsCount].c.capacity = capacity; boats[boatsCount].c.load = 0; boats[boatsCount].c.available = true; boats[boatsCount].c.speed = speed; boats[boatsCount].c.destNode = -1; boats[boatsCount].c.remainingDist = 0; boats[boatsCount].c.assignedRequestIdx = -1; boats[boatsCount].sea_enabled = true; boatsCount++;
+**    if (boatsCount >= MAX_BOATS) { cout<<"Boat capacity full\n"; return; }**
+**    boats[boatsCount].c.id = id; boats[boatsCount].c.currentNode = startNode; boats[boatsCount].c.capacity = capacity; boats[boatsCount].c.load = 0; boats[boatsCount].c.available = true; boats[boatsCount].c.speed = speed; boats[boatsCount].c.destNode = -1; boats[boatsCount].c.remainingDist = 0; boats[boatsCount].c.assignedRequestIdx = -1; boats[boatsCount].sea_enabled = true; boatsCount++;**
 }
 void saveVehiclesCSV(const char* fname) {
-    ofstream f(fname);
-    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }
-    f<<"type,id,node,capacity,speed,available,load\n";
-    for (int i=0;i<trucksCount;i++) f<<"truck,"<<trucks[i].c.id<<","<<trucks[i].c.currentNode<<","<<trucks[i].c.capacity<<","<<trucks[i].c.speed<<","<<trucks[i].c.available<<","<<trucks[i].c.load<<"\n";
-    for (int i=0;i<boatsCount;i++) f<<"boat,"<<boats[i].c.id<<","<<boats[i].c.currentNode<<","<<boats[i].c.capacity<<","<<boats[i].c.speed<<","<<boats[i].c.available<<","<<boats[i].c.load<<"\n";
-    f.close(); cout<<"Vehicles saved to "<<fname<<"\n";
+**    ofstream f(fname);**
+**    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }**
+**    f<<"type,id,node,capacity,speed,available,load\n";**
+**    for (int i=0;i<trucksCount;i++) f<<"truck,"<<trucks[i].c.id<<","<<trucks[i].c.currentNode<<","<<trucks[i].c.capacity<<","<<trucks[i].c.speed<<","<<trucks[i].c.available<<","<<trucks[i].c.load<<"\n";**
+**    for (int i=0;i<boatsCount;i++) f<<"boat,"<<boats[i].c.id<<","<<boats[i].c.currentNode<<","<<boats[i].c.capacity<<","<<boats[i].c.speed<<","<<boats[i].c.available<<","<<boats[i].c.load<<"\n";**
+**    f.close(); cout<<"Vehicles saved to "<<fname<<"\n";**
 }
 void loadVehiclesCSV(const char* fname) {
-    ifstream f(fname);
-    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }
-    string line; getline(f,line);
-    trucksCount = 0; boatsCount = 0;
-    while(getline(f,line) && (trucksCount < MAX_TRUCKS || boatsCount < MAX_BOATS)) {
-        char type[32]; int id,node,capacity,speed,available,load;
-        char buf[512]; strncpy(buf,line.c_str(),511); buf[511]=0;
-        if (sscanf(buf,"%31[^,],%d,%d,%d,%d,%d,%d",type,&id,&node,&capacity,&speed,&available,&load) >= 7) {
-            if (strcmp(type,"truck")==0 && trucksCount < MAX_TRUCKS) {
-                addTruck(id,node,capacity,speed); trucks[trucksCount-1].c.available = (available!=0); trucks[trucksCount-1].c.load = load;
-            } else if (strcmp(type,"boat")==0 && boatsCount < MAX_BOATS) {
-                addBoat(id,node,capacity,speed); boats[boatsCount-1].c.available = (available!=0); boats[boatsCount-1].c.load = load;
-            }
-        }
-    }
-    f.close();
-    cout<<"Loaded trucks="<<trucksCount<<" boats="<<boatsCount<<" from "<<fname<<"\n";
+**    ifstream f(fname);**
+**    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }**
+**    string line; getline(f,line);**
+**    trucksCount = 0; boatsCount = 0;**
+**    while(getline(f,line) && (trucksCount < MAX_TRUCKS || boatsCount < MAX_BOATS)) {**
+**        char type[32]; int id,node,capacity,speed,available,load;**
+**        char buf[512]; strncpy(buf,line.c_str(),511); buf[511]=0;**
+**        if (sscanf(buf,"%31[^,],%d,%d,%d,%d,%d,%d",type,&id,&node,&capacity,&speed,&available,&load) >= 7) {**
+**            if (strcmp(type,"truck")==0 && trucksCount < MAX_TRUCKS) {**
+**                addTruck(id,node,capacity,speed); trucks[trucksCount-1].c.available = (available!=0); trucks[trucksCount-1].c.load = load;**
+**            } else if (strcmp(type,"boat")==0 && boatsCount < MAX_BOATS) {**
+**                addBoat(id,node,capacity,speed); boats[boatsCount-1].c.available = (available!=0); boats[boatsCount-1].c.load = load;**
+**            }**
+**        }**
+**    }**
+**    f.close();**
+**    cout<<"Loaded trucks="<<trucksCount<<" boats="<<boatsCount<<" from "<<fname<<"\n";**
 }
 
 /* ===========================
-   Factories: add/save/load
-   =========================== */
+**   Factories: add/save/load**
+**   =========================== */**
 void addFactoryEntry(int id, const char* name, int node, int capacityIn, bool handlesSea) {
-    if (factoriesCount >= MAX_FACTORIES) { cout<<"Factories full\n"; return; }
-    Factory &f = factories[factoriesCount++];
-    f.id = id; strncpy(f.name, name, sizeof(f.name)-1); f.name[sizeof(f.name)-1]=0; f.node = node; f.capacityIn = capacityIn; f.storedRaw = 0; f.producedUnits = 0; f.handlesSea = handlesSea;
-    // register entity
-    registerEntity(id, name, node, true);
+**    if (factoriesCount >= MAX_FACTORIES) { cout<<"Factories full\n"; return; }**
+**    Factory &f = factories[factoriesCount++];**
+**    f.id = id; strncpy(f.name, name, sizeof(f.name)-1); f.name[sizeof(f.name)-1]=0; f.node = node; f.capacityIn = capacityIn; f.storedRaw = 0; f.producedUnits = 0; f.handlesSea = handlesSea;**
+**    // register entity**
+**    registerEntity(id, name, node, true);**
 }
 void saveFactoriesCSV(const char* fname) {
-    ofstream f(fname);
-    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }
-    f<<"id,name,node,capacityIn,storedRaw,producedUnits,handlesSea\n";
-    for (int i=0;i<factoriesCount;i++) {
-        f<<factories[i].id<<","<<factories[i].name<<","<<factories[i].node<<","<<factories[i].capacityIn<<","<<factories[i].storedRaw<<","<<factories[i].producedUnits<<","<<factories[i].handlesSea<<"\n";
-    }
-    f.close(); cout<<"Factories saved to "<<fname<<"\n";
+**    ofstream f(fname);**
+**    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }**
+**    f<<"id,name,node,capacityIn,storedRaw,producedUnits,handlesSea\n";**
+**    for (int i=0;i<factoriesCount;i++) {**
+**        f<<factories[i].id<<","<<factories[i].name<<","<<factories[i].node<<","<<factories[i].capacityIn<<","<<factories[i].storedRaw<<","<<factories[i].producedUnits<<","<<factories[i].handlesSea<<"\n";**
+**    }**
+**    f.close(); cout<<"Factories saved to "<<fname<<"\n";**
 }
 void loadFactoriesCSV(const char* fname) {
-    ifstream f(fname);
-    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }
-    string line; getline(f,line);
-    factoriesCount = 0;
-    while(getline(f,line) && factoriesCount < MAX_FACTORIES) {
-        char buf[512]; strncpy(buf,line.c_str(),511); buf[511]=0;
-        int id,node,capacityIn,storedRaw,producedUnits,handlesSea;
-        char name[64];
-        if (sscanf(buf,"%d,%63[^,],%d,%d,%d,%d,%d",&id,name,&node,&capacityIn,&storedRaw,&producedUnits,&handlesSea) >= 7) {
-            addFactoryEntry(id,name,node,capacityIn,handlesSea!=0);
-            factories[factoriesCount-1].storedRaw = storedRaw; factories[factoriesCount-1].producedUnits = producedUnits;
-        }
-    }
-    f.close(); cout<<"Loaded "<<factoriesCount<<" factories from "<<fname<<"\n";
+**    ifstream f(fname);**
+**    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }**
+**    string line; getline(f,line);**
+**    factoriesCount = 0;**
+**    while(getline(f,line) && factoriesCount < MAX_FACTORIES) {**
+**        char buf[512]; strncpy(buf,line.c_str(),511); buf[511]=0;**
+**        int id,node,capacityIn,storedRaw,producedUnits,handlesSea;**
+**        char name[64];**
+**        if (sscanf(buf,"%d,%63[^,],%d,%d,%d,%d,%d",&id,name,&node,&capacityIn,&storedRaw,&producedUnits,&handlesSea) >= 7) {**
+**            addFactoryEntry(id,name,node,capacityIn,handlesSea!=0);**
+**            factories[factoriesCount-1].storedRaw = storedRaw; factories[factoriesCount-1].producedUnits = producedUnits;**
+**        }**
+**    }**
+**    f.close(); cout<<"Loaded "<<factoriesCount<<" factories from "<<fname<<"\n";**
 }
 
 /* ===========================
-   Dijkstra (array-based) returns parent & dist arrays
-   =========================== */
+**   Dijkstra (array-based) returns parent & dist arrays**
+**   =========================== */**
 struct DRes { int dist[MAX_NODES]; int parent[MAX_NODES]; };
 DRes dijkstraArray(int src) {
-    DRes R; bool used[MAX_NODES];
-    for (int i=0;i<nodesCount;i++) { R.dist[i]=INF; R.parent[i]=-1; used[i]=false; }
-    R.dist[src] = 0;
-    for (int iter=0; iter<nodesCount; iter++) {
-        int u=-1, best=INF;
-        for (int i=0;i<nodesCount;i++) if (!used[i] && R.dist[i]<best) { best = R.dist[i]; u = i; }
-        if (u==-1) break;
-        used[u] = true;
-        for (int v=0; v<nodesCount; v++) {
-            if (adjMat[u][v] < INF && R.dist[u] + adjMat[u][v] < R.dist[v]) {
-                R.dist[v] = R.dist[u] + adjMat[u][v];
-                R.parent[v] = u;
-            }
-        }
-    }
-    return R;
+**    DRes R; bool used[MAX_NODES];**
+**    for (int i=0;i<nodesCount;i++) { R.dist[i]=INF; R.parent[i]=-1; used[i]=false; }**
+**    R.dist[src] = 0;**
+**    for (int iter=0; iter<nodesCount; iter++) {**
+**        int u=-1, best=INF;**
+**        for (int i=0;i<nodesCount;i++) if (!used[i] && R.dist[i]<best) { best = R.dist[i]; u = i; }**
+**        if (u==-1) break;**
+**        used[u] = true;**
+**        for (int v=0; v<nodesCount; v++) {**
+**            if (adjMat[u][v] < INF && R.dist[u] + adjMat[u][v] < R.dist[v]) {**
+**                R.dist[v] = R.dist[u] + adjMat[u][v];**
+**                R.parent[v] = u;**
+**            }**
+**        }**
+**    }**
+**    return R;**
 }
 int computePathLenFromParent(int parent[], int target) {
-    int cur = target; int sum = 0;
-    while (parent[cur] != -1) {
-        int p = parent[cur];
-        sum += adjMat[p][cur];
-        cur = p;
-    }
-    return sum;
+**    int cur = target; int sum = 0;**
+**    while (parent[cur] != -1) {**
+**        int p = parent[cur];**
+**        sum += adjMat[p][cur];**
+**        cur = p;**
+**    }**
+**    return sum;**
 }
 
 /* ===========================
-   Dispatch: assign nearest suitable vehicle (truck or boat) based on waste type & availability
-   time-accurate: assign destination and remainingDist; movement simulated by ticks
-   =========================== */
+**   Dispatch: assign nearest suitable vehicle (truck or boat) based on waste type & availability**
+**   time-accurate: assign destination and remainingDist; movement simulated by ticks**
+**   =========================== */**
 int findFactoryFor(WasteType wt, int volume) {
-    int best = -1; int bestFree = -1;
-    for (int i=0;i<factoriesCount;i++) {
-        if (wt == W_SEA_AQUATIC && !factories[i].handlesSea) continue;
-        int freeCap = factories[i].capacityIn - factories[i].storedRaw;
-        if (freeCap >= volume && freeCap > bestFree) { best = i; bestFree = freeCap; }
-    }
-    if (best == -1) {
-        for (int i=0;i<factoriesCount;i++) {
-            if (wt == W_SEA_AQUATIC && !factories[i].handlesSea) continue;
-            int freeCap = factories[i].capacityIn - factories[i].storedRaw;
-            if (freeCap > 0) { best = i; break; }
-        }
-    }
-    return best;
+**    int best = -1; int bestFree = -1;**
+**    for (int i=0;i<factoriesCount;i++) {**
+**        if (wt == W_SEA_AQUATIC && !factories[i].handlesSea) continue;**
+**        int freeCap = factories[i].capacityIn - factories[i].storedRaw;**
+**        if (freeCap >= volume && freeCap > bestFree) { best = i; bestFree = freeCap; }**
+**    }**
+**    if (best == -1) {**
+**        for (int i=0;i<factoriesCount;i++) {**
+**            if (wt == W_SEA_AQUATIC && !factories[i].handlesSea) continue;**
+**            int freeCap = factories[i].capacityIn - factories[i].storedRaw;**
+**            if (freeCap > 0) { best = i; break; }**
+**        }**
+**    }**
+**    return best;**
 }
 void dispatchTopRequest(int currentTime) {
-    if (requestHeapSize == 0) return;
-    int reqIdx = requestHeapPop();
-    if (reqIdx < 0) return;
-    Request &rq = requests[reqIdx];
-    if (rq.processed || rq.assigned) return;
-    // choose vehicle type
-    bool needBoat = (rq.type == W_SEA_AQUATIC);
-    // First look for dedicated vehicle (truck/boat) nearest by Dijkstra distance
-    int chosenVehicleType = -1; // 0=truck,1=boat
-    int chosenIdx = -1;
-    int chosenDist = INF;
-    // trucks
-    for (int t=0;t<trucksCount;t++) {
-        if (!trucks[t].c.available) continue;
-        if (trucks[t].c.capacity - trucks[t].c.load < rq.volume) continue;
-        DRes dr = dijkstraArray(trucks[t].c.currentNode);
-        if (dr.dist[rq.node] < chosenDist) { chosenDist = dr.dist[rq.node]; chosenVehicleType = 0; chosenIdx = t; }
-    }
-    // boats if needed or if no truck found and boats exist
-    if (boatsCount > 0) {
-        for (int b=0;b<boatsCount;b++) {
-            if (!boats[b].c.available) continue;
-            if (boats[b].c.capacity - boats[b].c.load < rq.volume) continue;
-            DRes dr = dijkstraArray(boats[b].c.currentNode);
-            // if request is sea and boat is closer, prefer boat
-            if (dr.dist[rq.node] < chosenDist) { chosenDist = dr.dist[rq.node]; chosenVehicleType = 1; chosenIdx = b; }
-        }
-    }
-    // If hazardous request, try to find any vehicle; hazard bias would have made priority high and it'll get chosen early
-    if (chosenIdx == -1) {
-        // no vehicle available now: requeue with slight time penalty (so others can be processed)
-        rq.priority = max(0, rq.priority - 1);
-        requestHeapPush(reqIdx);
-        return;
-    }
-    // Determine factory
-    int fIdx = findFactoryFor(rq.type, rq.volume);
-    if (fIdx == -1) {
-        // No factory; if hazardous, escalate (we can send to nearest allowed factory regardless of free capacity)
-        int fallback = -1; int minDist = INF;
-        for (int i=0;i<factoriesCount;i++) {
-            if (rq.type==W_SEA_AQUATIC && !factories[i].handlesSea) continue;
-            DRes dr = dijkstraArray(rq.node);
-            if (dr.dist[factories[i].node] < minDist) { minDist = dr.dist[factories[i].node]; fallback = i; }
-        }
-        if (fallback != -1) fIdx = fallback;
-        else {
-            cout<<"[WARN] No factory available for request "<<rq.id<<". Marking as failed.\n";
-            rq.processed = true;
-            return;
-        }
-    }
-    // Assign chosen vehicle: set destination to request node then to factory (we simulate multi-leg by setting destNode=request.node and storing assignedRequest)
-    if (chosenVehicleType == 0) {
-        Truck &tr = trucks[chosenIdx];
-        tr.c.available = false;
-        tr.c.assignedRequestIdx = reqIdx;
-        // compute distance from truck.currentNode -> request.node
-        DRes drTruckToReq = dijkstraArray(tr.c.currentNode);
-        int distToReq = drTruckToReq.dist[rq.node];
-        tr.c.destNode = rq.node;
-        tr.c.remainingDist = (distToReq>=INF? INF: distToReq);
-        // store assigned vehicle id into request
-        rq.assigned = true; rq.assignedVehicleId = tr.c.id;
-        cout<<"[ASSIGN] Truck "<<tr.c.id<<" assigned to Request "<<rq.id<<" (distToReq="<<distToReq<<") and will deliver to Factory "<<factories[fIdx].name<<"\n";
-        // We will store factory index somewhere: for simplicity, we temporarily attach to requestsCount field? better store in processed flag mapping? We'll store assignedVehicleId and vehicle will know assignedRequestIdx, and on delivery we'll find factory by type+volume
-        // Keep rq.processed false until delivered
-    } else {
-        Boat &bo = boats[chosenIdx];
-        bo.c.available = false;
-        bo.c.assignedRequestIdx = reqIdx;
-        DRes drBoatToReq = dijkstraArray(bo.c.currentNode);
-        int distToReq = drBoatToReq.dist[rq.node];
-        bo.c.destNode = rq.node;
-        bo.c.remainingDist = (distToReq>=INF? INF: distToReq);
-        rq.assigned = true; rq.assignedVehicleId = bo.c.id;
-        cout<<"[ASSIGN] Boat "<<bo.c.id<<" assigned to Request "<<rq.id<<" (distToReq="<<distToReq<<") and will deliver to Factory "<<factories[fIdx].name<<"\n";
-    }
+**    if (requestHeapSize == 0) return;**
+**    int reqIdx = requestHeapPop();**
+**    if (reqIdx < 0) return;**
+**    Request &rq = requests[reqIdx];**
+**    if (rq.processed || rq.assigned) return;**
+**    // choose vehicle type**
+**    bool needBoat = (rq.type == W_SEA_AQUATIC);**
+**    // First look for dedicated vehicle (truck/boat) nearest by Dijkstra distance**
+**    int chosenVehicleType = -1; // 0=truck,1=boat**
+**    int chosenIdx = -1;**
+**    int chosenDist = INF;**
+**    // trucks**
+**    for (int t=0;t<trucksCount;t++) {**
+**        if (!trucks[t].c.available) continue;**
+**        if (trucks[t].c.capacity - trucks[t].c.load < rq.volume) continue;**
+**        DRes dr = dijkstraArray(trucks[t].c.currentNode);**
+**        if (dr.dist[rq.node] < chosenDist) { chosenDist = dr.dist[rq.node]; chosenVehicleType = 0; chosenIdx = t; }**
+**    }**
+**    // boats if needed or if no truck found and boats exist**
+**    if (boatsCount > 0) {**
+**        for (int b=0;b<boatsCount;b++) {**
+**            if (!boats[b].c.available) continue;**
+**            if (boats[b].c.capacity - boats[b].c.load < rq.volume) continue;**
+**            DRes dr = dijkstraArray(boats[b].c.currentNode);**
+**            // if request is sea and boat is closer, prefer boat**
+**            if (dr.dist[rq.node] < chosenDist) { chosenDist = dr.dist[rq.node]; chosenVehicleType = 1; chosenIdx = b; }**
+**        }**
+**    }**
+**    // If hazardous request, try to find any vehicle; hazard bias would have made priority high and it'll get chosen early**
+**    if (chosenIdx == -1) {**
+**        // no vehicle available now: requeue with slight time penalty (so others can be processed)**
+**        rq.priority = max(0, rq.priority - 1);**
+**        requestHeapPush(reqIdx);**
+**        return;**
+**    }**
+**    // Determine factory**
+**    int fIdx = findFactoryFor(rq.type, rq.volume);**
+**    if (fIdx == -1) {**
+**        // No factory; if hazardous, escalate (we can send to nearest allowed factory regardless of free capacity)**
+**        int fallback = -1; int minDist = INF;**
+**        for (int i=0;i<factoriesCount;i++) {**
+**            if (rq.type==W_SEA_AQUATIC && !factories[i].handlesSea) continue;**
+**            DRes dr = dijkstraArray(rq.node);**
+**            if (dr.dist[factories[i].node] < minDist) { minDist = dr.dist[factories[i].node]; fallback = i; }**
+**        }**
+**        if (fallback != -1) fIdx = fallback;**
+**        else {**
+**            cout<<"[WARN] No factory available for request "<<rq.id<<". Marking as failed.\n";**
+**            rq.processed = true;**
+**            return;**
+**        }**
+**    }**
+**    // Assign chosen vehicle: set destination to request node then to factory (we simulate multi-leg by setting destNode=request.node and storing assignedRequest)**
+**    if (chosenVehicleType == 0) {**
+**        Truck &tr = trucks[chosenIdx];**
+**        tr.c.available = false;**
+**        tr.c.assignedRequestIdx = reqIdx;**
+**        // compute distance from truck.currentNode -> request.node**
+**        DRes drTruckToReq = dijkstraArray(tr.c.currentNode);**
+**        int distToReq = drTruckToReq.dist[rq.node];**
+**        tr.c.destNode = rq.node;**
+**        tr.c.remainingDist = (distToReq>=INF? INF: distToReq);**
+**        // store assigned vehicle id into request**
+**        rq.assigned = true; rq.assignedVehicleId = tr.c.id;**
+**        cout<<"[ASSIGN] Truck "<<tr.c.id<<" assigned to Request "<<rq.id<<" (distToReq="<<distToReq<<") and will deliver to Factory "<<factories[fIdx].name<<"\n";**
+**        // We will store factory index somewhere: for simplicity, we temporarily attach to requestsCount field? better store in processed flag mapping? We'll store assignedVehicleId and vehicle will know assignedRequestIdx, and on delivery we'll find factory by type+volume**
+**        // Keep rq.processed false until delivered**
+**    } else {**
+**        Boat &bo = boats[chosenIdx];**
+**        bo.c.available = false;**
+**        bo.c.assignedRequestIdx = reqIdx;**
+**        DRes drBoatToReq = dijkstraArray(bo.c.currentNode);**
+**        int distToReq = drBoatToReq.dist[rq.node];**
+**        bo.c.destNode = rq.node;**
+**        bo.c.remainingDist = (distToReq>=INF? INF: distToReq);**
+**        rq.assigned = true; rq.assignedVehicleId = bo.c.id;**
+**        cout<<"[ASSIGN] Boat "<<bo.c.id<<" assigned to Request "<<rq.id<<" (distToReq="<<distToReq<<") and will deliver to Factory "<<factories[fIdx].name<<"\n";**
+**    }**
 }
 
 /* ===========================
-   Movement simulation tick: move vehicles toward dest; when reach request node, load and send to factory
-   We implement states:
-   - vehicle.destNode == request.node : moving to pickup
-   - when arrive, immediate compute factory and set destNode = factory.node and remainingDist accordingly
-   - when arrive at factory, unload -> factory.storedRaw += volume; mark request.processed = true
-   =========================== */
+**   Movement simulation tick: move vehicles toward dest; when reach request node, load and send to factory**
+**   We implement states:**
+**   - vehicle.destNode == request.node : moving to pickup**
+**   - when arrive, immediate compute factory and set destNode = factory.node and remainingDist accordingly**
+**   - when arrive at factory, unload -> factory.storedRaw += volume; mark request.processed = true**
+**   =========================== */**
 void processTick(int currentTime) {
-    // trucks
-    for (int t=0;t<trucksCount;t++) {
-        Truck &tr = trucks[t];
-        if (tr.c.destNode == -1) continue;
-        if (tr.c.remainingDist <= 0) {
-            // arrived at dest node
-            int reqIdx = tr.c.assignedRequestIdx;
-            if (reqIdx < 0 || reqIdx >= requestsCount) { tr.c.destNode = -1; tr.c.available = true; continue; }
-            Request &rq = requests[reqIdx];
-            if (!rq.assigned) { tr.c.destNode = -1; tr.c.available = true; tr.c.assignedRequestIdx = -1; continue; }
-            // If at pickup point and not yet loaded
-            if (!rq.processed && tr.c.currentNode == rq.node) {
-                // load into truck
-                if (tr.c.capacity - tr.c.load >= rq.volume) {
-                    tr.c.load += rq.volume;
-                    // set next destination = best factory
-                    int fIdx = findFactoryFor(rq.type, rq.volume);
-                    if (fIdx == -1) {
-                        // no factory -> unload to temp depot (skip)
-                        cout<<"[WARN] No factory when truck arrived for request "<<rq.id<<". Unloading at depot.\n";
-                        tr.c.load -= rq.volume;
-                        rq.processed = true;
-                        tr.c.destNode = -1; tr.c.assignedRequestIdx = -1; tr.c.available = true;
-                    } else {
-                        // set path to factory
-                        DRes dr = dijkstraArray(tr.c.currentNode);
-                        int distToFactory = dr.dist[ factories[fIdx].node ];
-                        tr.c.destNode = factories[fIdx].node;
-                        tr.c.remainingDist = (distToFactory>=INF? INF: distToFactory);
-                        // store selected factory id in assignedVehicleId? we will simply on arrival iterate best factory again and add
-                        cout<<"[TRUCK] Truck "<<tr.c.id<<" loaded "<<rq.volume<<"L for Request "<<rq.id<<", heading to Factory "<<factories[fIdx].name<<" (dist="<<distToFactory<<")\n";
-                    }
-                } else {
-                    // not enough capacity (shouldn't happen due to check earlier) -> requeue or partial load (skip)
-                    cout<<"[WARN] Truck "<<tr.c.id<<" cannot load full volume for request "<<rq.id<<"\n";
-                }
-            } else if (!rq.processed && tr.c.currentNode == tr.c.destNode) {
-                // arrived at factory (assuming destNode is factory)
-                int fIdx = -1;
-                // find factory at this node
-                for (int i=0;i<factoriesCount;i++) if (factories[i].node == tr.c.currentNode) { fIdx = i; break; }
-                if (fIdx == -1) {
-                    // not factory node -> free vehicle
-                    tr.c.destNode = -1; tr.c.available = true; tr.c.assignedRequestIdx = -1;
-                } else {
-                    // unload
-                    // find request for this truck
-                    if (rq.volume <= tr.c.load) {
-                        factories[fIdx].storedRaw += rq.volume;
-                        tr.c.load -= rq.volume;
-                        rq.processed = true;
-                        cout<<"[DELIVER] Truck "<<tr.c.id<<" delivered "<<rq.volume<<"L for Request "<<rq.id<<" to Factory "<<factories[fIdx].name<<"\n";
-                        // free truck
-                        tr.c.destNode = -1; tr.c.available = true; tr.c.assignedRequestIdx = -1;
-                    } else {
-                        // partial handling
-                        factories[fIdx].storedRaw += tr.c.load;
-                        rq.volume -= tr.c.load;
-                        cout<<"[PARTIAL] Truck "<<tr.c.id<<" partially delivered to Factory "<<factories[fIdx].name<<" remaining for request "<<rq.id<<" = "<<rq.volume<<"\n";
-                        tr.c.load = 0;
-                        tr.c.destNode = -1; tr.c.available = true; tr.c.assignedRequestIdx = -1;
-                        // requeue remaining (adjust priority)
-                        rq.priority = max(0, rq.priority - 1);
-                        requestHeapPush(reqIdx);
-                    }
-                }
-            } else {
-                // arrived at some node but conditions not matching - free vehicle
-                tr.c.destNode = -1; tr.c.available = true; tr.c.assignedRequestIdx = -1;
-            }
-        } else {
-            // move towards destination by speed units
-            int move = tr.c.speed;
-            tr.c.remainingDist -= move;
-            // if remainingDist becomes <=0, set currentNode to destNode
-            if (tr.c.remainingDist <= 0) tr.c.currentNode = tr.c.destNode;
-            // else we don't update intermediate node (requires path step simulation)
-        }
-    }
-    // boats: similar logic
-    for (int b=0;b<boatsCount;b++) {
-        Boat &bo = boats[b];
-        if (bo.c.destNode == -1) continue;
-        if (bo.c.remainingDist <= 0) {
-            int reqIdx = bo.c.assignedRequestIdx;
-            if (reqIdx < 0 || reqIdx >= requestsCount) { bo.c.destNode = -1; bo.c.available = true; continue; }
-            Request &rq = requests[reqIdx];
-            if (!rq.assigned) { bo.c.destNode = -1; bo.c.available = true; bo.c.assignedRequestIdx = -1; continue; }
-            if (!rq.processed && bo.c.currentNode == rq.node) {
-                if (bo.c.capacity - bo.c.load >= rq.volume) {
-                    bo.c.load += rq.volume;
-                    int fIdx = findFactoryFor(rq.type, rq.volume);
-                    if (fIdx == -1) {
-                        cout<<"[WARN] No factory when boat arrived for request "<<rq.id<<". Unloading at depot.\n";
-                        bo.c.load -= rq.volume;
-                        rq.processed = true;
-                        bo.c.destNode = -1; bo.c.assignedRequestIdx = -1; bo.c.available = true;
-                    } else {
-                        DRes dr = dijkstraArray(bo.c.currentNode);
-                        int distToFactory = dr.dist[ factories[fIdx].node ];
-                        bo.c.destNode = factories[fIdx].node;
-                        bo.c.remainingDist = (distToFactory>=INF? INF: distToFactory);
-                        cout<<"[BOAT] Boat "<<bo.c.id<<" loaded "<<rq.volume<<"L for Request "<<rq.id<<", heading to Factory "<<factories[fIdx].name<<"\n";
-                    }
-                } else {
-                    cout<<"[WARN] Boat "<<bo.c.id<<" cannot load full volume for request "<<rq.id<<"\n";
-                }
-            } else if (!rq.processed && bo.c.currentNode == bo.c.destNode) {
-                int fIdx = -1;
-                for (int i=0;i<factoriesCount;i++) if (factories[i].node == bo.c.currentNode) { fIdx = i; break; }
-                if (fIdx == -1) { bo.c.destNode = -1; bo.c.available = true; bo.c.assignedRequestIdx = -1; }
-                else {
-                    if (rq.volume <= bo.c.load) {
-                        factories[fIdx].storedRaw += rq.volume;
-                        bo.c.load -= rq.volume;
-                        rq.processed = true;
-                        cout<<"[DELIVER] Boat "<<bo.c.id<<" delivered "<<rq.volume<<"L for Request "<<rq.id<<" to Factory "<<factories[fIdx].name<<"\n";
-                        bo.c.destNode = -1; bo.c.available = true; bo.c.assignedRequestIdx = -1;
-                    } else {
-                        factories[fIdx].storedRaw += bo.c.load;
-                        rq.volume -= bo.c.load;
-                        cout<<"[PARTIAL] Boat "<<bo.c.id<<" partially delivered to Factory "<<factories[fIdx].name<<" remaining for request "<<rq.id<<" = "<<rq.volume<<"\n";
-                        bo.c.load = 0;
-                        bo.c.destNode = -1; bo.c.available = true; bo.c.assignedRequestIdx = -1;
-                        rq.priority = max(0, rq.priority - 1);
-                        requestHeapPush(reqIdx);
-                    }
-                }
-            } else {
-                bo.c.destNode = -1; bo.c.available = true; bo.c.assignedRequestIdx = -1;
-            }
-        } else {
-            int move = bo.c.speed;
-            bo.c.remainingDist -= move;
-            if (bo.c.remainingDist <= 0) bo.c.currentNode = bo.c.destNode;
-        }
-    }
+**    // trucks**
+**    for (int t=0;t<trucksCount;t++) {**
+**        Truck &tr = trucks[t];**
+**        if (tr.c.destNode == -1) continue;**
+**        if (tr.c.remainingDist <= 0) {**
+**            // arrived at dest node**
+**            int reqIdx = tr.c.assignedRequestIdx;**
+**            if (reqIdx < 0 || reqIdx >= requestsCount) { tr.c.destNode = -1; tr.c.available = true; continue; }**
+**            Request &rq = requests[reqIdx];**
+**            if (!rq.assigned) { tr.c.destNode = -1; tr.c.available = true; tr.c.assignedRequestIdx = -1; continue; }**
+**            // If at pickup point and not yet loaded**
+**            if (!rq.processed && tr.c.currentNode == rq.node) {**
+**                // load into truck**
+**                if (tr.c.capacity - tr.c.load >= rq.volume) {**
+**                    tr.c.load += rq.volume;**
+**                    // set next destination = best factory**
+**                    int fIdx = findFactoryFor(rq.type, rq.volume);**
+**                    if (fIdx == -1) {**
+**                        // no factory -> unload to temp depot (skip)**
+**                        cout<<"[WARN] No factory when truck arrived for request "<<rq.id<<". Unloading at depot.\n";**
+**                        tr.c.load -= rq.volume;**
+**                        rq.processed = true;**
+**                        tr.c.destNode = -1; tr.c.assignedRequestIdx = -1; tr.c.available = true;**
+**                    } else {**
+**                        // set path to factory**
+**                        DRes dr = dijkstraArray(tr.c.currentNode);**
+**                        int distToFactory = dr.dist[ factories[fIdx].node ];**
+**                        tr.c.destNode = factories[fIdx].node;**
+**                        tr.c.remainingDist = (distToFactory>=INF? INF: distToFactory);**
+**                        // store selected factory id in assignedVehicleId? we will simply on arrival iterate best factory again and add**
+**                        cout<<"[TRUCK] Truck "<<tr.c.id<<" loaded "<<rq.volume<<"L for Request "<<rq.id<<", heading to Factory "<<factories[fIdx].name<<" (dist="<<distToFactory<<")\n";**
+**                    }**
+**                } else {**
+**                    // not enough capacity (shouldn't happen due to check earlier) -> requeue or partial load (skip)**
+**                    cout<<"[WARN] Truck "<<tr.c.id<<" cannot load full volume for request "<<rq.id<<"\n";**
+**                }**
+**            } else if (!rq.processed && tr.c.currentNode == tr.c.destNode) {**
+**                // arrived at factory (assuming destNode is factory)**
+**                int fIdx = -1;**
+**                // find factory at this node**
+**                for (int i=0;i<factoriesCount;i++) if (factories[i].node == tr.c.currentNode) { fIdx = i; break; }**
+**                if (fIdx == -1) {**
+**                    // not factory node -> free vehicle**
+**                    tr.c.destNode = -1; tr.c.available = true; tr.c.assignedRequestIdx = -1;**
+**                } else {**
+**                    // unload**
+**                    // find request for this truck**
+**                    if (rq.volume <= tr.c.load) {**
+**                        factories[fIdx].storedRaw += rq.volume;**
+**                        tr.c.load -= rq.volume;**
+**                        rq.processed = true;**
+**                        cout<<"[DELIVER] Truck "<<tr.c.id<<" delivered "<<rq.volume<<"L for Request "<<rq.id<<" to Factory "<<factories[fIdx].name<<"\n";**
+**                        // free truck**
+**                        tr.c.destNode = -1; tr.c.available = true; tr.c.assignedRequestIdx = -1;**
+**                    } else {**
+**                        // partial handling**
+**                        factories[fIdx].storedRaw += tr.c.load;**
+**                        rq.volume -= tr.c.load;**
+**                        cout<<"[PARTIAL] Truck "<<tr.c.id<<" partially delivered to Factory "<<factories[fIdx].name<<" remaining for request "<<rq.id<<" = "<<rq.volume<<"\n";**
+**                        tr.c.load = 0;**
+**                        tr.c.destNode = -1; tr.c.available = true; tr.c.assignedRequestIdx = -1;**
+**                        // requeue remaining (adjust priority)**
+**                        rq.priority = max(0, rq.priority - 1);**
+**                        requestHeapPush(reqIdx);**
+**                    }**
+**                }**
+**            } else {**
+**                // arrived at some node but conditions not matching - free vehicle**
+**                tr.c.destNode = -1; tr.c.available = true; tr.c.assignedRequestIdx = -1;**
+**            }**
+**        } else {**
+**            // move towards destination by speed units**
+**            int move = tr.c.speed;**
+**            tr.c.remainingDist -= move;**
+**            // if remainingDist becomes <=0, set currentNode to destNode**
+**            if (tr.c.remainingDist <= 0) tr.c.currentNode = tr.c.destNode;**
+**            // else we don't update intermediate node (requires path step simulation)**
+**        }**
+**    }**
+**    // boats: similar logic**
+**    for (int b=0;b<boatsCount;b++) {**
+**        Boat &bo = boats[b];**
+**        if (bo.c.destNode == -1) continue;**
+**        if (bo.c.remainingDist <= 0) {**
+**            int reqIdx = bo.c.assignedRequestIdx;**
+**            if (reqIdx < 0 || reqIdx >= requestsCount) { bo.c.destNode = -1; bo.c.available = true; continue; }**
+**            Request &rq = requests[reqIdx];**
+**            if (!rq.assigned) { bo.c.destNode = -1; bo.c.available = true; bo.c.assignedRequestIdx = -1; continue; }**
+**            if (!rq.processed && bo.c.currentNode == rq.node) {**
+**                if (bo.c.capacity - bo.c.load >= rq.volume) {**
+**                    bo.c.load += rq.volume;**
+**                    int fIdx = findFactoryFor(rq.type, rq.volume);**
+**                    if (fIdx == -1) {**
+**                        cout<<"[WARN] No factory when boat arrived for request "<<rq.id<<". Unloading at depot.\n";**
+**                        bo.c.load -= rq.volume;**
+**                        rq.processed = true;**
+**                        bo.c.destNode = -1; bo.c.assignedRequestIdx = -1; bo.c.available = true;**
+**                    } else {**
+**                        DRes dr = dijkstraArray(bo.c.currentNode);**
+**                        int distToFactory = dr.dist[ factories[fIdx].node ];**
+**                        bo.c.destNode = factories[fIdx].node;**
+**                        bo.c.remainingDist = (distToFactory>=INF? INF: distToFactory);**
+**                        cout<<"[BOAT] Boat "<<bo.c.id<<" loaded "<<rq.volume<<"L for Request "<<rq.id<<", heading to Factory "<<factories[fIdx].name<<"\n";**
+**                    }**
+**                } else {**
+**                    cout<<"[WARN] Boat "<<bo.c.id<<" cannot load full volume for request "<<rq.id<<"\n";**
+**                }**
+**            } else if (!rq.processed && bo.c.currentNode == bo.c.destNode) {**
+**                int fIdx = -1;**
+**                for (int i=0;i<factoriesCount;i++) if (factories[i].node == bo.c.currentNode) { fIdx = i; break; }**
+**                if (fIdx == -1) { bo.c.destNode = -1; bo.c.available = true; bo.c.assignedRequestIdx = -1; }**
+**                else {**
+**                    if (rq.volume <= bo.c.load) {**
+**                        factories[fIdx].storedRaw += rq.volume;**
+**                        bo.c.load -= rq.volume;**
+**                        rq.processed = true;**
+**                        cout<<"[DELIVER] Boat "<<bo.c.id<<" delivered "<<rq.volume<<"L for Request "<<rq.id<<" to Factory "<<factories[fIdx].name<<"\n";**
+**                        bo.c.destNode = -1; bo.c.available = true; bo.c.assignedRequestIdx = -1;**
+**                    } else {**
+**                        factories[fIdx].storedRaw += bo.c.load;**
+**                        rq.volume -= bo.c.load;**
+**                        cout<<"[PARTIAL] Boat "<<bo.c.id<<" partially delivered to Factory "<<factories[fIdx].name<<" remaining for request "<<rq.id<<" = "<<rq.volume<<"\n";**
+**                        bo.c.load = 0;**
+**                        bo.c.destNode = -1; bo.c.available = true; bo.c.assignedRequestIdx = -1;**
+**                        rq.priority = max(0, rq.priority - 1);**
+**                        requestHeapPush(reqIdx);**
+**                    }**
+**                }**
+**            } else {**
+**                bo.c.destNode = -1; bo.c.available = true; bo.c.assignedRequestIdx = -1;**
+**            }**
+**        } else {**
+**            int move = bo.c.speed;**
+**            bo.c.remainingDist -= move;**
+**            if (bo.c.remainingDist <= 0) bo.c.currentNode = bo.c.destNode;**
+**        }**
+**    }**
 }
 
 /* ===========================
-   Factory processing: convert raw -> units
-   =========================== */
+**   Factory processing: convert raw -> units**
+**   =========================== */**
 void processFactories() {
-    for (int i=0;i<factoriesCount;i++) {
-        Factory &f = factories[i];
-        if (f.storedRaw <= 0) continue;
-        int units = f.storedRaw / 100; // 100L -> 1 unit
-        if (units > 0) {
-            f.producedUnits += units;
-            f.storedRaw -= units * 100;
-            cout<<"[FACTORY] "<<f.name<<" processed "<<units*100<<"L -> "<<units<<" units (total units="<<f.producedUnits<<")\n";
-        }
-    }
+**    for (int i=0;i<factoriesCount;i++) {**
+**        Factory &f = factories[i];**
+**        if (f.storedRaw <= 0) continue;**
+**        int units = f.storedRaw / 100; // 100L -> 1 unit**
+**        if (units > 0) {**
+**            f.producedUnits += units;**
+**            f.storedRaw -= units * 100;**
+**            cout<<"[FACTORY] "<<f.name<<" processed "<<units*100<<"L -> "<<units<<" units (total units="<<f.producedUnits<<")\n";**
+**        }**
+**    }**
 }
 
 /* ===========================
-   Merge sort factories by producedUnits descending for report
-   =========================== */
+**   Merge sort factories by producedUnits descending for report**
+**   =========================== */**
 void mergeFactories(Factory arr[], int l, int m, int r) {
-    int n1 = m-l+1, n2 = r-m;
-    Factory *L = new Factory[n1]; Factory *R = new Factory[n2];
-    for (int i=0;i<n1;i++) L[i] = arr[l+i];
-    for (int j=0;j<n2;j++) R[j] = arr[m+1+j];
-    int i=0,j=0,k=l;
-    while (i<n1 && j<n2) {
-        if (L[i].producedUnits >= R[j].producedUnits) arr[k++] = L[i++]; else arr[k++] = R[j++];
-    }
-    while (i<n1) arr[k++] = L[i++];
-    while (j<n2) arr[k++] = R[j++];
-    delete[] L; delete[] R;
+**    int n1 = m-l+1, n2 = r-m;**
+**    Factory *L = new Factory[n1]; Factory *R = new Factory[n2];**
+**    for (int i=0;i<n1;i++) L[i] = arr[l+i];**
+**    for (int j=0;j<n2;j++) R[j] = arr[m+1+j];**
+**    int i=0,j=0,k=l;**
+**    while (i<n1 && j<n2) {**
+**        if (L[i].producedUnits >= R[j].producedUnits) arr[k++] = L[i++]; else arr[k++] = R[j++];**
+**    }**
+**    while (i<n1) arr[k++] = L[i++];**
+**    while (j<n2) arr[k++] = R[j++];**
+**    delete[] L; delete[] R;**
 }
 void mergeSortFactoriesArr(Factory arr[], int l, int r) {
-    if (l<r) {
-        int m = (l+r)/2;
-        mergeSortFactoriesArr(arr,l,m); mergeSortFactoriesArr(arr,m+1,r); mergeFactories(arr,l,m,r);
-    }
+**    if (l<r) {**
+**        int m = (l+r)/2;**
+**        mergeSortFactoriesArr(arr,l,m); mergeSortFactoriesArr(arr,m+1,r); mergeFactories(arr,l,m,r);**
+**    }**
 }
 
 /* ===========================
-   KMP substring search for names
-   =========================== */
+**   KMP substring search for names**
+**   =========================== */**
 void computeLPS(const char pat[], int M, int lps[]) {
-    int len=0; lps[0]=0; int i=1;
-    while (i<M) {
-        if (pat[i] == pat[len]) { len++; lps[i]=len; i++; }
-        else { if (len) len=lps[len-1]; else { lps[i]=0; i++; } }
-    }
+**    int len=0; lps[0]=0; int i=1;**
+**    while (i<M) {**
+**        if (pat[i] == pat[len]) { len++; lps[i]=len; i++; }**
+**        else { if (len) len=lps[len-1]; else { lps[i]=0; i++; } }**
+**    }**
 }
 bool KMPsearch(const char text[], const char pat[]) {
-    int N = strlen(text), M = strlen(pat);
-    if (M==0) return true;
-    int *lps = new int[M];
-    computeLPS(pat,M,lps);
-    int i=0,j=0;
-    while (i<N) {
-        if (text[i] == pat[j]) { i++; j++; if (j==M) { delete[] lps; return true; } }
-        else { if (j) j = lps[j-1]; else i++; }
-    }
-    delete[] lps; return false;
+**    int N = strlen(text), M = strlen(pat);**
+**    if (M==0) return true;**
+**    int *lps = new int[M];**
+**    computeLPS(pat,M,lps);**
+**    int i=0,j=0;**
+**    while (i<N) {**
+**        if (text[i] == pat[j]) { i++; j++; if (j==M) { delete[] lps; return true; } }**
+**        else { if (j) j = lps[j-1]; else i++; }**
+**    }**
+**    delete[] lps; return false;**
 }
 
 /* ===========================
-   Persistence: save/load all major tables
-   =========================== */
+**   Persistence: save/load all major tables**
+**   =========================== */**
 void saveAll(const char* dir) {
-    char fname[256];
-    snprintf(fname,sizeof(fname),"%s/requests.csv",dir); saveRequestsCSV(fname);
-    snprintf(fname,sizeof(fname),"%s/vehicles.csv",dir); saveVehiclesCSV(fname);
-    snprintf(fname,sizeof(fname),"%s/factories.csv",dir); saveFactoriesCSV(fname);
-    cout<<"Saved all data to directory: "<<dir<<"\n";
+**    char fname[256];**
+**    snprintf(fname,sizeof(fname),"%s/requests.csv",dir); saveRequestsCSV(fname);**
+**    snprintf(fname,sizeof(fname),"%s/vehicles.csv",dir); saveVehiclesCSV(fname);**
+**    snprintf(fname,sizeof(fname),"%s/factories.csv",dir); saveFactoriesCSV(fname);**
+**    cout<<"Saved all data to directory: "<<dir<<"\n";**
 }
 void loadAll(const char* dir) {
-    char fname[256];
-    snprintf(fname,sizeof(fname),"%s/requests.csv",dir); loadRequestsCSV(fname);
-    snprintf(fname,sizeof(fname),"%s/vehicles.csv",dir); loadVehiclesCSV(fname);
-    snprintf(fname,sizeof(fname),"%s/factories.csv",dir); loadFactoriesCSV(fname);
-    cout<<"Loaded all data from directory: "<<dir<<"\n";
+**    char fname[256];**
+**    snprintf(fname,sizeof(fname),"%s/requests.csv",dir); loadRequestsCSV(fname);**
+**    snprintf(fname,sizeof(fname),"%s/vehicles.csv",dir); loadVehiclesCSV(fname);**
+**    snprintf(fname,sizeof(fname),"%s/factories.csv",dir); loadFactoriesCSV(fname);**
+**    cout<<"Loaded all data from directory: "<<dir<<"\n";**
 }
 
 /* ===========================
-   Save/Load functions require forward declarations from above
-   =========================== */
+**   Save/Load functions require forward declarations from above**
+**   =========================== */**
 void saveRequestsCSV(const char* fname);
 void loadRequestsCSV(const char* fname);
 void saveVehiclesCSV(const char* fname);
@@ -799,286 +742,250 @@ void saveFactoriesCSV(const char* fname);
 void loadFactoriesCSV(const char* fname);
 
 /* ===========================
-   DEMO SETUP
-   =========================== */
+**   DEMO SETUP**
+**   =========================== */**
 void demoSetup() {
-    initGraph(20);
-    // build sample map (nodes)
-    addEdge(0,1,5); addEdge(0,2,7); addEdge(1,3,4); addEdge(2,4,6);
-    addEdge(3,5,3); addEdge(4,6,2); addEdge(5,7,5); addEdge(6,8,4);
-    addEdge(7,9,7); addEdge(9,10,3); addEdge(10,11,4); addEdge(11,12,6);
-    // factories
-    addFactoryEntry:
-    // use addFactoryEntry wrapper (we already have addFactoryEntry earlier) -> but name conflict; implement simple here:
-    addFactoryEntry(501,"RecycCo General",6,3000,false);
-    addFactoryEntry(502,"MarineClean",9,4000,true);
-    addFactoryEntry(503,"InduRecycle",4,2500,false);
-    // register factories in AVL
-    registerEntity(501,"RecycCo General",6,true);
-    registerEntity(502,"MarineClean",9,true);
-    registerEntity(503,"InduRecycle",4,true);
-    // trucks and boats
-    addTruck(201,0,1500,20);
-    addTruck(202,2,1000,18);
-    addBoat(301,9,2000,15);
-    // sample household registrations
-    registerEntity(1001,"House-A",3,false);
-    registerEntity(1002,"Shop-B",2,false);
+**    initGraph(20);**
+**    // build sample map (nodes)**
+**    addEdge(0,1,5); addEdge(0,2,7); addEdge(1,3,4); addEdge(2,4,6);**
+**    addEdge(3,5,3); addEdge(4,6,2); addEdge(5,7,5); addEdge(6,8,4);**
+**    addEdge(7,9,7); addEdge(9,10,3); addEdge(10,11,4); addEdge(11,12,6);**
+**    // factories**
+**    addFactoryEntry:**
+**    // use addFactoryEntry wrapper (we already have addFactoryEntry earlier) -> but name conflict; implement simple here:**
+**    addFactoryEntry(501,"RecycCo General",6,3000,false);**
+**    addFactoryEntry(502,"MarineClean",9,4000,true);**
+**    addFactoryEntry(503,"InduRecycle",4,2500,false);**
+**    // register factories in AVL**
+**    registerEntity(501,"RecycCo General",6,true);**
+**    registerEntity(502,"MarineClean",9,true);**
+**    registerEntity(503,"InduRecycle",4,true);**
+**    // trucks and boats**
+**    addTruck(201,0,1500,20);**
+**    addTruck(202,2,1000,18);**
+**    addBoat(301,9,2000,15);**
+**    // sample household registrations**
+**    registerEntity(1001,"House-A",3,false);**
+**    registerEntity(1002,"Shop-B",2,false);**
 }
 
 /* ===========================
-   CLI helpers
-   =========================== */
+**   CLI helpers**
+**   =========================== */**
 void showMenu() {
-    cout<<"\n=== Smart Waste System Menu ===\n";
-    cout<<"1) Add Request\n2) Add Truck\n3) Add Boat\n4) Add Factory\n5) Dispatch next request\n6) Run simulation ticks\n7) Process factories (run processing once)\n8) Show reports (factories)\n9) Save all CSVs\n10) Load all CSVs\n11) List pending requests\n12) List vehicles\n13) Exit\nChoose: ";
+**    cout<<"\n=== Smart Waste System Menu ===\n";**
+**    cout<<"1) Add Request\n2) Add Truck\n3) Add Boat\n4) Add Factory\n5) Dispatch next request\n6) Run simulation ticks\n7) Process factories (run processing once)\n8) Show reports (factories)\n9) Save all CSVs\n10) Load all CSVs\n11) List pending requests\n12) List vehicles\n13) Exit\nChoose: ";**
 }
 void listPendingRequests() {
-    cout<<"Pending Requests (id,node,type,vol,priority,timestamp,processed):\n";
-    for (int i=0;i<requestsCount;i++) {
-        Request &r = requests[i];
-        cout<<r.id<<","<<r.node<<","<<WasteTypeName[r.type]<<","<<r.volume<<","<<r.priority<<","<<r.timestamp<<","<<r.processed<<"\n";
-    }
+**    cout<<"Pending Requests (id,node,type,vol,priority,timestamp,processed):\n";**
+**    for (int i=0;i<requestsCount;i++) {**
+**        Request &r = requests[i];**
+**        cout<<r.id<<","<<r.node<<","<<WasteTypeName[r.type]<<","<<r.volume<<","<<r.priority<<","<<r.timestamp<<","<<r.processed<<"\n";**
+**    }**
 }
 void listVehicles() {
-    cout<<"Trucks:\n";
-    for (int i=0;i<trucksCount;i++) {
-        Truck &t = trucks[i];
-        cout<<"Truck id="<<t.c.id<<" node="<<t.c.currentNode<<" cap="<<t.c.capacity<<" load="<<t.c.load<<" avail="<<t.c.available<<"\n";
-    }
-    cout<<"Boats:\n";
-    for (int i=0;i<boatsCount;i++) {
-        Boat &b = boats[i];
-        cout<<"Boat id="<<b.c.id<<" node="<<b.c.currentNode<<" cap="<<b.c.capacity<<" load="<<b.c.load<<" avail="<<b.c.available<<"\n";
-    }
+**    cout<<"Trucks:\n";**
+**    for (int i=0;i<trucksCount;i++) {**
+**        Truck &t = trucks[i];**
+**        cout<<"Truck id="<<t.c.id<<" node="<<t.c.currentNode<<" cap="<<t.c.capacity<<" load="<<t.c.load<<" avail="<<t.c.available<<"\n";**
+**    }**
+**    cout<<"Boats:\n";**
+**    for (int i=0;i<boatsCount;i++) {**
+**        Boat &b = boats[i];**
+**        cout<<"Boat id="<<b.c.id<<" node="<<b.c.currentNode<<" cap="<<b.c.capacity<<" load="<<b.c.load<<" avail="<<b.c.available<<"\n";**
+**    }**
 }
 void showFactoryReport() {
-    if (factoriesCount == 0) { cout<<"No factories\n"; return; }
-    Factory copyArr[MAX_FACTORIES];
-    int fc = factoriesCount;
-    for (int i=0;i<fc;i++) copyArr[i] = factories[i];
-    mergeSortFactoriesArr(copyArr, 0, fc-1);
-    cout<<"Factory Report (by units desc):\n";
-    for (int i=0;i<fc;i++) cout<<copyArr[i].name<<" units="<<copyArr[i].producedUnits<<" storedRaw="<<copyArr[i].storedRaw<<"\n";
+**    if (factoriesCount == 0) { cout<<"No factories\n"; return; }**
+**    Factory copyArr[MAX_FACTORIES];**
+**    int fc = factoriesCount;**
+**    for (int i=0;i<fc;i++) copyArr[i] = factories[i];**
+**    mergeSortFactoriesArr(copyArr, 0, fc-1);**
+**    cout<<"Factory Report (by units desc):\n";**
+**    for (int i=0;i<fc;i++) cout<<copyArr[i].name<<" units="<<copyArr[i].producedUnits<<" storedRaw="<<copyArr[i].storedRaw<<"\n";**
 }
 
 /* ===========================
-   wrapper for addFactoryEntry (we forward declared earlier)
-   =========================== */
+**   wrapper for addFactoryEntry (we forward declared earlier)**
+**   =========================== */**
 void addFactoryEntry(int id, const char* name, int node, int capacityIn, bool handlesSea) {
-    if (factoriesCount >= MAX_FACTORIES) { cout<<"No space\n"; return; }
-    Factory &f = factories[factoriesCount++];
-    f.id = id; strncpy(f.name, name, sizeof(f.name)-1); f.name[sizeof(f.name)-1]=0; f.node=node; f.capacityIn = capacityIn; f.storedRaw = 0; f.producedUnits = 0; f.handlesSea = handlesSea;
+**    if (factoriesCount >= MAX_FACTORIES) { cout<<"No space\n"; return; }**
+**    Factory &f = factories[factoriesCount++];**
+**    f.id = id; strncpy(f.name, name, sizeof(f.name)-1); f.name[sizeof(f.name)-1]=0; f.node=node; f.capacityIn = capacityIn; f.storedRaw = 0; f.producedUnits = 0; f.handlesSea = handlesSea;**
 }
 
 /* ===========================
-   Main: menu loop
-   =========================== */
+**   Main: menu loop**
+**   =========================== */**
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+**    ios::sync_with_stdio(false);**
+**    cin.tie(nullptr);**
 
-    cout<<"=== Smart Waste Collection & Recycling Management (Expanded) ===\n";
-    demoSetup(); // sample world preloaded
+**    cout<<"=== Smart Waste Collection & Recycling Management (Expanded) ===\n";**
+**    demoSetup(); // sample world preloaded**
 
-    int currentTime = 0;
-    while (true) {
-        showMenu();
-        int choice; if (!(cin>>choice)) break;
-        if (choice == 1) {
-            int node, vol; int ttype;
-            char urgentch;
-            cout<<"Enter node, type (0=household,1=commercial,2=industrial,3=sea,4=hazardous), volume: ";
-            cin>>node>>ttype>>vol;
-            cout<<"Urgent? (y/n): "; cin>>urgentch;
-            bool urgent = (urgentch=='y'||urgentch=='Y');
-            addRequest(node, (WasteType)ttype, vol, currentTime, urgent);
-            cout<<"Added request.\n";
-        } else if (choice == 2) {
-            int id,node,cap,speed;
-            cout<<"Enter truck id, startNode, capacity, speed (units/min): "; cin>>id>>node>>cap>>speed;
-            addTruck(id,node,cap,speed);
-            cout<<"Truck added.\n";
-        } else if (choice == 3) {
-            int id,node,cap,speed;
-            cout<<"Enter boat id, startNode, capacity, speed: "; cin>>id>>node>>cap>>speed;
-            addBoat(id,node,cap,speed);
-            cout<<"Boat added.\n";
-        } else if (choice == 4) {
-            int id,node,cap; char name[64]; int handlesSea;
-            cout<<"Enter factory id, name (single token), node, capacityIn, handlesSea(0/1): ";
-            cin>>id>>name>>node>>cap>>handlesSea;
-            addFactoryEntry(id,name,node,cap,handlesSea!=0);
-            registerEntity(id,name,node,true);
-            cout<<"Factory added.\n";
-        } else if (choice == 5) {
-            // dispatch top request
-            dispatchTopRequest(currentTime);
-        } else if (choice == 6) {
-            int ticks; cout<<"How many minutes to simulate? "; cin>>ticks;
-            for (int i=0;i<ticks;i++) {
-                // dispatch new requests opportunistically
-                if (requestHeapSize > 0) dispatchTopRequest(currentTime);
-                processTick(currentTime);
-                processFactories();
-                currentTime++;
-            }
-            cout<<"Simulated "<<ticks<<" minute(s). CurrentTime="<<currentTime<<"\n";
-        } else if (choice == 7) {
-            processFactories(); cout<<"Factories processed once.\n";
-        } else if (choice == 8) {
-            showFactoryReport();
-        } else if (choice == 9) {
-            char dir[128]; cout<<"Enter directory path (no trailing slash) to save CSV files: "; cin>>dir;
-            saveAll(dir);
-        } else if (choice == 10) {
-            char dir[128]; cout<<"Enter directory path to load CSV files: "; cin>>dir;
-            loadAll(dir);
-        } else if (choice == 11) {
-            listPendingRequests();
-        } else if (choice == 12) {
-            listVehicles();
-        } else if (choice == 13) {
-            cout<<"Exiting.\n"; break;
-        } else {
-            cout<<"Invalid choice.\n";
-        }
-    }
+**    int currentTime = 0;**
+**    while (true) {**
+**        showMenu();**
+**        int choice; if (!(cin>>choice)) break;**
+**        if (choice == 1) {**
+**            int node, vol; int ttype;**
+**            char urgentch;**
+**            cout<<"Enter node, type (0=household,1=commercial,2=industrial,3=sea,4=hazardous), volume: ";**
+**            cin>>node>>ttype>>vol;**
+**            cout<<"Urgent? (y/n): "; cin>>urgentch;**
+**            bool urgent = (urgentch=='y'||urgentch=='Y');**
+**            addRequest(node, (WasteType)ttype, vol, currentTime, urgent);**
+**            cout<<"Added request.\n";**
+**        } else if (choice == 2) {**
+**            int id,node,cap,speed;**
+**            cout<<"Enter truck id, startNode, capacity, speed (units/min): "; cin>>id>>node>>cap>>speed;**
+**            addTruck(id,node,cap,speed);**
+**            cout<<"Truck added.\n";**
+**        } else if (choice == 3) {**
+**            int id,node,cap,speed;**
+**            cout<<"Enter boat id, startNode, capacity, speed: "; cin>>id>>node>>cap>>speed;**
+**            addBoat(id,node,cap,speed);**
+**            cout<<"Boat added.\n";**
+**        } else if (choice == 4) {**
+**            int id,node,cap; char name[64]; int handlesSea;**
+**            cout<<"Enter factory id, name (single token), node, capacityIn, handlesSea(0/1): ";**
+**            cin>>id>>name>>node>>cap>>handlesSea;**
+**            addFactoryEntry(id,name,node,cap,handlesSea!=0);**
+**            registerEntity(id,name,node,true);**
+**            cout<<"Factory added.\n";**
+**        } else if (choice == 5) {**
+**            // dispatch top request**
+**            dispatchTopRequest(currentTime);**
+**        } else if (choice == 6) {**
+**            int ticks; cout<<"How many minutes to simulate? "; cin>>ticks;**
+**            for (int i=0;i<ticks;i++) {**
+**                // dispatch new requests opportunistically**
+**                if (requestHeapSize > 0) dispatchTopRequest(currentTime);**
+**                processTick(currentTime);**
+**                processFactories();**
+**                currentTime++;**
+**            }**
+**            cout<<"Simulated "<<ticks<<" minute(s). CurrentTime="<<currentTime<<"\n";**
+**        } else if (choice == 7) {**
+**            processFactories(); cout<<"Factories processed once.\n";**
+**        } else if (choice == 8) {**
+**            showFactoryReport();**
+**        } else if (choice == 9) {**
+**            char dir[128]; cout<<"Enter directory path (no trailing slash) to save CSV files: "; cin>>dir;**
+**            saveAll(dir);**
+**        } else if (choice == 10) {**
+**            char dir[128]; cout<<"Enter directory path to load CSV files: "; cin>>dir;**
+**            loadAll(dir);**
+**        } else if (choice == 11) {**
+**            listPendingRequests();**
+**        } else if (choice == 12) {**
+**            listVehicles();**
+**        } else if (choice == 13) {**
+**            cout<<"Exiting.\n"; break;**
+**        } else {**
+**            cout<<"Invalid choice.\n";**
+**        }**
+**    }**
 
-    return 0;
+**    return 0;**
 }
 
 /* ===========================
-   CSV helper implementations (declared above)
-   =========================== */
+**   CSV helper implementations (declared above)**
+**   =========================== */**
 
 void saveRequestsCSV(const char* fname) {
-    ofstream f(fname);
-    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }
-    f<<"id,node,type,volume,priority,timestamp,processed\n";
-    for (int i=0;i<requestsCount;i++) {
-        f<<requests[i].id<<","<<requests[i].node<<","<<int(requests[i].type)<<","<<requests[i].volume<<","<<requests[i].priority<<","<<requests[i].timestamp<<","<<requests[i].processed<<"\n";
-    }
-    f.close();
+**    ofstream f(fname);**
+**    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }**
+**    f<<"id,node,type,volume,priority,timestamp,processed\n";**
+**    for (int i=0;i<requestsCount;i++) {**
+**        f<<requests[i].id<<","<<requests[i].node<<","<<int(requests[i].type)<<","<<requests[i].volume<<","<<requests[i].priority<<","<<requests[i].timestamp<<","<<requests[i].processed<<"\n";**
+**    }**
+**    f.close();**
 }
 
 void loadRequestsCSV(const char* fname) {
-    ifstream f(fname);
-    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }
-    string line; getline(f,line); // header
-    requestsCount = 0; requestHeapSize = 0;
-    while(getline(f,line) && requestsCount < MAX_REQUESTS) {
-        int id,node,type,volume,priority,timestamp,processed;
-        char buf[512]; strncpy(buf,line.c_str(),511); buf[511]=0;
-        if (sscanf(buf,"%d,%d,%d,%d,%d,%d,%d",&id,&node,&type,&volume,&priority,&timestamp,&processed) >= 7) {
-            Request &r = requests[requestsCount];
-            r.id = id; r.node = node; r.type = (WasteType)type; r.volume = volume; r.priority = priority; r.timestamp = timestamp; r.processed = processed; r.assigned=false; r.assignedVehicleId=-1;
-            requestHeapPush(requestsCount);
-            requestsCount++;
-        }
-    }
-    f.close();
+**    ifstream f(fname);**
+**    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }**
+**    string line; getline(f,line); // header**
+**    requestsCount = 0; requestHeapSize = 0;**
+**    while(getline(f,line) && requestsCount < MAX_REQUESTS) {**
+**        int id,node,type,volume,priority,timestamp,processed;**
+**        char buf[512]; strncpy(buf,line.c_str(),511); buf[511]=0;**
+**        if (sscanf(buf,"%d,%d,%d,%d,%d,%d,%d",&id,&node,&type,&volume,&priority,&timestamp,&processed) >= 7) {**
+**            Request &r = requests[requestsCount];**
+**            r.id = id; r.node = node; r.type = (WasteType)type; r.volume = volume; r.priority = priority; r.timestamp = timestamp; r.processed = processed; r.assigned=false; r.assignedVehicleId=-1;**
+**            requestHeapPush(requestsCount);**
+**            requestsCount++;**
+**        }**
+**    }**
+**    f.close();**
 }
 
 void saveVehiclesCSV(const char* fname) {
-    ofstream f(fname);
-    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }
-    f<<"type,id,node,capacity,speed,available,load\n";
-    for (int i=0;i<trucksCount;i++) f<<"truck,"<<trucks[i].c.id<<","<<trucks[i].c.currentNode<<","<<trucks[i].c.capacity<<","<<trucks[i].c.speed<<","<<trucks[i].c.available<<","<<trucks[i].c.load<<"\n";
-    for (int i=0;i<boatsCount;i++) f<<"boat,"<<boats[i].c.id<<","<<boats[i].c.currentNode<<","<<boats[i].c.capacity<<","<<boats[i].c.speed<<","<<boats[i].c.available<<","<<boats[i].c.load<<"\n";
-    f.close();
+**    ofstream f(fname);**
+**    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }**
+**    f<<"type,id,node,capacity,speed,available,load\n";**
+**    for (int i=0;i<trucksCount;i++) f<<"truck,"<<trucks[i].c.id<<","<<trucks[i].c.currentNode<<","<<trucks[i].c.capacity<<","<<trucks[i].c.speed<<","<<trucks[i].c.available<<","<<trucks[i].c.load<<"\n";**
+**    for (int i=0;i<boatsCount;i++) f<<"boat,"<<boats[i].c.id<<","<<boats[i].c.currentNode<<","<<boats[i].c.capacity<<","<<boats[i].c.speed<<","<<boats[i].c.available<<","<<boats[i].c.load<<"\n";**
+**    f.close();**
 }
 
 void loadVehiclesCSV(const char* fname) {
-    ifstream f(fname);
-    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }
-    string line; getline(f,line);
-    trucksCount = 0; boatsCount = 0;
-    while(getline(f,line) && (trucksCount < MAX_TRUCKS || boatsCount < MAX_BOATS)) {
-        char type[32]; int id,node,capacity,speed,available,load;
-        char buf[512]; strncpy(buf,line.c_str(),511); buf[511]=0;
-        if (sscanf(buf,"%31[^,],%d,%d,%d,%d,%d,%d",type,&id,&node,&capacity,&speed,&available,&load) >= 7) {
-            if (strcmp(type,"truck")==0 && trucksCount < MAX_TRUCKS) {
-                addTruck(id,node,capacity,speed); trucks[trucksCount-1].c.available = (available!=0); trucks[trucksCount-1].c.load = load;
-            } else if (strcmp(type,"boat")==0 && boatsCount < MAX_BOATS) {
-                addBoat(id,node,capacity,speed); boats[boatsCount-1].c.available = (available!=0); boats[boatsCount-1].c.load = load;
-            }
-        }
-    }
-    f.close();
+**    ifstream f(fname);**
+**    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }**
+**    string line; getline(f,line);**
+**    trucksCount = 0; boatsCount = 0;**
+**    while(getline(f,line) && (trucksCount < MAX_TRUCKS || boatsCount < MAX_BOATS)) {**
+**        char type[32]; int id,node,capacity,speed,available,load;**
+**        char buf[512]; strncpy(buf,line.c_str(),511); buf[511]=0;**
+**        if (sscanf(buf,"%31[^,],%d,%d,%d,%d,%d,%d",type,&id,&node,&capacity,&speed,&available,&load) >= 7) {**
+**            if (strcmp(type,"truck")==0 && trucksCount < MAX_TRUCKS) {**
+**                addTruck(id,node,capacity,speed); trucks[trucksCount-1].c.available = (available!=0); trucks[trucksCount-1].c.load = load;**
+**            } else if (strcmp(type,"boat")==0 && boatsCount < MAX_BOATS) {**
+**                addBoat(id,node,capacity,speed); boats[boatsCount-1].c.available = (available!=0); boats[boatsCount-1].c.load = load;**
+**            }**
+**        }**
+**    }**
+**    f.close();**
 }
 
 void saveFactoriesCSV(const char* fname) {
-    ofstream f(fname);
-    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }
-    f<<"id,name,node,capacityIn,storedRaw,producedUnits,handlesSea\n";
-    for (int i=0;i<factoriesCount;i++) {
-        f<<factories[i].id<<","<<factories[i].name<<","<<factories[i].node<<","<<factories[i].capacityIn<<","<<factories[i].storedRaw<<","<<factories[i].producedUnits<<","<<factories[i].handlesSea<<"\n";
-    }
-    f.close();
+**    ofstream f(fname);**
+**    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }**
+**    f<<"id,name,node,capacityIn,storedRaw,producedUnits,handlesSea\n";**
+**    for (int i=0;i<factoriesCount;i++) {**
+**        f<<factories[i].id<<","<<factories[i].name<<","<<factories[i].node<<","<<factories[i].capacityIn<<","<<factories[i].storedRaw<<","<<factories[i].producedUnits<<","<<factories[i].handlesSea<<"\n";**
+**    }**
+**    f.close();**
 }
 
 void loadFactoriesCSV(const char* fname) {
-    ifstream f(fname);
-    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }
-    string line; getline(f,line);
-    factoriesCount = 0;
-    while(getline(f,line) && factoriesCount < MAX_FACTORIES) {
-        char buf[512]; strncpy(buf,line.c_str(),511); buf[511]=0;
-        int id,node,capacityIn,storedRaw,producedUnits,handlesSea;
-        char name[64];
-        if (sscanf(buf,"%d,%63[^,],%d,%d,%d,%d,%d",&id,name,&node,&capacityIn,&storedRaw,&producedUnits,&handlesSea) >= 7) {
-            addFactoryEntry(id,name,node,capacityIn,handlesSea!=0);
-            factories[factoriesCount-1].storedRaw = storedRaw; factories[factoriesCount-1].producedUnits = producedUnits;
-        }
-    }
-    f.close();
+**    ifstream f(fname);**
+**    if(!f) { cout<<"Failed to open "<<fname<<"\n"; return; }**
+**    string line; getline(f,line);**
+**    factoriesCount = 0;**
+**    while(getline(f,line) && factoriesCount < MAX_FACTORIES) {**
+**        char buf[512]; strncpy(buf,line.c_str(),511); buf[511]=0;**
+**        int id,node,capacityIn,storedRaw,producedUnits,handlesSea;**
+**        char name[64];**
+**        if (sscanf(buf,"%d,%63[^,],%d,%d,%d,%d,%d",&id,name,&node,&capacityIn,&storedRaw,&producedUnits,&handlesSea) >= 7) {**
+**            addFactoryEntry(id,name,node,capacityIn,handlesSea!=0);**
+**            factories[factoriesCount-1].storedRaw = storedRaw; factories[factoriesCount-1].producedUnits = producedUnits;**
+**        }**
+**    }**
+**    f.close();**
 }
-
-    </div>
-    </div>
-
-    <!-- Smart Parking -->
-    <div id="parking" class="content-box">
-        <div class="title">Smart Parking System</div>
-        <p>Bellapuram’s commercial and entertainment zones need an intelligent parking system that can quickly assign vehicles to the best available slot while handling VIP, EV, and cold-chain requirements.
-The system must track slots, prioritize special vehicles, guide drivers using shortest-path routing, and ensure sensor-based safety before allocation.
-Its goal is to reduce congestion, speed up slot discovery, and generate accurate occupancy and billing reports.</p>
-
-<p>🅿 Parking Slot Registry</p>
-<p>AVL Tree</p>
-<p>Fast O(log n) insertion/search; handles reserved/EV/cold-chain slots.</p>
-
-<p>🌟 VIP / Special Car Queue</p>
-<p>Max Heap</p>
-<p>Prioritizes VIP, EV, cold-chain vehicles for assignment.</p>
-
-<p>🚗 Shortest Path Routing</p>
-<p>Dijkstra (adjacency matrix)</p>
-<p>Guides cars to nearest available slot (multi-zone).</p>
-
-<p>📝 Parking Reports / Billing</p>
-<p>Merge Sort</p>
-<p>Generates sorted reports by occupancy or revenue.</p>
-
-<p>🔔 Sensor Alerts / Preventive Measures</p>
-<p>Slot struct contains sensor flag; prevents assignment to blocked/over-occupied slots.</p>
-
-<p>⚡ EV & Cold-Chain Vehicles</p>
-<p>Slot attributes ev and coldchain; ensures proper zone assignment.</p>
-
-<p>⏱ Time-Based Billing</p>
-<p>Revenue = timeIn * rate; tracks per-car occupancy.</p>
-
-<p>🌱 Sustainable Development Goals (SDGs)<p>
-<p>SDG 11: Sustainable Cities and Communities – reduces congestion and optimizes urban mobility.</p>
-<p>SDG 7: Affordable and Clean Energy – includes EV charging stations for clean transport.</p>
-<p>SDG 9: Industry, Innovation, and Infrastructure – smart infrastructure for parking management.
-
-</p>
-        <div class="code-button" onclick="toggleCode('parkingCode')">Show Code</div>
-        <div id="parkingCode" class="code-section">
-#include <bits/stdc++.h>
+  parking:{
+    title:'Smart Parking System for Commercial & Entertainment Zones',
+    desc:`<h3>Problem Statement</h3>
+    <p>Parking congestion around malls and theatres leads to traffic jams, wasted fuel, and poor user experience.</p>
+    <h3>System Approach</h3>
+    <p>Parking slots are stored in AVL Trees, VIP/EV vehicles are prioritized using Max-Heaps, and Dijkstra finds the nearest available slot.</p>
+    <h3>Algorithms Used</h3>
+    <p>AVL Tree, Max Heap, Dijkstra, Merge Sort</p>`,
+    code:#include <bits/stdc++.h>
 using namespace std;
 const int MAX_SLOTS=200, MAX_CARS=300, MAX_NODES=50, INF=1000000000;
 
@@ -1324,62 +1231,16 @@ int main(){
 
 
 }
-    </div>
-    </div>
 
-    <!-- Renewable Energy Grid -->
-    <div id="energy" class="content-box">
-        <div class="title">Renewable Energy Grid Management</div>
-        <p>Probkem statement: Bellapuram needs a smart system to manage solar and wind energy efficiently across all zones.
-The grid must prioritize high-output plants, detect low production quickly, and balance energy distribution.
-It should maintain a fast plant registry and support real-time routing with minimal power loss.
-</p>
-<p>1. Power Plant Priority</p>
-<p>Algorithm Used: Max Heap</p>
-<p>Purpose:</p>
-<p>Selects the highest-producing solar or wind plant first.</p>
-<p>Ensures the grid pulls energy from the most efficient source.</p>
-<p>Useful during peak hours to maximize output.</p>
-
-<p>2. Solar/Wind Production Logs</p>
-<p>Algorithm Used: Min Heap</p>
-<p>Purpose:</p>
-<p>Identifies the lowest-producing plant immediately.</p>
-<p>Helps detect performance degradation.</p>
-<p>Supports automatic maintenance scheduling.</p>
-
-3. Load Distribution Across City</p>
-<p>Algorithm Used: Dijkstra OR Bellman-Ford (no vectors, array-only implementation)</p>
-<p>Purpose:</p>
-<p>Computes the shortest-loss electrical path from plant → zone.</p>
-<p>Balances loads across residential, industrial, and commercial areas.</p>
-<p>Prevents overload on specific grid lines.</p>
-
-<p>4. Sorting of Daily Power Generation</p>
-<p>Algorithm Used: Merge Sort (no vectors, pure array)</p>
-<p>Purpose:</p>
-<p>Sorts daily solar/wind energy records.</p>
-<p>Helps grid operators generate reports.</p>
-<p>Stable and efficient for large datasets.</p>
-
-<p>5. Plant Registry & Database</p>
-<p>Algorithm Used: AVL Tree</p>
-<p>Purpose:</p>
-<p>Stores and searches all solar and wind plants efficiently.</p>
-<p>Ensures O(log n) lookup for:</p>
-<p>Fault detection</p>
-<p>Updating plant output</p>
-<p>Adding new renewable stations</p>
-
-<p>🌱 Sustainable Development Goals (SDGs)</p>
-<p>SDG 7: Affordable and Clean Energy – promotes renewable energy generation.</p>
-<p>SDG 13: Climate Action – reduces carbon emissions by replacing fossil fuels.</p>
-<p>SDG 9: Industry, Innovation, and Infrastructure – smart energy grids enhance infrastructure.
-
-</p>
-        <div class="code-button" onclick="toggleCode('energyCode')">Show Code</div>
-        <div id="energyCode" class="code-section">
-#include <iostream>
+  energy:{
+    title:'Renewable Energy Grid Management (Solar + Wind)',
+    desc:`<h3>Problem Statement</h3>
+    <p>Renewable energy sources are intermittent, causing instability in urban power supply.</p>
+    <h3>System Approach</h3>
+    <p>Max-Heaps select highest-producing plants, Min-Heaps detect underperforming units, and Dijkstra routes power with minimal loss.</p>
+    <h3>Algorithms Used</h3>
+    <p>Max Heap, Min Heap, Dijkstra, Bellman–Ford, Merge Sort, AVL Tree</p>`,
+    code:`#include <iostream>
 #include <climits>
 #include <cstring>
 using namespace std;
@@ -1704,62 +1565,15 @@ int main() {
 **    return 0;**
 }
 
-
-        </div>
-    </div>
-
-    <!-- Port Cargo -->
-    <div id="port" class="content-box">
-        <div class="title">Port Cargo Scheduling</div>
-        <p>Problem statement: Bellapuram Port requires an intelligent cargo management system that can efficiently prioritize, store, track, and route thousands of shipments daily.
-The system must optimize port operations—including berthing, container handling, storage, and inland cargo movement—using fast data-structure-based decision making.
-It should ensure real-time cargo prioritization, rapid search and scheduling, and optimal routing to minimize delays across the entire logistics chain.
-</p>
-<p>📦 Cargo Priority Handling – Max Heap</p>
-<p>Manages cargo based on priority score (perishables, urgent shipments).</p>
-<p>Max-Heap ensures O(log n) insertion & extraction of highest priority cargo.</p>
-
-<p>🏗️ Container Storage & Organization – AVL Tree</p>
-<p>Stores container IDs in balanced tree for fast O(log n) insert/search.</p>
-<p>Keeps warehouse management efficient and avoids unbalanced storage delays.</p>
-
-<p>🔍 Cargo Search Index – Red-Black Tree</p>
-<p>Allows quick lookup of cargo by ID in O(log n).</p>
-<p>Efficient for queries and tracking shipment locations.</p>
-
-<p>📜 Manifest Sorting – QuickSort (array-based)</p>
-<p>Sorts cargo manifest by ID for easy reporting & retrieval.</p>
-<p>O(n log n) average performance, no vectors used.</p>
-
-<p>⚓ Berth Assignment & Scheduling – Min Heap</p>
-<p>Assigns ships to earliest available berth.</p>
-<p>Min-Heap ensures fastest assignment and updates berth availability efficiently.</p>
-
-<p>🛣️ Truck / Cargo Routing – Dijkstra (array + custom min-heap)</p>
-<p>Finds shortest route from port to warehouse/warehouse to city.</p>
-<p>Supports planning optimal cargo delivery routes without vectors.</p>
-
-<p>🌐 Graph Representation – Adjacency Matrix</p>
-<p>Represents port and city network.</p>
-<p>Fast edge access, simple fixed-size array for small-medium networks.</p>
-
-<p>💡 Path Retrieval – Parent array</p>
-<p>Reconstructs shortest path for cargo delivery.</p>
-<p>No dynamic arrays needed, simple fixed-size implementation.</p>
-
-<p>📝 Key Advantages & Reasoning</p>
-<p>O(log n) operations for heap/tree → efficient cargo management.</p>
-<p>Sorting & routing algorithms ensure timely and cost-effective delivery.</p>
-
-<p>🌱 Sustainable Development Goals (SDGs)</p>
-<p>SDG 8: Decent Work and Economic Growth – efficient logistics supports trade and jobs.</p>
-<p>SDG 9: Industry, Innovation, and Infrastructure – modern port and cargo systems.</p>
-<p>SDG 12: Responsible Consumption and Production – optimized logistics reduces waste/energy use.
-
-</p>
-        <div class="code-button" onclick="toggleCode('portCode')">Show Code</div>
-        <div id="portCode" class="code-section">
-#include <iostream>
+  cargo:{
+    title:'Port Cargo Scheduling & Container Allocation',
+    desc:`<h3>Problem Statement</h3>
+    <p>Ports suffer delays due to inefficient container placement and berth scheduling.</p>
+    <h3>System Approach</h3>
+    <p>Containers are prioritized using Heaps, routes are optimized using graph algorithms, and scheduling minimizes turnaround time.</p>
+    <h3>Algorithms Used</h3>
+    <p>Heap, Dijkstra, Bellman–Ford, Kruskal</p>`,
+    code:`#include <iostream>
 #include <string>
 #include <climits>
 #include <algorithm>
@@ -2255,60 +2069,17 @@ int main() {
 **    cout << "\n";**
 
 **    cout << "\nSimulation complete.\n";**
-**    return 0;**
-}
-
-        </div>
-    </div>
-
-    <!-- Public Transport Fleet -->
-    <div id="fleet" class="content-box">
-        <div class="title">Public Transport Fleet Optimization</div>
-        <p>Bellapuram requires an intelligent transport routing system that can efficiently guide commuters across buses, metros, and feeder routes.
-The system must account for dynamic factors like traffic congestion, toll penalties, and network connectivity.
-It should provide both real-time shortest paths and robust route planning across the entire city-wide mobility network.
-</p>
-<p>🚦 Shortest Route – Dijkstra</p>
-<p>Finds the quickest path from a source to all destinations.</p>
-<p>Efficient for positive travel times between city nodes.</p>
-
-<p>🛣️ Routes with Penalties – Bellman-Ford</p>
-<p>Computes paths even with negative weights like traffic fines, toll discounts, or delays.</p>
-<p>Ensures optimal route selection under varying conditions.</p>
-
-<p>🌐 Network Exploration – BFS / DFS</p>
-<p>Traverses the transport network to check connectivity.</p>
-<p>Useful for identifying reachable areas or planning new connections.</p>
-
-<p>📊 All-Pairs Shortest Paths – Floyd-Warshall</p>
-<p>Finds shortest paths between every pair of nodes.</p>
-<p>Useful for traffic prediction, planning alternative routes, and route optimization.</p>
-
-<p>📋 Graph Representation – Adjacency Matrix</p>
-<p>Stores distances between all nodes in a fixed-size 2D array.</p>
-<p>Fast access, simple implementation, suitable for small-medium city graphs.</p>
-
-<p>🔢 Distance & Visited Tracking – Arrays</p>
-<p>Keeps track of shortest distances and visited nodes efficiently.</p>
-<p>Fixed memory usage, easy to implement without vectors.</p>
-
-<p>🛠️ Queue for BFS – Array-based Queue</p>
-<p>Ensures FIFO processing of nodes for level-order traversal.</p>
-<p>Lightweight and predictable memory usage.</p>
-
-<p>💡 Efficiency Notes</p>
-<p>Algorithms run in O(V^2) (Dijkstra with arrays) or O(V^3) (Floyd-Warshall).</p>
-
-<p>🌱 Sustainable Development Goals (SDGs)</p>
-<p>SDG 11: Sustainable Cities and Communities – efficient public transit reduces traffic congestion.</p>
-<p>SDG 13: Climate Action – minimizes carbon footprint of transportation.</p>
-<p>SDG 9: Industry, Innovation, and Infrastructure – smart transport management infrastructure.
-
-
-</p>
-        <div class="code-button" onclick="toggleCode('fleetCode')">Show Code</div>
-        <div id="fleetCode" class="code-section">
-#include <iostream>
+**    return 0;**}
+,
+  transport:{
+    title:'Public Transport Fleet Optimization',
+    desc:`<h3>Problem Statement</h3>
+    <p>Uneven passenger distribution causes overcrowding on some routes and underutilization on others.</p>
+    <h3>System Approach</h3>
+    <p>Passenger demand is analyzed, routes are evaluated using BFS/DFS, and fleets are optimized using shortest paths.</p>
+    <h3>Algorithms Used</h3>
+    <p>BFS, DFS, Dijkstra</p>`,
+    code:`#include <iostream>
 #include <climits>
 using namespace std;
 const int MAX = 10;
@@ -2444,17 +2215,16 @@ int main() {
 
 **    return 0;**
 }
-
-        </div>
-    </div>
-
-    <!-- Water Distribution -->
-    <div id="water" class="content-box">
-        <div class="title">Water Distribution System</div>
-        <p>MST pipe design, routing, leakage penalty, and tank registry.</p>
-        <div class="code-button" onclick="toggleCode('waterCode')">Show Code</div>
-        <div id="waterCode" class="code-section">
-#include <bits/stdc++.h>
+,
+  water:{
+    title:'Water Distribution System',
+    desc:`<h3>Problem Statement</h3>
+    <p>Water leakage and unequal distribution lead to shortages in many city zones.</p>
+    <h3>System Approach</h3>
+    <p>Pipelines are modeled as graphs, MST algorithms design efficient networks, and shortest paths reroute water during failures.</p>
+    <h3>Algorithms Used</h3>
+    <p>Prim, Kruskal, Dijkstra</p>`,
+    code:`#include <bits/stdc++.h>
 using namespace std;
 
 const int MAX_NODES = 50;       // distribution nodes
@@ -2817,39 +2587,16 @@ int main(){
 **    return 0;**
 }
 
-
-        </div>
-    </div>
-
-    <!-- Emergency Dispatch -->
-    <div id="emergency" class="content-box">
-        <div class="title">Emergency Response Dispatch System</div>
-        <p>Bellapuram needs a real-time hydrology-based emergency system that can predict short-term flooding, proactively close risky roads, and pre-position rescue units before conditions escalate.
-The system must analyze rainfall and river-level sensor data to forecast danger, activate pumps to reduce flood impact, and guide emergency vehicles through safe, updated routes.
-Its goal is to minimize response time, prevent casualties, and ensure coordinated flood management across all city zones.</p>
-
-<p>🔵 Flood prediction: predictFloodAdvance(minsAhead,…) uses current rainfall/river figures to forecast a short-term increase per sensor.</p>
-<p>Why: allows pre-warning and staging before conditions worsen.</p>
-
-<p>🟢 Proactive road closures: proactiveRoadClosures() marks edges proactivelyClosed = true when forecasted increase passes threshold.</p>
-<p>Why: prevents vehicles/public from moving into soon-to-be-impassable routes.</p>
-
-<p>🟡 Pre-positioning vehicles/pumps: prepositionVehicles() stages ambulances and pump vehicles at safe nearby nodes for fast response.</p>
-<p>Why: lowers response time once flooding starts.</p>
-
-<p>🔴 Activate pumps: activatePumpsAtNode() temporarily increases node drainage capacity (simulated).</p>
-<p>Why: preventive pumping can reduce local flood risk.</p>
-
-<p>🌱 Sustainable Development Goals (SDGs)</p>
-<p>SDG 3: Good Health and Well-being – rapid response saves lives.</p>
-<p>SDG 11: Sustainable Cities and Communities – disaster preparedness and resilience.</p>
-<p>SDG 9: Industry, Innovation, and Infrastructure – smart communication and emergency tech.
-
-</p>
-
-        <div class="code-button" onclick="toggleCode('emergencyCode')">Show Code</div>
-        <div id="emergencyCode" class="code-section">
-#include <bits/stdc++.h>
+,
+  emergency:{
+    title:'Emergency Response Dispatch System (Hydrology)',
+    desc:`<h3>Problem Statement</h3>
+    <p>Delayed response during floods increases damage and loss of life.</p>
+    <h3>System Approach</h3>
+    <p>The system predicts flood advance, proactively closes roads, prepositions vehicles, and activates drainage pumps.</p>
+    <h3>Algorithms Used</h3>
+    <p>Graph traversal, forecasting logic</p>`,
+    code:`#include <bits/stdc++.h>
 using namespace std;
 const int MAX_NODES = 60;
 const int MAX_EDGES = 300;
@@ -3647,70 +3394,16 @@ int main() {
 
 
 }
-        </div>
-    </div>
-
-    <!-- Housing -->
-    <div id="housing" class="content-box">
-        <div class="title">Smart Housing Allocation System</div>
-        <p>Bellapuram needs an intelligent housing allocation system that can efficiently manage applicants, prioritize needy families, and assign the best available houses based on distance, affordability, and availability.
-The system must ensure fast registry lookup, priority-based selection, accurate proximity evaluation, and conflict-free final allocations.
-It should support quick searching, stable report generation, and maintain scalable, real-time housing records across all residential zones.</p>
-
-<p>🔵 1. Applicant Registry (AVL Tree)</p>
-<p>Algorithm/Data Structure: AVL Tree</p>
-<p>Why: ⚡ O(log n) insert/search, 📌 sorted Applicant IDs, 📁 ideal for verification & updates.</p>
-
-<p>🔵 2. Applicant Priority Queue (Max-Heap)</p>
-<p>Algorithm/Data Structure: Array-based Max-Heap</p>
-<p>Why: 🏆 allocates most-needy applicant first, ⚡ O(log n) operations, 🧮 uses priority score.</p>
-
-<p>🔵 3. House Inventory & Selection (Min-Heap)</p>
-<p>Data Structure: Fixed array + Min-Heap</p>
-<p>Why: 🏠 fast “cheapest/best house” retrieval, ⚡ O(log m) insert/remove, 🎯 optimal house picking.</p>
-
-<p>🔵 4. Proximity Evaluation (Dijkstra — No Vectors)</p>
-<p>Algorithm: Dijkstra with adjacency matrix</p>
-<p>Why: 📍 computes distance from applicant → houses, 🧠 used in scoring, 📌 vector-free.</p>
-<p>Complexity: O(V²)</p>
-
-<p>🔵 5. Allocation Index (Red–Black Tree)</p>
-<p>Data Structure: Red–Black Tree (ApplicantID → HouseID)</p>
-<p>Why: 🔍 O(log n) lookup, 🏷️ clean allocation mapping, 🧹 prevents conflicts.</p>
-
-<p>🔵 6. Sorting Applicants (Merge Sort)</p>
-<p>Algorithm: Merge Sort (array-based)</p>
-<p>Why: 🧾 stable, fast O(n log n), 💼 ideal for generating reports.</p>
-
-<p>🔵 7. Name Search (KMP Algorithm)</p>
-<p>Algorithm: KMP (C-string matching)</p>
-<p>Why: 🔎 fast partial name search, 🚀 O(n + m), 📂 works well for large lists.</p>
-
-<p>📈 Complexity Summary</p>
-
-<p>AVL → O(log n)</p>
-<p>Max-Heap → O(log n)</p>
-<p>Min-Heap → O(log m)</p>
-<p>Dijkstra → O(V²)</p>
-<p>Merge Sort → O(n log n)</p>
-<p>KMP → O(n + m)</p>
-
-<p>🌱 Sustainable Development Goals (SDGs)</p>
-<p>SDG 11: Sustainable Cities and Communities – equitable and efficient housing allocation.</p>
-<p>SDG 1: No Poverty – prioritizes vulnerable populations.</p>
-<p>SDG 10: Reduced Inequalities – ensures fair access to housing.</p>
-
-</p>
-        <div class="code-button" onclick="toggleCode('housingCode')">Show Code</div>
-        <div id="housingCode" class="code-section">
-⭐Smart Housing Allocation System (Residential Zone)
-// smart_housing_no_vectors.cpp
-// Smart Housing Allocation System (NO vector)
-// Features: AVL applicant registry, Max-Heap priority for applicants,
-// Min-Heap for houses, Dijkstra to evaluate proximity to amenities,
-// Merge Sort for reports, KMP for name search, RB-tree for allocation index.
-
-#include <iostream>
+,
+  housing:{
+    title:'Smart Housing Allocation System',
+    desc:`<h3>Problem Statement</h3>
+    <p>Manual housing allotment is slow, unfair, and inefficient.</p>
+    <h3>System Approach</h3>
+    <p>Applicants are stored in AVL Trees, prioritized using Max-Heaps, and houses are allocated based on cost and proximity.</p>
+    <h3>Algorithms Used</h3>
+    <p>AVL Tree, Max Heap, Min Heap, Dijkstra</p>`,
+    code:`#include <iostream>
 #include <cstring>
 #include <climits>
 using namespace std;
@@ -3725,276 +3418,276 @@ const int INF = 1000000000;
 
 // Applicant record
 struct Applicant {
-    int id;                 // unique id
-    char name[64];
-    int familySize;
-    double monthlyIncome;
-    bool specialNeed;       // elderly/disabled
-    int preferenceNode;     // preferred location (node)
-    int score;              // computed priority score (higher = more urgent)
+**    int id;                 // unique id**
+**    char name[64];**
+**    int familySize;**
+**    double monthlyIncome;**
+**    bool specialNeed;       // elderly/disabled**
+**    int preferenceNode;     // preferred location (node)**
+**    int score;              // computed priority score (higher = more urgent)**
 };
 
 // House record
 struct House {
-    int id;
-    int node;               // location node
-    double price;
-    double area;            // sq.ft
-    bool available;
+**    int id;**
+**    int node;               // location node**
+**    double price;**
+**    double area;            // sq.ft**
+**    bool available;**
 };
 
 /* ========== AVL TREE FOR APPLICANTS (by id) ========== */
 struct AVLNode {
-    Applicant app;
-    AVLNode *left, *right;
-    int height;
-    AVLNode(const Applicant &a): app(a), left(nullptr), right(nullptr), height(1) {}
+**    Applicant app;**
+**    AVLNode *left, *right;**
+**    int height;**
+**    AVLNode(const Applicant &a): app(a), left(nullptr), right(nullptr), height(1) {}**
 };
 
 int avlHeight(AVLNode* n) { return n ? n->height : 0; }
 AVLNode* avlRightRotate(AVLNode* y) {
-    AVLNode* x = y->left;
-    AVLNode* T2 = x->right;
-    x->right = y; y->left = T2;
-    y->height = 1 + max(avlHeight(y->left), avlHeight(y->right));
-    x->height = 1 + max(avlHeight(x->left), avlHeight(x->right));
-    return x;
+**    AVLNode* x = y->left;**
+**    AVLNode* T2 = x->right;**
+**    x->right = y; y->left = T2;**
+**    y->height = 1 + max(avlHeight(y->left), avlHeight(y->right));**
+**    x->height = 1 + max(avlHeight(x->left), avlHeight(x->right));**
+**    return x;**
 }
 AVLNode* avlLeftRotate(AVLNode* x) {
-    AVLNode* y = x->right;
-    AVLNode* T2 = y->left;
-    y->left = x; x->right = T2;
-    x->height = 1 + max(avlHeight(x->left), avlHeight(x->right));
-    y->height = 1 + max(avlHeight(y->left), avlHeight(y->right));
-    return y;
+**    AVLNode* y = x->right;**
+**    AVLNode* T2 = y->left;**
+**    y->left = x; x->right = T2;**
+**    x->height = 1 + max(avlHeight(x->left), avlHeight(x->right));**
+**    y->height = 1 + max(avlHeight(y->left), avlHeight(y->right));**
+**    return y;**
 }
 AVLNode* avlInsert(AVLNode* node, const Applicant &a) {
-    if (!node) return new AVLNode(a);
-    if (a.id < node->app.id) node->left = avlInsert(node->left, a);
-    else if (a.id > node->app.id) node->right = avlInsert(node->right, a);
-    else return node; // duplicate ignored
-    node->height = 1 + max(avlHeight(node->left), avlHeight(node->right));
-    int balance = avlHeight(node->left) - avlHeight(node->right);
-    if (balance > 1 && a.id < node->left->app.id) return avlRightRotate(node);
-    if (balance < -1 && a.id > node->right->app.id) return avlLeftRotate(node);
-    if (balance > 1 && a.id > node->left->app.id) { node->left = avlLeftRotate(node->left); return avlRightRotate(node); }
-    if (balance < -1 && a.id < node->right->app.id) { node->right = avlRightRotate(node->right); return avlLeftRotate(node); }
-    return node;
+**    if (!node) return new AVLNode(a);**
+**    if (a.id < node->app.id) node->left = avlInsert(node->left, a);**
+**    else if (a.id > node->app.id) node->right = avlInsert(node->right, a);**
+**    else return node; // duplicate ignored**
+**    node->height = 1 + max(avlHeight(node->left), avlHeight(node->right));**
+**    int balance = avlHeight(node->left) - avlHeight(node->right);**
+**    if (balance > 1 && a.id < node->left->app.id) return avlRightRotate(node);**
+**    if (balance < -1 && a.id > node->right->app.id) return avlLeftRotate(node);**
+**    if (balance > 1 && a.id > node->left->app.id) { node->left = avlLeftRotate(node->left); return avlRightRotate(node); }**
+**    if (balance < -1 && a.id < node->right->app.id) { node->right = avlRightRotate(node->right); return avlLeftRotate(node); }**
+**    return node;**
 }
 AVLNode* avlSearch(AVLNode* root, int id) {
-    if (!root) return nullptr;
-    if (id == root->app.id) return root;
-    if (id < root->app.id) return avlSearch(root->left, id);
-    return avlSearch(root->right, id);
+**    if (!root) return nullptr;**
+**    if (id == root->app.id) return root;**
+**    if (id < root->app.id) return avlSearch(root->left, id);**
+**    return avlSearch(root->right, id);**
 }
 
 /* ========== MERGE SORT FOR APPLICANTS BY SCORE (array) ========== */
 void mergeApplicants(Applicant arr[], int l, int m, int r) {
-    int n1 = m - l + 1, n2 = r - m;
-    Applicant *L = new Applicant[n1];
-    Applicant *R = new Applicant[n2];
-    for (int i=0;i<n1;i++) L[i]=arr[l+i];
-    for (int j=0;j<n2;j++) R[j]=arr[m+1+j];
-    int i=0,j=0,k=l;
-    while(i<n1 && j<n2) {
-        if (L[i].score >= R[j].score) arr[k++] = L[i++]; // descending by score
-        else arr[k++] = R[j++];
-    }
-    while(i<n1) arr[k++]=L[i++];
-    while(j<n2) arr[k++]=R[j++];
-    delete[] L; delete[] R;
+**    int n1 = m - l + 1, n2 = r - m;**
+**    Applicant *L = new Applicant[n1];**
+**    Applicant *R = new Applicant[n2];**
+**    for (int i=0;i<n1;i++) L[i]=arr[l+i];**
+**    for (int j=0;j<n2;j++) R[j]=arr[m+1+j];**
+**    int i=0,j=0,k=l;**
+**    while(i<n1 && j<n2) {**
+**        if (L[i].score >= R[j].score) arr[k++] = L[i++]; // descending by score**
+**        else arr[k++] = R[j++];**
+**    }**
+**    while(i<n1) arr[k++]=L[i++];**
+**    while(j<n2) arr[k++]=R[j++];**
+**    delete[] L; delete[] R;**
 }
 void mergeSortApplicants(Applicant arr[], int l, int r) {
-    if (l < r) {
-        int m = (l + r)/2;
-        mergeSortApplicants(arr, l, m);
-        mergeSortApplicants(arr, m+1, r);
-        mergeApplicants(arr, l, m, r);
-    }
+**    if (l < r) {**
+**        int m = (l + r)/2;**
+**        mergeSortApplicants(arr, l, m);**
+**        mergeSortApplicants(arr, m+1, r);**
+**        mergeApplicants(arr, l, m, r);**
+**    }**
 }
 
 /* ========== MAX-HEAP FOR APPLICANT PRIORITY (stores indices into applicants array) ========== */
 struct ApplicantHeap {
-    int heapIdx[MAX_APPLICANTS];
-    int size;
-    ApplicantHeap(): size(0) {}
-    void push(int idx, Applicant applicants[]) {
-        heapIdx[size] = idx;
-        int i = size++;
-        while (i != 0) {
-            int p = (i-1)/2;
-            if (applicants[heapIdx[i]].score > applicants[heapIdx[p]].score) {
-                int t = heapIdx[i]; heapIdx[i] = heapIdx[p]; heapIdx[p] = t;
-                i = p;
-            } else break;
-        }
-    }
-    int pop(Applicant applicants[]) {
-        if (size == 0) return -1;
-        int root = heapIdx[0];
-        heapIdx[0] = heapIdx[--size];
-        // heapify
-        int i=0;
-        while(true) {
-            int l=2*i+1, r=2*i+2, largest=i;
-            if (l < size && applicants[heapIdx[l]].score > applicants[heapIdx[largest]].score) largest = l;
-            if (r < size && applicants[heapIdx[r]].score > applicants[heapIdx[largest]].score) largest = r;
-            if (largest != i) { int t = heapIdx[i]; heapIdx[i] = heapIdx[largest]; heapIdx[largest] = t; i = largest; }
-            else break;
-        }
-        return root;
-    }
-    bool empty() { return size==0; }
+**    int heapIdx[MAX_APPLICANTS];**
+**    int size;**
+**    ApplicantHeap(): size(0) {}**
+**    void push(int idx, Applicant applicants[]) {**
+**        heapIdx[size] = idx;**
+**        int i = size++;**
+**        while (i != 0) {**
+**            int p = (i-1)/2;**
+**            if (applicants[heapIdx[i]].score > applicants[heapIdx[p]].score) {**
+**                int t = heapIdx[i]; heapIdx[i] = heapIdx[p]; heapIdx[p] = t;**
+**                i = p;**
+**            } else break;**
+**        }**
+**    }**
+**    int pop(Applicant applicants[]) {**
+**        if (size == 0) return -1;**
+**        int root = heapIdx[0];**
+**        heapIdx[0] = heapIdx[--size];**
+**        // heapify**
+**        int i=0;**
+**        while(true) {**
+**            int l=2*i+1, r=2*i+2, largest=i;**
+**            if (l < size && applicants[heapIdx[l]].score > applicants[heapIdx[largest]].score) largest = l;**
+**            if (r < size && applicants[heapIdx[r]].score > applicants[heapIdx[largest]].score) largest = r;**
+**            if (largest != i) { int t = heapIdx[i]; heapIdx[i] = heapIdx[largest]; heapIdx[largest] = t; i = largest; }**
+**            else break;**
+**        }**
+**        return root;**
+**    }**
+**    bool empty() { return size==0; }**
 };
 
 /* ========== MIN-HEAP FOR AVAILABLE HOUSES (choose cheapest or closest) ========== */
 struct HouseHeap {
-    int heapIdx[MAX_HOUSES];
-    int size;
-    HouseHeap(): size(0) {}
-    // comparator by price ascending; tie-breaker by area descending
-    void push(int idx, House houses[]) {
-        heapIdx[size] = idx;
-        int i = size++;
-        while (i != 0) {
-            int p = (i-1)/2;
-            bool better = (houses[heapIdx[i]].price < houses[heapIdx[p]].price) ||
-                          (houses[heapIdx[i]].price == houses[heapIdx[p]].price && houses[heapIdx[i]].area > houses[heapIdx[p]].area);
-            if (better) {
-                int t = heapIdx[i]; heapIdx[i] = heapIdx[p]; heapIdx[p] = t;
-                i = p;
-            } else break;
-        }
-    }
-    int pop(House houses[]) {
-        if (size==0) return -1;
-        int root = heapIdx[0];
-        heapIdx[0] = heapIdx[--size];
-        int i=0;
-        while(true) {
-            int l=2*i+1, r=2*i+2, smallest=i;
-            if (l<size) {
-                bool less = (houses[heapIdx[l]].price < houses[heapIdx[smallest]].price) ||
-                            (houses[heapIdx[l]].price == houses[heapIdx[smallest]].price && houses[heapIdx[l]].area > houses[heapIdx[smallest]].area);
-                if (less) smallest = l;
-            }
-            if (r<size) {
-                bool less = (houses[heapIdx[r]].price < houses[heapIdx[smallest]].price) ||
-                            (houses[heapIdx[r]].price == houses[heapIdx[smallest]].price && houses[heapIdx[r]].area > houses[heapIdx[smallest]].area);
-                if (less) smallest = r;
-            }
-            if (smallest != i) { int t = heapIdx[i]; heapIdx[i] = heapIdx[smallest]; heapIdx[smallest] = t; i = smallest; }
-            else break;
-        }
-        return root;
-    }
-    bool empty() { return size==0; }
+**    int heapIdx[MAX_HOUSES];**
+**    int size;**
+**    HouseHeap(): size(0) {}**
+**    // comparator by price ascending; tie-breaker by area descending**
+**    void push(int idx, House houses[]) {**
+**        heapIdx[size] = idx;**
+**        int i = size++;**
+**        while (i != 0) {**
+**            int p = (i-1)/2;**
+**            bool better = (houses[heapIdx[i]].price < houses[heapIdx[p]].price) ||**
+**                          (houses[heapIdx[i]].price == houses[heapIdx[p]].price && houses[heapIdx[i]].area > houses[heapIdx[p]].area);**
+**            if (better) {**
+**                int t = heapIdx[i]; heapIdx[i] = heapIdx[p]; heapIdx[p] = t;**
+**                i = p;**
+**            } else break;**
+**        }**
+**    }**
+**    int pop(House houses[]) {**
+**        if (size==0) return -1;**
+**        int root = heapIdx[0];**
+**        heapIdx[0] = heapIdx[--size];**
+**        int i=0;**
+**        while(true) {**
+**            int l=2*i+1, r=2*i+2, smallest=i;**
+**            if (l<size) {**
+**                bool less = (houses[heapIdx[l]].price < houses[heapIdx[smallest]].price) ||**
+**                            (houses[heapIdx[l]].price == houses[heapIdx[smallest]].price && houses[heapIdx[l]].area > houses[heapIdx[smallest]].area);**
+**                if (less) smallest = l;**
+**            }**
+**            if (r<size) {**
+**                bool less = (houses[heapIdx[r]].price < houses[heapIdx[smallest]].price) ||**
+**                            (houses[heapIdx[r]].price == houses[heapIdx[smallest]].price && houses[heapIdx[r]].area > houses[heapIdx[smallest]].area);**
+**                if (less) smallest = r;**
+**            }**
+**            if (smallest != i) { int t = heapIdx[i]; heapIdx[i] = heapIdx[smallest]; heapIdx[smallest] = t; i = smallest; }**
+**            else break;**
+**        }**
+**        return root;**
+**    }**
+**    bool empty() { return size==0; }**
 };
 
 /* ========== RED-BLACK TREE FOR ALLOCATIONS (applicantID -> houseID) ========== */
 enum Color { R_RED, R_BLACK };
 struct RBTNode {
-    int appId;
-    int houseId;
-    Color color;
-    RBTNode *left, *right, *parent;
-    RBTNode(int a=0,int h=-1): appId(a), houseId(h), color(R_RED), left(nullptr), right(nullptr), parent(nullptr) {}
+**    int appId;**
+**    int houseId;**
+**    Color color;**
+**    RBTNode *left, *right, *parent;**
+**    RBTNode(int a=0,int h=-1): appId(a), houseId(h), color(R_RED), left(nullptr), right(nullptr), parent(nullptr) {}**
 };
 
 class RBTree {
 public:
-    RBTNode* root;
-    RBTree(): root(nullptr) {}
-    void rotateLeft(RBTNode* &rootRef, RBTNode* &pt) {
-        RBTNode* pt_right = pt->right;
-        pt->right = pt_right->left;
-        if(pt->right) pt->right->parent = pt;
-        pt_right->parent = pt->parent;
-        if(!pt->parent) rootRef = pt_right;
-        else if(pt == pt->parent->left) pt->parent->left = pt_right;
-        else pt->parent->right = pt_right;
-        pt_right->left = pt;
-        pt->parent = pt_right;
-    }
-    void rotateRight(RBTNode* &rootRef, RBTNode* &pt) {
-        RBTNode* pt_left = pt->left;
-        pt->left = pt_left->right;
-        if(pt->left) pt->left->parent = pt;
-        pt_left->parent = pt->parent;
-        if(!pt->parent) rootRef = pt_left;
-        else if(pt == pt->parent->left) pt->parent->left = pt_left;
-        else pt->parent->right = pt_left;
-        pt_left->right = pt;
-        pt->parent = pt_left;
-    }
-    void fixViolation(RBTNode* &rootRef, RBTNode* &pt) {
-        RBTNode *parent_pt = nullptr, *grand_parent_pt = nullptr;
-        while ((pt != rootRef) && (pt->color == R_RED) && (pt->parent->color == R_RED)) {
-            parent_pt = pt->parent;
-            grand_parent_pt = pt->parent->parent;
-            if (parent_pt == grand_parent_pt->left) {
-                RBTNode *uncle_pt = grand_parent_pt->right;
-                if (uncle_pt && uncle_pt->color == R_RED) {
-                    grand_parent_pt->color = R_RED;
-                    parent_pt->color = R_BLACK;
-                    uncle_pt->color = R_BLACK;
-                    pt = grand_parent_pt;
-                } else {
-                    if (pt == parent_pt->right) {
-                        rotateLeft(rootRef, parent_pt);
-                        pt = parent_pt;
-                        parent_pt = pt->parent;
-                    }
-                    rotateRight(rootRef, grand_parent_pt);
-                    Color t = parent_pt->color; parent_pt->color = grand_parent_pt->color; grand_parent_pt->color = t;
-                    pt = parent_pt;
-                }
-            } else {
-                RBTNode *uncle_pt = grand_parent_pt->left;
-                if (uncle_pt && uncle_pt->color == R_RED) {
-                    grand_parent_pt->color = R_RED;
-                    parent_pt->color = R_BLACK;
-                    uncle_pt->color = R_BLACK;
-                    pt = grand_parent_pt;
-                } else {
-                    if (pt == parent_pt->left) {
-                        rotateRight(rootRef, parent_pt);
-                        pt = parent_pt;
-                        parent_pt = pt->parent;
-                    }
-                    rotateLeft(rootRef, grand_parent_pt);
-                    Color t = parent_pt->color; parent_pt->color = grand_parent_pt->color; grand_parent_pt->color = t;
-                    pt = parent_pt;
-                }
-            }
-        }
-        rootRef->color = R_BLACK;
-    }
-    void insert(int appId, int houseId) {
-        RBTNode* pt = new RBTNode(appId, houseId);
-        root = bstInsert(root, pt);
-        fixViolation(root, pt);
-    }
-    RBTNode* bstInsert(RBTNode* rootLocal, RBTNode* pt) {
-        if (!rootLocal) return pt;
-        if (pt->appId < rootLocal->appId) {
-            rootLocal->left = bstInsert(rootLocal->left, pt);
-            rootLocal->left->parent = rootLocal;
-        } else if (pt->appId > rootLocal->appId) {
-            rootLocal->right = bstInsert(rootLocal->right, pt);
-            rootLocal->right->parent = rootLocal;
-        }
-        return rootLocal;
-    }
-    int search(int appId) {
-        RBTNode* cur = root;
-        while(cur) {
-            if (appId == cur->appId) return cur->houseId;
-            if (appId < cur->appId) cur = cur->left;
-            else cur = cur->right;
-        }
-        return -1; // not found
-    }
+**    RBTNode* root;**
+**    RBTree(): root(nullptr) {}**
+**    void rotateLeft(RBTNode* &rootRef, RBTNode* &pt) {**
+**        RBTNode* pt_right = pt->right;**
+**        pt->right = pt_right->left;**
+**        if(pt->right) pt->right->parent = pt;**
+**        pt_right->parent = pt->parent;**
+**        if(!pt->parent) rootRef = pt_right;**
+**        else if(pt == pt->parent->left) pt->parent->left = pt_right;**
+**        else pt->parent->right = pt_right;**
+**        pt_right->left = pt;**
+**        pt->parent = pt_right;**
+**    }**
+**    void rotateRight(RBTNode* &rootRef, RBTNode* &pt) {**
+**        RBTNode* pt_left = pt->left;**
+**        pt->left = pt_left->right;**
+**        if(pt->left) pt->left->parent = pt;**
+**        pt_left->parent = pt->parent;**
+**        if(!pt->parent) rootRef = pt_left;**
+**        else if(pt == pt->parent->left) pt->parent->left = pt_left;**
+**        else pt->parent->right = pt_left;**
+**        pt_left->right = pt;**
+**        pt->parent = pt_left;**
+**    }**
+**    void fixViolation(RBTNode* &rootRef, RBTNode* &pt) {**
+**        RBTNode *parent_pt = nullptr, *grand_parent_pt = nullptr;**
+**        while ((pt != rootRef) && (pt->color == R_RED) && (pt->parent->color == R_RED)) {**
+**            parent_pt = pt->parent;**
+**            grand_parent_pt = pt->parent->parent;**
+**            if (parent_pt == grand_parent_pt->left) {**
+**                RBTNode *uncle_pt = grand_parent_pt->right;**
+**                if (uncle_pt && uncle_pt->color == R_RED) {**
+**                    grand_parent_pt->color = R_RED;**
+**                    parent_pt->color = R_BLACK;**
+**                    uncle_pt->color = R_BLACK;**
+**                    pt = grand_parent_pt;**
+**                } else {**
+**                    if (pt == parent_pt->right) {**
+**                        rotateLeft(rootRef, parent_pt);**
+**                        pt = parent_pt;**
+**                        parent_pt = pt->parent;**
+**                    }**
+**                    rotateRight(rootRef, grand_parent_pt);**
+**                    Color t = parent_pt->color; parent_pt->color = grand_parent_pt->color; grand_parent_pt->color = t;**
+**                    pt = parent_pt;**
+**                }**
+**            } else {**
+**                RBTNode *uncle_pt = grand_parent_pt->left;**
+**                if (uncle_pt && uncle_pt->color == R_RED) {**
+**                    grand_parent_pt->color = R_RED;**
+**                    parent_pt->color = R_BLACK;**
+**                    uncle_pt->color = R_BLACK;**
+**                    pt = grand_parent_pt;**
+**                } else {**
+**                    if (pt == parent_pt->left) {**
+**                        rotateRight(rootRef, parent_pt);**
+**                        pt = parent_pt;**
+**                        parent_pt = pt->parent;**
+**                    }**
+**                    rotateLeft(rootRef, grand_parent_pt);**
+**                    Color t = parent_pt->color; parent_pt->color = grand_parent_pt->color; grand_parent_pt->color = t;**
+**                    pt = parent_pt;**
+**                }**
+**            }**
+**        }**
+**        rootRef->color = R_BLACK;**
+**    }**
+**    void insert(int appId, int houseId) {**
+**        RBTNode* pt = new RBTNode(appId, houseId);**
+**        root = bstInsert(root, pt);**
+**        fixViolation(root, pt);**
+**    }**
+**    RBTNode* bstInsert(RBTNode* rootLocal, RBTNode* pt) {**
+**        if (!rootLocal) return pt;**
+**        if (pt->appId < rootLocal->appId) {**
+**            rootLocal->left = bstInsert(rootLocal->left, pt);**
+**            rootLocal->left->parent = rootLocal;**
+**        } else if (pt->appId > rootLocal->appId) {**
+**            rootLocal->right = bstInsert(rootLocal->right, pt);**
+**            rootLocal->right->parent = rootLocal;**
+**        }**
+**        return rootLocal;**
+**    }**
+**    int search(int appId) {**
+**        RBTNode* cur = root;**
+**        while(cur) {**
+**            if (appId == cur->appId) return cur->houseId;**
+**            if (appId < cur->appId) cur = cur->left;**
+**            else cur = cur->right;**
+**        }**
+**        return -1; // not found**
+**    }**
 };
 
 /* ========== DIJKSTRA (array adjacency matrix) ========== */
@@ -4002,51 +3695,51 @@ int nodeCount = 0;
 int adjMat[MAX_NODES][MAX_NODES];
 
 void initGraph(int n) {
-    nodeCount = n;
-    for (int i=0;i<n;i++) for (int j=0;j<n;j++) adjMat[i][j] = (i==j?0:INF);
+**    nodeCount = n;**
+**    for (int i=0;i<n;i++) for (int j=0;j<n;j++) adjMat[i][j] = (i==j?0:INF);**
 }
 void addEdgeGraph(int u,int v,int w) {
-    if (u<0||u>=nodeCount||v<0||v>=nodeCount) return;
-    adjMat[u][v] = w; adjMat[v][u] = w;
+**    if (u<0||u>=nodeCount||v<0||v>=nodeCount) return;**
+**    adjMat[u][v] = w; adjMat[v][u] = w;**
 }
 void dijkstra(int src, int dist[], int parent[]) {
-    bool used[MAX_NODES];
-    for (int i=0;i<nodeCount;i++) { dist[i]=INF; parent[i]=-1; used[i]=false; }
-    dist[src]=0;
-    for (int it=0; it<nodeCount; ++it) {
-        int u=-1, best=INF;
-        for (int i=0;i<nodeCount;i++) if(!used[i] && dist[i]<best) { best=dist[i]; u=i; }
-        if (u==-1) break;
-        used[u]=true;
-        for (int v=0; v<nodeCount; ++v) {
-            if (adjMat[u][v] < INF && dist[u] + adjMat[u][v] < dist[v]) {
-                dist[v] = dist[u] + adjMat[u][v];
-                parent[v] = u;
-            }
-        }
-    }
+**    bool used[MAX_NODES];**
+**    for (int i=0;i<nodeCount;i++) { dist[i]=INF; parent[i]=-1; used[i]=false; }**
+**    dist[src]=0;**
+**    for (int it=0; it<nodeCount; ++it) {**
+**        int u=-1, best=INF;**
+**        for (int i=0;i<nodeCount;i++) if(!used[i] && dist[i]<best) { best=dist[i]; u=i; }**
+**        if (u==-1) break;**
+**        used[u]=true;**
+**        for (int v=0; v<nodeCount; ++v) {**
+**            if (adjMat[u][v] < INF && dist[u] + adjMat[u][v] < dist[v]) {**
+**                dist[v] = dist[u] + adjMat[u][v];**
+**                parent[v] = u;**
+**            }**
+**        }**
+**    }**
 }
 
 /* ========== KMP FOR NAME SEARCH (C-style strings) ========== */
 void computeLPS(const char pat[], int M, int lps[]) {
-    int len = 0; lps[0]=0; int i=1;
-    while (i < M) {
-        if (pat[i] == pat[len]) { len++; lps[i]=len; i++; }
-        else { if (len != 0) len = lps[len-1]; else { lps[i]=0; i++; } }
-    }
+**    int len = 0; lps[0]=0; int i=1;**
+**    while (i < M) {**
+**        if (pat[i] == pat[len]) { len++; lps[i]=len; i++; }**
+**        else { if (len != 0) len = lps[len-1]; else { lps[i]=0; i++; } }**
+**    }**
 }
 bool KMPsearch(const char text[], const char pat[]) {
-    int N = strlen(text), M = strlen(pat);
-    if (M==0) return true;
-    int *lps = new int[M];
-    computeLPS(pat, M, lps);
-    int i=0,j=0;
-    while(i<N) {
-        if (text[i]==pat[j]) { i++; j++; if (j==M) { delete[] lps; return true; } }
-        else { if (j) j = lps[j-1]; else i++; }
-    }
-    delete[] lps;
-    return false;
+**    int N = strlen(text), M = strlen(pat);**
+**    if (M==0) return true;**
+**    int *lps = new int[M];**
+**    computeLPS(pat, M, lps);**
+**    int i=0,j=0;**
+**    while(i<N) {**
+**        if (text[i]==pat[j]) { i++; j++; if (j==M) { delete[] lps; return true; } }**
+**        else { if (j) j = lps[j-1]; else i++; }**
+**    }**
+**    delete[] lps;**
+**    return false;**
 }
 
 /* ========== SYSTEM STORAGE ========== */
@@ -4063,192 +3756,159 @@ RBTree allocationIndex;
 
 /* ========== UTILITIES ========== */
 int computeScore(const Applicant &a) {
-    // sample scoring: higher family size and lower income => higher priority
-    int s = 0;
-    s += a.familySize * 10;
-    if (a.monthlyIncome < 15000) s += 80;
-    else if (a.monthlyIncome < 30000) s += 40;
-    if (a.specialNeed) s += 100;
-    // proximity preference will be considered later when selecting house
-    return s;
+**    // sample scoring: higher family size and lower income => higher priority**
+**    int s = 0;**
+**    s += a.familySize * 10;**
+**    if (a.monthlyIncome < 15000) s += 80;**
+**    else if (a.monthlyIncome < 30000) s += 40;**
+**    if (a.specialNeed) s += 100;**
+**    // proximity preference will be considered later when selecting house**
+**    return s;**
 }
 void addApplicant(const Applicant &a) {
-    if (applicantsCount >= MAX_APPLICANTS) { cout<<"Applicant capacity reached\n"; return; }
-    applicants[applicantsCount] = a;
-    applicants[applicantsCount].score = computeScore(a);
-    applicantRoot = avlInsert(applicantRoot, applicants[applicantsCount]);
-    // push index into heap for allocation queue
-    applicantHeap.push(applicantsCount, applicants);
-    applicantsCount++;
+**    if (applicantsCount >= MAX_APPLICANTS) { cout<<"Applicant capacity reached\n"; return; }**
+**    applicants[applicantsCount] = a;**
+**    applicants[applicantsCount].score = computeScore(a);**
+**    applicantRoot = avlInsert(applicantRoot, applicants[applicantsCount]);**
+**    // push index into heap for allocation queue**
+**    applicantHeap.push(applicantsCount, applicants);**
+**    applicantsCount++;**
 }
 void addHouse(const House &h) {
-    if (housesCount >= MAX_HOUSES) { cout<<"House capacity reached\n"; return; }
-    houses[housesCount] = h;
-    houses[housesCount].available = h.available;
-    if (houses[housesCount].available) houseHeap.push(housesCount, houses);
-    housesCount++;
+**    if (housesCount >= MAX_HOUSES) { cout<<"House capacity reached\n"; return; }**
+**    houses[housesCount] = h;**
+**    houses[housesCount].available = h.available;**
+**    if (houses[housesCount].available) houseHeap.push(housesCount, houses);**
+**    housesCount++;**
 }
 void showTopApplicants(int k) {
-    // produce a shallow copy of heap (we'll pop from a temporary array)
-    int tempHeap[MAX_APPLICANTS]; int sz=applicantHeap.size;
-    for (int i=0;i<sz;i++) tempHeap[i]=applicantHeap.heapIdx[i];
-    cout<<"Top applicants (id : score) :\n";
-    for (int i=0;i<k && applicantHeap.size>0;i++) {
-        int idx = applicantHeap.pop(applicants);
-        cout<< applicants[idx].id << " : " << applicants[idx].score << "\n";
-    }
-    // restore heap
-    for (int i=0;i<sz;i++) applicantHeap.heapIdx[i] = tempHeap[i];
-    applicantHeap.size = sz;
+**    // produce a shallow copy of heap (we'll pop from a temporary array)**
+**    int tempHeap[MAX_APPLICANTS]; int sz=applicantHeap.size;**
+**    for (int i=0;i<sz;i++) tempHeap[i]=applicantHeap.heapIdx[i];**
+**    cout<<"Top applicants (id : score) :\n";**
+**    for (int i=0;i<k && applicantHeap.size>0;i++) {**
+**        int idx = applicantHeap.pop(applicants);**
+**        cout<< applicants[idx].id << " : " << applicants[idx].score << "\n";**
+**    }**
+**    // restore heap**
+**    for (int i=0;i<sz;i++) applicantHeap.heapIdx[i] = tempHeap[i];**
+**    applicantHeap.size = sz;**
 }
 
 /* ========== ALLOCATION PROCESS ========== */
 void allocateHousing() {
-    // process applicants in priority order (heap) and assign best available house
-    while (!applicantHeap.empty() && !houseHeap.empty()) {
-        int appIdx = applicantHeap.pop(applicants);
-        Applicant &ap = applicants[appIdx];
-        // evaluate available houses to find one closest to applicant preference (use Dijkstra distances)
-        // We'll pop houses temporarily, compute a score combining price and distance, pick best, then push back others.
-        int tempHIdx[MAX_HOUSES]; int tempCount=0;
-        int bestHouseIdx = -1;
-        double bestScore = 1e18; // lower better: price + alpha*distance
-        double alpha = 1.0; // tuning param cost per distance unit
-        // prepare distances from applicant preference node
-        int dist[MAX_NODES], parent[MAX_NODES];
-        dijkstra(ap.preferenceNode, dist, parent);
-        // iterate through houseHeap positions -> but heap doesn't allow easy iterate; we'll pop houses and inspect
-        while (!houseHeap.empty()) {
-            int hIdx = houseHeap.pop(houses);
-            tempHIdx[tempCount++] = hIdx;
-            if (!houses[hIdx].available) continue;
-            int hnode = houses[hIdx].node;
-            int d = (hnode>=0 && hnode<nodeCount) ? dist[hnode] : INF;
-            double score = houses[hIdx].price + alpha * ( (d>=INF)? 1000000 : d );
-            // prefer houses nearer and cheaper
-            if (score < bestScore) { bestScore = score; bestHouseIdx = hIdx; }
-        }
-        // Rebuild houseHeap from temp, skipping the assigned
-        for (int i=0;i<tempCount;i++) {
-            int idx = tempHIdx[i];
-            if (idx == bestHouseIdx) continue; // assigned
-            if (houses[idx].available) houseHeap.push(idx, houses);
-        }
-        if (bestHouseIdx == -1) {
-            // no available house actually assignable, push applicant back? here we break
-            cout<<"No suitable house available now for applicant "<<ap.id<<"\n";
-            // optionally could queue applicant elsewhere; skip for now
-            continue;
-        }
-        // assign
-        houses[bestHouseIdx].available = false;
-        allocationIndex.insert(ap.id, houses[bestHouseIdx].id);
-        cout<<"Allocated Applicant "<<ap.id<<" ("<<ap.name<<") -> House "<<houses[bestHouseIdx].id<<"\n";
-    }
+**    // process applicants in priority order (heap) and assign best available house**
+**    while (!applicantHeap.empty() && !houseHeap.empty()) {**
+**        int appIdx = applicantHeap.pop(applicants);**
+**        Applicant &ap = applicants[appIdx];**
+**        // evaluate available houses to find one closest to applicant preference (use Dijkstra distances)**
+**        // We'll pop houses temporarily, compute a score combining price and distance, pick best, then push back others.**
+**        int tempHIdx[MAX_HOUSES]; int tempCount=0;**
+**        int bestHouseIdx = -1;**
+**        double bestScore = 1e18; // lower better: price + alpha*distance**
+**        double alpha = 1.0; // tuning param cost per distance unit**
+**        // prepare distances from applicant preference node**
+**        int dist[MAX_NODES], parent[MAX_NODES];**
+**        dijkstra(ap.preferenceNode, dist, parent);**
+**        // iterate through houseHeap positions -> but heap doesn't allow easy iterate; we'll pop houses and inspect**
+**        while (!houseHeap.empty()) {**
+**            int hIdx = houseHeap.pop(houses);**
+**            tempHIdx[tempCount++] = hIdx;**
+**            if (!houses[hIdx].available) continue;**
+**            int hnode = houses[hIdx].node;**
+**            int d = (hnode>=0 && hnode<nodeCount) ? dist[hnode] : INF;**
+**            double score = houses[hIdx].price + alpha * ( (d>=INF)? 1000000 : d );**
+**            // prefer houses nearer and cheaper**
+**            if (score < bestScore) { bestScore = score; bestHouseIdx = hIdx; }**
+**        }**
+**        // Rebuild houseHeap from temp, skipping the assigned**
+**        for (int i=0;i<tempCount;i++) {**
+**            int idx = tempHIdx[i];**
+**            if (idx == bestHouseIdx) continue; // assigned**
+**            if (houses[idx].available) houseHeap.push(idx, houses);**
+**        }**
+**        if (bestHouseIdx == -1) {**
+**            // no available house actually assignable, push applicant back? here we break**
+**            cout<<"No suitable house available now for applicant "<<ap.id<<"\n";**
+**            // optionally could queue applicant elsewhere; skip for now**
+**            continue;**
+**        }**
+**        // assign**
+**        houses[bestHouseIdx].available = false;**
+**        allocationIndex.insert(ap.id, houses[bestHouseIdx].id);**
+**        cout<<"Allocated Applicant "<<ap.id<<" ("<<ap.name<<") -> House "<<houses[bestHouseIdx].id<<"\n";**
+**    }**
 }
 
 /* ========== DEMO SETUP & RUN ========== */
 void setupDemoGraph() {
-    initGraph(8); // nodes 0..7
-    addEdgeGraph(0,1,4); addEdgeGraph(0,2,6);
-    addEdgeGraph(1,2,2); addEdgeGraph(1,3,7);
-    addEdgeGraph(2,4,3); addEdgeGraph(3,4,2);
-    addEdgeGraph(3,5,5); addEdgeGraph(4,6,4); addEdgeGraph(5,7,8);
+**    initGraph(8); // nodes 0..7**
+**    addEdgeGraph(0,1,4); addEdgeGraph(0,2,6);**
+**    addEdgeGraph(1,2,2); addEdgeGraph(1,3,7);**
+**    addEdgeGraph(2,4,3); addEdgeGraph(3,4,2);**
+**    addEdgeGraph(3,5,5); addEdgeGraph(4,6,4); addEdgeGraph(5,7,8);**
 }
 void setupDemoHouses() {
-    addHouse( (House){1001, 3, 4500.0, 900.0, true} );
-    addHouse( (House){1002, 4, 5000.0, 1000.0, true} );
-    addHouse( (House){1003, 2, 3500.0, 700.0, true} );
-    addHouse( (House){1004, 6, 4800.0, 950.0, true} );
+**    addHouse( (House){1001, 3, 4500.0, 900.0, true} );**
+**    addHouse( (House){1002, 4, 5000.0, 1000.0, true} );**
+**    addHouse( (House){1003, 2, 3500.0, 700.0, true} );**
+**    addHouse( (House){1004, 6, 4800.0, 950.0, true} );**
 }
 void setupDemoApplicants() {
-    Applicant a1; a1.id=1; strcpy(a1.name,"Priya"); a1.familySize=4; a1.monthlyIncome=12000; a1.specialNeed=false; a1.preferenceNode=3;
-    Applicant a2; a2.id=2; strcpy(a2.name,"Rajan"); a2.familySize=6; a2.monthlyIncome=8000; a2.specialNeed=true; a2.preferenceNode=4;
-    Applicant a3; a3.id=3; strcpy(a3.name,"Leela"); a3.familySize=2; a3.monthlyIncome=35000; a3.specialNeed=false; a3.preferenceNode=2;
-    Applicant a4; a4.id=4; strcpy(a4.name,"Suresh"); a4.familySize=5; a4.monthlyIncome=15000; a4.specialNeed=false; a4.preferenceNode=6;
-    addApplicant(a1); addApplicant(a2); addApplicant(a3); addApplicant(a4);
+**    Applicant a1; a1.id=1; strcpy(a1.name,"Priya"); a1.familySize=4; a1.monthlyIncome=12000; a1.specialNeed=false; a1.preferenceNode=3;**
+**    Applicant a2; a2.id=2; strcpy(a2.name,"Rajan"); a2.familySize=6; a2.monthlyIncome=8000; a2.specialNeed=true; a2.preferenceNode=4;**
+**    Applicant a3; a3.id=3; strcpy(a3.name,"Leela"); a3.familySize=2; a3.monthlyIncome=35000; a3.specialNeed=false; a3.preferenceNode=2;**
+**    Applicant a4; a4.id=4; strcpy(a4.name,"Suresh"); a4.familySize=5; a4.monthlyIncome=15000; a4.specialNeed=false; a4.preferenceNode=6;**
+**    addApplicant(a1); addApplicant(a2); addApplicant(a3); addApplicant(a4);**
 }
 
 /* ========== MAIN ========== */
 int main() {
-    cout<<"=== Smart Housing Allocation System (No vectors) ===\n\n";
+**    cout<<"=== Smart Housing Allocation System (No vectors) ===\n\n";**
 
-    // Setup
-    setupDemoGraph();
-    setupDemoHouses();
-    setupDemoApplicants();
+**    // Setup**
+**    setupDemoGraph();**
+**    setupDemoHouses();**
+**    setupDemoApplicants();**
 
-    cout<<"\nTop applicants by priority (demo):\n";
-    showTopApplicants(4);
+**    cout<<"\nTop applicants by priority (demo):\n";**
+**    showTopApplicants(4);**
 
-    cout<<"\nStarting allocation process...\n";
-    allocateHousing();
+**    cout<<"\nStarting allocation process...\n";**
+**    allocateHousing();**
 
-    cout<<"\nLookup allocation for applicant 2: House ID = " << allocationIndex.search(2) << "\n";
+**    cout<<"\nLookup allocation for applicant 2: House ID = " << allocationIndex.search(2) << "\n";**
 
-    // Search by name using KMP
-    char pattern[] = "Leela";
-    cout<<"\nSearching applicants by name pattern '"<<pattern<<"':\n";
-    for (int i=0;i<applicantsCount;i++) {
-        if (KMPsearch(applicants[i].name, pattern)) {
-            cout<<"Found applicant: "<< applicants[i].id << " - " << applicants[i].name << "\n";
-        }
-    }
+**    // Search by name using KMP**
+**    char pattern[] = "Leela";**
+**    cout<<"\nSearching applicants by name pattern '"<<pattern<<"':\n";**
+**    for (int i=0;i<applicantsCount;i++) {**
+**        if (KMPsearch(applicants[i].name, pattern)) {**
+**            cout<<"Found applicant: "<< applicants[i].id << " - " << applicants[i].name << "\n";**
+**        }**
+**    }**
 
-    // Report: sort applicants array by score for full listing
-    cout<<"\nApplicants sorted by score (desc):\n";
-    mergeSortApplicants(applicants, 0, applicantsCount-1);
-    for (int i=0;i<applicantsCount;i++) {
-        cout<< applicants[i].id << " " << applicants[i].name << " score=" << applicants[i].score << "\n";
-    }
+**    // Report: sort applicants array by score for full listing**
+**    cout<<"\nApplicants sorted by score (desc):\n";**
+**    mergeSortApplicants(applicants, 0, applicantsCount-1);**
+**    for (int i=0;i<applicantsCount;i++) {**
+**        cout<< applicants[i].id << " " << applicants[i].name << " score=" << applicants[i].score << "\n";**
+**    }**
 
-    cout<<"\nDemo complete.\n";
-    return 0;
+**    cout<<"\nDemo complete.\n";**
+**    return 0;**
 }
 
-
-        </div>
-    </div>
-
-    <!-- Market Analyzer -->
-    <div id="market" class="content-box">
-        <div class="title">Smart Market & Commercial Price Analyzer</div>
-        <p>Bellapuram requires an intelligent price-analysis system to monitor, compare, and manage commodity prices across all commercial zones in real time.
-The system must efficiently store, sort, search, and update product and price data while detecting abnormal spikes or inflation patterns.
-It should support fast zone-wise comparisons and provide reliable alerts to help authorities, vendors, and consumers make data-driven decisions.</p>
-
-<p>1. Unstable prices in coastal trading city</p>
-<p>Solved using:</p>
-<p>Merge Sort / Quick Sort for daily price ordering</p>
-<p>Max-Heap to detect price spikes</p>
-<p>Helps government + traders catch fake inflation</p>
-
-<p>2. Wrong or manipulated commercial data</p>
-<p>Solved using:</p>
-<p>KMP & Rabin–Karp name search</p>
-<p>BST/AVL (extendable) for unique storage</p>
-<p>Ensures accurate, tamper-proof commodity records</p>
-
-<p>3. Market zoning & regulation</p>
-<p>Zone-wise price lists can be run separately:</p>
-<p>Zone-A wholesale</p>
-<p>Zone-B retail</p>
-<p>Zone-C coastal import yard</p>
-
-<p>Sorted comparison helps detect:</p>
-<p>Illegal overpricing</p>
-<p>Price dumping</p>
-<p>Tax evasion</p>
-
-<p>🌱 Sustainable Development Goals (SDGs)</p>
-<p>SDG 8: Decent Work and Economic Growth – supports market efficiency and fair trade.</p>
-<p>SDG 12: Responsible Consumption and Production – price transparency encourages sustainable purchasing.</p>
-<p>SDG 9: Industry, Innovation, and Infrastructure – digital market intelligence infrastructure.
-
-</p>
-        <div class="code-button" onclick="toggleCode('marketCode')">Show Code</div>
-        <div id="marketCode" class="code-section">
-#include <iostream>
+,
+  market:{
+    title:'Smart Market & Commercial Zone Price Analyzer',
+    desc:`<h3>Problem Statement</h3>
+    <p>Unregulated pricing causes inflation spikes in commercial zones.</p>
+    <h3>System Approach</h3>
+    <p>Prices are tracked, sorted, and analyzed to detect abnormal increases and assist policy decisions.</p>
+    <h3>Algorithms Used</h3>
+    <p>Heap, Merge Sort</p>`,
+    code:`#include <iostream>
 #include <cstring>
 #include <cmath>
 using namespace std;
@@ -4463,69 +4123,16 @@ int main() {
 **    delete[] arr;**
 **    return 0;**
 }
-
-        </div>
-    </div>
-
-    <!-- Logistics -->
-    <div id="logistics" class="content-box">
-        <div class="title">Industrial Logistics & Supply Chain Manager</div>
-        <p>Bellapuram needs a smart logistics system to manage warehouses, prioritize urgent shipments, and protect cold-chain goods.
-The system must monitor temperature deviations, assign trucks efficiently, and compute optimal or penalty-adjusted delivery routes.
-Its focus is fast, reliable, and cost-efficient movement of industrial cargo across the city.</p>
-
-<p>🔵 1. Warehouse Registry (AVL Tree)</p>
-<p>Algorithm / Data structure: AVL tree (pointer + arrays) storing Warehouse records.</p>
-<p>Reason: O(log n) insert/search by warehouse ID — fast lookup for cold-storage availability and capacity checks.</p>
-
-<p>🔵 2. Shipment Priority Queue (Max-Heap)</p>
-<p>Algorithm / Data structure: Array-based Max-Heap for shipments.</p>
-<p>Reason: Prioritises urgent/cold shipments (higher priority) so scarce trucks are assigned to most critical deliveries; push/pop in O(log n).</p>
-
-<p>🔵 3. Cold-Chain Temperature Monitoring (Temp Sensors + Heap)</p>
-<p>Algorithm / Data structure: Temperature sensors per node; max-heap on deviation from target temperature.</p>
-<p>Reason: Quickly identify worst temperature deviators — generate alerts and trigger emergency holds or rerouting to protect perishables.</p>
-
-<p>🔵 4. Route Planning (Dijkstra)</p>
-<p>Algorithm: Dijkstra (array-based adjacency matrix).</p>
-<p>Reason: Fast shortest-path routing (travel time/cost) from trucks to pickup and destination nodes; used for truck selection and ETA estimates.</p>
-
-<p>🔵 5. Alternate / Penalty Routes (Bellman–Ford)</p>
-<p>Algorithm: Bellman–Ford (edge-list).</p>
-<p>Reason: Model routes with penalties (cold-penalty; traffic/toll negative/positive adjustments), detect suboptimal paths, and handle graphs with special edge costs.</p>
-
-<p>🔵 6. Network Design (Kruskal & Prim)</p>
-<p>Algorithms: Kruskal (edge-sorting + union-find) and Prim (array-based).</p>
-<p>Reason: Design minimal-cost distribution backbone connecting hubs/warehouses (helps plan placement of cold-chains and main lanes).</p>
-
-<p>🔵 7. Manifest Sorting (Merge Sort)</p>
-<p>Algorithm: Merge Sort on array of manifest entries.</p>
-<p>Reason: Stable O(n log n) sorting for manifests and reports (sort by priority, produce printable load lists).</p>
-
-<p>🔵 8. Tracking & Search (KMP)</p>
-<p>Algorithm: Knuth–Morris–Pratt substring search for tracking codes.</p>
-<p>Reason: Fast search in lists of tracking codes for queries like partial tracking numbers or pattern matches.</p>
-
-<p>🔵 9. Truck Scheduling & Selection (Greedy + Dijkstra)</p>
-<p>Algorithm/Approach: Greedy truck assignment — choose nearest available truck with required capacity using Dijkstra distances.</p>
-<p>Reason: Practical, fast, and effective for real-time dispatch; respects cold requirements by prioritising cold-capable hubs.</p>
-
-<p>🔵 10. Cold-Chain Emergency Handling (Alerts + Holds)</p>
-<p>Mechanisms: On large temperature deviation, the system:</p>
-<p>flags shipments for hold,chooses nearest cold warehouse (AVL lookup),notifies operators (console/alert).</p>
-<p>Reason: Prevent temperature-sensitive cargo loss; enable human operator action or automated re-routing</p>
-
-<p>🌱 Sustainable Development Goals (SDGs)</p>
-<p>SDG 8: Decent Work and Economic Growth – efficient supply chains enhance productivity.</p>
-<p>SDG 9: Industry, Innovation, and Infrastructure – modern industrial logistics.</p>
-<p>SDG 12: Responsible Consumption and Production – optimized logistics reduces waste and energy usage.</p>
-<p>SDG 13: Climate Action – cold-chain and optimized transport reduce emissions.</p>
-
-
-</p>
-        <div class="code-button" onclick="toggleCode('logisticsCode')">Show Code</div>
-        <div id="logisticsCode" class="code-section">
-#include <bits/stdc++.h>
+,
+  logistics:{
+    title:'Industrial Logistics & Supply Chain Manager',
+    desc:`<h3>Problem Statement</h3>
+    <p>Factory-to-warehouse movement is inefficient, especially for cold-chain goods.</p>
+    <h3>System Approach</h3>
+    <p>Warehouses are stored in AVL Trees, shipments prioritized with Heaps, and trucks dispatched using Dijkstra-based routing.</p>
+    <h3>Algorithms Used</h3>
+    <p>AVL Tree, Heap, Dijkstra, Bellman–Ford</p>`,
+    code:`#include <bits/stdc++.h>
 using namespace std;
 const int MAX_NODES = 60;      // graph nodes
 const int MAX_EDGES = 300;
@@ -5234,10 +4841,17 @@ int main() {
 
 
 }
-        </div>
-    </div>
+;
 
-</div>
-
+function openModal(key){
+  document.getElementById('modal').style.display='flex';
+  document.getElementById('title').innerText=data[key].title;
+  document.getElementById('desc').innerHTML=data[key].desc;
+  document.getElementById('code').innerText=data[key].code;
+  document.getElementById('code').style.display='none';
+}
+function closeModal(){document.getElementById('modal').style.display='none'}
+function toggleCode(){const c=document.getElementById('code');c.style.display=c.style.display==='none'?'block':'none'}
+</script>
 </body>
 </html>
