@@ -1,174 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Bellasagaram | Anoosha Hokrani</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Segoe UI, Arial;
-      background: linear-gradient(to bottom right, #e0f2fe, #bae6fd, #93c5fd); /* gradient background */
-      color: #0f172a;
-    }
+<style>
+  body {
+    margin: 0;
+    font-family: Segoe UI, Arial;
+    background: #e0f2fe; /* light blue background */
+    color: #0f172a;      /* dark navy text for contrast */
+  }
 
-    header {
-      padding: 30px;
-      background: #1e3a8a; /* deeper blue header */
-      color: #f0f9ff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
+  header {
+    padding: 30px;
+    background: #2563eb; /* strong blue header */
+    color: #f0f9ff;      /* very light text */
+  }
 
-    h1 {
-      margin: 0;
-      font-size: 36px;
-      color: #f0f9ff;
-    }
+  h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #f0f9ff; /* header title in light text */
+  }
 
-    h2 {
-      font-size: 26px;
-      margin-top: 15px;
-      font-weight: 600;
-      color: #f0f9ff;
-      text-align: left;
-    }
+  p {
+    line-height: 1.6;
+    color: #0f172a; /* readable dark text */
+  }
 
-    p {
-      line-height: 1.6;
-      font-size: 20px;
-      color: #f0f9ff;
-      margin-top: 10px;
-    }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 30px;
+  }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      padding: 30px;
-    }
+  .card {
+    background: #93c5fd; /* medium light blue card */
+    border-radius: 14px;
+    padding: 20px;
+    cursor: pointer;
+    transition: .3s;
+    color: #0f172a; /* dark text inside cards */
+  }
 
-    .card {
-      background: #93c5fd;
-      border-radius: 14px;
-      padding: 20px;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      color: #0f172a;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
+  .card:hover {
+    transform: scale(1.03);
+    background: #60a5fa; /* brighter blue on hover */
+  }
 
-    .card:hover {
-      transform: scale(1.05);
-      background: #60a5fa;
-      box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
-    }
+  .card span {
+    font-size: 22px;
+  }
 
-    .card span {
-      font-size: 22px;
-    }
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(37, 99, 235, 0.85); /* semi-transparent blue overlay */
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(37, 99, 235, 0.85);
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
+  .modal-content {
+    background: #f0f9ff; /* very light blue modal background */
+    width: 85%;
+    max-height: 85%;
+    overflow: auto;
+    border-radius: 16px;
+    padding: 30px;
+    color: #0f172a; /* dark text inside modal */
+  }
 
-    .modal-content {
-      background: #f0f9ff;
-      width: 85%;
-      max-height: 85%;
-      overflow: auto;
-      border-radius: 16px;
-      padding: 30px;
-      color: #0f172a;
-    }
+  .close {
+    float: right;
+    font-size: 22px;
+    cursor: pointer;
+    color: #2563eb; /* blue close button */
+  }
 
-    .close {
-      float: right;
-      font-size: 22px;
-      cursor: pointer;
-      color: #2563eb;
-    }
+  button {
+    background: #2563eb; /* blue button */
+    border: none;
+    color: #f0f9ff; /* light text */
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
 
-    button {
-      background: #2563eb;
-      border: none;
-      color: #f0f9ff;
-      padding: 10px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
+  button:hover {
+    background: #1e40af; /* darker blue hover */
+  }
 
-    button:hover {
-      background: #1e40af;
-    }
+  pre {
+    background: #e0f2fe; /* light blue code block */
+    padding: 15px;
+    border-radius: 10px;
+    overflow: auto;
+    display: none;
+    white-space: pre-wrap;
+    color: #0f172a;
+  }
 
-    pre {
-      background: #e0f2fe;
-      padding: 15px;
-      border-radius: 10px;
-      overflow: auto;
-      display: none;
-      white-space: pre-wrap;
-      color: #0f172a;
-    }
-
-    h3 {
-      margin-top: 25px;
-      color: #2563eb;
-    }
-
-    .instruction {
-      text-align: center;
-      font-size: 18px;
-      color: #2563eb;
-      font-weight: 500;
-      margin-top: 20px;
-    }
-  </style>
+  h3 {
+    margin-top: 25px;
+    color: #2563eb; /* blue section headings */
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Anoosha Hokrani</h1>
-    <h2>🌴 Bellasagaram – Sweet Coastal City 🌊</h2>
-    <p>Smart City Systems & Infrastructure – Project Bellasagaram</p>
-  </header>
-
-  <h2 style="color: #2563eb; text-align: center; margin-top: 40px;">
-    🔷 10 Visionary Business Ideas for a Smart City 🔷
-  </h2>
-
-  <div class="grid">
-    <div class="card" onclick="openModal('waste')">♻️ Smart Waste Collection</div>
-    <div class="card" onclick="openModal('parking')">🅿 Smart Parking System</div>
-    <div class="card" onclick="openModal('energy')">☀ Renewable Energy Grid</div>
-    <div class="card" onclick="openModal('cargo')">📦 Port Cargo Scheduling</div>
-    <div class="card" onclick="openModal('transport')">🚌 Public Transport Optimization</div>
-    <div class="card" onclick="openModal('water')">💧 Water Distribution System</div>
-    <div class="card" onclick="openModal('emergency')">🚨 Emergency Dispatch System</div>
-    <div class="card" onclick="openModal('housing')">🏠 Smart Housing Allocation</div>
-    <div class="card" onclick="openModal('market')">📊 Smart Market Analyzer</div>
-    <div class="card" onclick="openModal('logistics')">🚚 Industrial Logistics</div>
-  </div>
-
-  <p class="instruction">
-    👉 Click on each business idea to know more about it 👈
+<header>
+  <h1 style="margin:0; font-size:32px; color:white;">
+    Anoosha Hokrani
+  </h1>
+    <p style="color:white; font-size:20px; margin-top:15px;">
+    Smart City Systems & Infrastructure – Project Bellasagaram
   </p>
+</header><h2 style="color: #2563eb; font-size: 26px; text-align: center; margin-top: 40px;">
+  🔷 10 Visionary Business Ideas for a Smart city 🔷
+</h2>
 
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">✖</span>
-      <h2 id="title"></h2>
-      <div id="desc"></div>
-      <button onclick="toggleCode()">View Code</button>
-      <pre id="code"></pre>
-    </div>
+<div class="grid">
+  <div class="card" onclick="openModal('waste')">♻️ Smart Waste Collection</div>
+  <div class="card" onclick="openModal('parking')">🅿 Smart Parking System</div>
+  <div class="card" onclick="openModal('energy')">☀ Renewable Energy Grid</div>
+  <div class="card" onclick="openModal('cargo')">📦 Port Cargo Scheduling</div>
+  <div class="card" onclick="openModal('transport')">🚌 Public Transport Optimization</div>
+  <div class="card" onclick="openModal('water')">💧 Water Distribution System</div>
+  <div class="card" onclick="openModal('emergency')">🚨 Emergency Dispatch System</div>
+  <div class="card" onclick="openModal('housing')">🏠 Smart Housing Allocation</div>
+  <div class="card" onclick="openModal('market')">📊 Smart Market Analyzer</div>
+  <div class="card" onclick="openModal('logistics')">🚚 Industrial Logistics</div>
+</div>
+
+<p style="text-align:center; font-size:18px; color:black; margin-top:20px; font-weight:500;">
+  👉 Click on each business idea to know more about it 👈
+</p>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">✖</span>
+    <h2 id="title"></h2>
+    <div id="desc"></div>
+    <button onclick="toggleCode()">View Algorithm Code</button>
+    <pre id="code"></pre>
   </div>
+</div>
 
-  <script>
+<script>
 const data={
   waste: {
   title: 'Smart Waste Collection & Recycling Management',
