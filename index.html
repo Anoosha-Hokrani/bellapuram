@@ -1,4 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bellasagaram | Anoosha Hokrani</title>
+  <style>
+    body{margin:0;font-family:Segoe UI,Arial;background:#0b1220;color:#e5e7eb}
+    header{padding:30px;background:#0f172a}
+    h1{margin:0;font-size:32px}
+    p{line-height:1.6}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;padding:30px}
+    .card{background:#111827;border-radius:14px;padding:20px;cursor:pointer;transition:.3s}
+    .card:hover{transform:scale(1.03);background:#1e293b}
+    .card span{font-size:22px}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center}
+    .modal-content{background:#020617;width:85%;max-height:85%;overflow:auto;border-radius:16px;padding:30px}
+    .close{float:right;font-size:22px;cursor:pointer}
+    button{background:#2563eb;border:none;color:white;padding:10px 16px;border-radius:8px;cursor:pointer;margin-top:10px}
+    pre{background:#020617;padding:15px;border-radius:10px;overflow:auto;display:none;white-space:pre-wrap}
+    h3{margin-top:25px}
+  </style>
+</head>
+<body>
+<header>
+  <h1>Anoosha Hokrani</h1>
+  <p>Smart City Systems & Infrastructure – Project Bellasagaram</p>
+</header>
 
+<div class="grid">
+  <div class="card" onclick="openModal('waste')">♻️ Smart Waste Collection</div>
+  <div class="card" onclick="openModal('parking')">🅿 Smart Parking System</div>
+  <div class="card" onclick="openModal('energy')">☀ Renewable Energy Grid</div>
+  <div class="card" onclick="openModal('cargo')">📦 Port Cargo Scheduling</div>
+  <div class="card" onclick="openModal('transport')">🚌 Public Transport Optimization</div>
+  <div class="card" onclick="openModal('water')">💧 Water Distribution System</div>
+  <div class="card" onclick="openModal('emergency')">🚨 Emergency Dispatch System</div>
+  <div class="card" onclick="openModal('housing')">🏠 Smart Housing Allocation</div>
+  <div class="card" onclick="openModal('market')">📊 Smart Market Analyzer</div>
+  <div class="card" onclick="openModal('logistics')">🚚 Industrial Logistics</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">✖</span>
+    <h2 id="title"></h2>
+    <div id="desc"></div>
+    <button onclick="toggleCode()">View Algorithm Code</button>
+    <pre id="code"></pre>
+  </div>
+</div>
+
+<script>
 const data={
   waste: {
   title: 'Smart Waste Collection & Recycling Management',
