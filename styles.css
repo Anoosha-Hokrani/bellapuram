@@ -1,34 +1,206 @@
-/* Gradient background for the whole page */
-body {
-  background: linear-gradient(to bottom right, #e0f2fe, #93c5fd);
-  color: #0f172a;
-  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+:root {
+  --bg: #0b0f14;
+  --card: #121821;
+  --muted: #a6b3c4;
+  --text: #e9eef6;
+  --accent: #ffd166;
+  --accent2: #06d6a0;
+  --highlight: #2563eb;
+  --hover-glow: rgba(37, 99, 235, 0.4);
 }
 
-/* Card styling with hover glow */
+/* Reset + base */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  /* Background gradient – coastal theme */
+  background: linear-gradient(to bottom right, #e0f2fe, #bae6fd, #93c5fd);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Links */
+a {
+  color: var(--accent2);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Hero section */
+.hero {
+  background: radial-gradient(1000px 400px at 10% -10%, #1a2230 0%, rgba(26,34,48,0) 70%),
+              radial-gradient(800px 300px at 90% -20%, #0e2530 0%, rgba(14,37,48,0) 80%),
+              linear-gradient(180deg, #0c1118 0%, #0b0f14 100%);
+  padding: 64px 24px 32px;
+  border-bottom: 1px solid #1c2430;
+}
+
+.hero-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 40px;
+  margin: 0 0 8px;
+  color: #f0f9ff;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0 0 24px;
+  font-weight: 600;
+}
+
+/* Profile */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid #1f2a38;
+  object-fit: cover;
+}
+
+.name {
+  margin: 0;
+}
+
+.role {
+  margin: 2px 0 0;
+  color: var(--muted);
+}
+
+/* Quote block */
+.quote {
+  margin: 24px 0 0;
+  padding: 16px;
+  border-left: 4px solid var(--accent);
+  background: #101620;
+  color: #dfe7f2;
+}
+
+/* Container + sections */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.section {
+  margin: 24px 0;
+}
+
+.section h3 {
+  margin: 0 0 12px;
+  font-size: 22px;
+  color: var(--highlight);
+}
+
+.section-intro {
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+/* Grid layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cards */
 .card {
-  background: #93c5fd;
-  border-radius: 14px;
+  background: var(--card);
+  border: 1px solid #1f2a2f;
+  border-radius: 12px;
   padding: 20px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.02) inset, 0 12px 24px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  color: #0f172a;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  color: var(--text);
 }
 
 .card:hover {
   transform: scale(1.05);
-  background: #60a5fa;
-  box-shadow: 0 0 15px rgba(37, 99, 235, 0.4); /* blue glow */
+  background: #1a2230;
+  box-shadow: 0 0 15px var(--hover-glow);
 }
 
-/* Instruction line styling */
+.card h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: #f0f4fb;
+}
+
+/* Card details */
+.details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.details li {
+  color: #cdd6e3;
+  line-height: 1.45;
+}
+
+.details strong {
+  color: #eaeef6;
+}
+
+/* Stack text */
+.stack p {
+  margin: 8px 0;
+  color: #cfd8e5;
+}
+
+/* Instruction line */
 .instruction {
   text-align: center;
   font-size: 20px;
-  color: #2563eb;
+  color: var(--highlight);
   font-weight: 600;
   margin-top: 25px;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid #1c2430;
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
 }
