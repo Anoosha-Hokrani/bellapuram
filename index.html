@@ -187,18 +187,18 @@ function openModal(key){
   document.body.style.overflow = "hidden";
 }
 
-function closeModal(){
-  document.getElementById("modal").style.display = "none";
-  document.getElementById("codeBox").style.display = "none";
-  document.body.style.overflow = "auto";
-}
 
-function toggleCode(){
-  const box = document.getElementById("codeBox");
-  box.style.display = box.style.display === "block" ? "none" : "block";
-}
-</script>
 
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">✖</span>
+    <h2 id="title"></h2>
+    <div id="desc"></div>
+    <button onclick="toggleCode()">View Code</button>
+    <pre id="code"></pre>
+  </div>
+</div>
+<script>
 const data={
   waste: {
   title: 'Smart Waste Collection & Recycling Management',
