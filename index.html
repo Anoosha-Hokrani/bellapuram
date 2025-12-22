@@ -2,190 +2,177 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Smart City – Bellasagaram</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart City Systems — Bellasagaram</title>
 
 <style>
-:root{
-  --bg:#020617;
-  --card:#0f172a;
-  --accent:#38bdf8;
-  --text:#e5f4ff;
-  --muted:#94a3b8;
-}
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #0a1a2f;
+    color: #e0e5eb;
+    overflow-x: hidden;
+  }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+  header {
+    padding: 40px;
+    background: linear-gradient(135deg,#1e3a8a,#2563eb);
+    text-align: center;
+    color: white;
+  }
+  header h1 { margin: 0; font-size: 2.4rem; letter-spacing: 1px;}
+  header p { margin-top: 8px; font-size: 1.1rem; opacity: .9; }
 
-body{
-  font-family:"Segoe UI",Arial,sans-serif;
-  background:radial-gradient(circle at top,#0f172a,#020617 75%);
-  color:var(--text);
-  overflow-x:hidden;
-}
+  .intro {
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 40px auto 20px;
+    color: #81a1c1;
+  }
 
-/* header */
-header{
-  text-align:center;
-  padding:70px 20px 50px;
-}
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 24px;
+    padding: 20px 40px;
+    margin-bottom: 40px;
+  }
 
-header h1{
-  font-size:42px;
-}
+  .card {
+    background: linear-gradient(145deg,#112240,#1b315a);
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    transition: .25s ease;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.4);
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 22px rgba(0,0,0,0.6);
+  }
+  .card span { font-size: 1.2rem; display: block; margin-bottom: 8px;}
 
-header p{
-  margin-top:12px;
-  font-size:20px;
-  color:var(--muted);
-}
+  /* Modal */
+  .modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,25,47,0.85);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    z-index: 999;
+  }
+  .modal-bg.active { display: flex; }
 
-.tagline{
-  margin-top:10px;
-  font-size:16px;
-  color:#7dd3fc;
-}
+  .modal {
+    background: #112240;
+    padding: 28px;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    transform: translateY(-30px);
+    animation: dropIn .4s ease forwards;
+    color: #e0e5eb;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  @keyframes dropIn {
+    from { opacity: 0; transform: translateY(-60px); }
+    to { opacity: 1; transform: translateY(0);}
+  }
 
-/* title */
-.section-title{
-  text-align:center;
-  font-size:32px;
-  color:var(--accent);
-  margin:40px 0 20px;
-}
+  .close-btn {
+    float: right;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: #f87171;
+  }
+  .modal h2 {
+    margin-top: 8px;
+    font-size: 1.8rem;
+    color: #61dafb;
+  }
+  .modal p { margin-top: 14px; font-size: 1rem; line-height: 1.6;}
 
-/* grid */
-.grid{
-  max-width:1200px;
-  margin:auto;
-  padding:30px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;
-}
-
-/* card */
-.card{
-  background:rgba(255,255,255,0.06);
-  backdrop-filter:blur(10px);
-  border-radius:20px;
-  padding:30px;
-  transition:0.4s;
-  border:1px solid rgba(255,255,255,0.08);
-}
-
-.card:hover{
-  transform:translateY(-10px);
-  border-color:rgba(56,189,248,0.6);
-  box-shadow:0 0 30px rgba(56,189,248,0.35);
-}
-
-.card span{
-  font-size:36px;
-  display:block;
-  margin-bottom:15px;
-}
-
-.card h3{
-  margin-bottom:10px;
-}
-
-.card p{
-  font-size:15px;
-  line-height:1.6;
-  color:var(--muted);
-}
-
-/* footer */
-footer{
-  text-align:center;
-  padding:40px 20px;
-  font-size:14px;
-  color:#64748b;
-}
+  .back {
+    display: inline-block;
+    margin-top: 18px;
+    font-size: .95rem;
+    color: #60a5fa;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 </style>
-</head>
 
+</head>
 <body>
 
 <header>
   <h1>Anoosha Hokrani</h1>
-  <p>Smart City Systems & Infrastructure – Bellasagaram</p>
-  <div class="tagline">Sustainable • Intelligent • Connected Urban Future</div>
+  <p>Smart City Systems & Infrastructure – Project Bellasagaram</p>
 </header>
 
-<h2 class="section-title">🌐 Visionary Smart City Business Ideas</h2>
+<p class="intro">🔷 Click any business idea to see its details 🔷</p>
 
 <div class="grid">
-
-  <div class="card">
-    <span>♻️</span>
-    <h3>Smart Waste Collection & Recycling Management</h3>
-    <p>IoT-enabled bins, waste classification, route optimization, and recycling efficiency.</p>
+  <div class="card" onclick="openModal('Smart Waste Collection & Recycling Management','Solution for efficient waste prioritization, routing & recycling optimization.')">
+    <span>♻️ Smart Waste Collection & Recycling Management</span>
   </div>
-
-  <div class="card">
-    <span>🅿️</span>
-    <h3>Smart Parking System (Commercial & Entertainment Zone)</h3>
-    <p>Real-time parking availability, automated billing, and congestion reduction.</p>
+  <div class="card" onclick="openModal('Smart Parking System','Commercial & entertainment parking with sensor guidance & optimal slot allocation.')">
+    <span>🅿️ Smart Parking System for Commercial & Entertainment Zone</span>
   </div>
-
-  <div class="card">
-    <span>☀️</span>
-    <h3>Renewable Energy Grid Management (Solar + Wind)</h3>
-    <p>Smart monitoring, load balancing, and efficient renewable energy utilization.</p>
+  <div class="card" onclick="openModal('Renewable Energy Grid Management','Manage solar + wind energy inputs with real-time balancing.')">
+    <span>☀️ Renewable Energy Grid Management (Solar + Wind)</span>
   </div>
-
-  <div class="card">
-    <span>📦</span>
-    <h3>Port Cargo Scheduling & Container Allocation</h3>
-    <p>Optimized container handling, reduced port delays, and efficient cargo flow.</p>
+  <div class="card" onclick="openModal('Port Cargo Scheduling','Container scheduling with priority & optimized unloading.')">
+    <span>⚓ Port Cargo Scheduling & Container Allocation</span>
   </div>
-
-  <div class="card">
-    <span>🚌</span>
-    <h3>Public Transport Fleet Optimization</h3>
-    <p>Data-driven scheduling, fuel optimization, and reduced passenger waiting time.</p>
+  <div class="card" onclick="openModal('Public Transport Fleet Optimization','AI-guided transit scheduling & fleet routing.')">
+    <span>🚍 Public Transport Fleet Optimization</span>
   </div>
-
-  <div class="card">
-    <span>💧</span>
-    <h3>Water Distribution System</h3>
-    <p>Leak detection, smart metering, demand-based water distribution.</p>
+  <div class="card" onclick="openModal('Water Distribution System','Smart distribution & leak detection with sensor networks.')">
+    <span>💧 Water Distribution System</span>
   </div>
-
-  <div class="card">
-    <span>🚨</span>
-    <h3>Emergency Response Dispatch System</h3>
-    <p>Faster routing and coordination for ambulance, police, and fire services.</p>
+  <div class="card" onclick="openModal('Emergency Response Dispatch','AI-assisted emergency dispatch & routing.')">
+    <span>🚨 Emergency Response Dispatch System</span>
   </div>
-
-  <div class="card">
-    <span>🏠</span>
-    <h3>Smart Housing Allocation System (Residential Zone)</h3>
-    <p>Automated housing allocation based on eligibility and availability.</p>
+  <div class="card" onclick="openModal('Smart Housing Allocation','Automated residential zone allocation.')">
+    <span>🏠 Smart Housing Allocation System</span>
   </div>
-
-  <div class="card">
-    <span>📊</span>
-    <h3>Smart Market & Commercial Zone Price Analyzer</h3>
-    <p>Real-time price analysis, demand forecasting, and fraud prevention.</p>
+  <div class="card" onclick="openModal('Smart Market Analyzer','Real-time commercial pricing & trend analyzer.')">
+    <span>📊 Smart Market & Commercial Zone Price Analyzer</span>
   </div>
-
-  <div class="card">
-    <span>🚚</span>
-    <h3>Industrial Logistics & Supply Chain Manager</h3>
-    <p>Smart coordination of raw materials, warehouses, and delivery systems.</p>
+  <div class="card" onclick="openModal('Industrial Logistics & Supply Chain','Optimized industrial supply chain management.')">
+    <span>🚚 Industrial Logistics & Supply Chain Manager</span>
   </div>
-
 </div>
 
-<footer>
-© Smart City Project – Bellasagaram
-</footer>
+<!-- Modal -->
+<div id="modalBg" class="modal-bg">
+  <div class="modal">
+    <span class="close-btn" onclick="closeModal()">✖</span>
+    <h2 id="modalTitle"></h2>
+    <p id="modalDesc"></p>
+    <div class="back" onclick="closeModal()">⬅ Back</div>
+  </div>
+</div>
+
+<script>
+  function openModal(title,desc) {
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("modalDesc").innerText = desc;
+    document.getElementById("modalBg").classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+  function closeModal() {
+    document.getElementById("modalBg").classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
+</script>
 
 
 
