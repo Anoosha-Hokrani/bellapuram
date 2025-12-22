@@ -205,77 +205,33 @@ pre {
 
 <h2 class="section-title">🌐 Visionary Smart City Business Ideas</h2>
 
+
 <div class="grid">
-  <div class="card" onclick="openModal('Smart Waste Collection')">
-    <span>♻️</span>
-    <h3>Smart Waste Collection</h3>
-    <p>IoT bins, optimized routes, cleaner environment.</p>
-  </div>
-
-  <div class="card" onclick="openModal('Smart Parking System')">
-    <span>🅿️</span>
-    <h3>Smart Parking</h3>
-    <p>Live availability & digital payments.</p>
-  </div>
-
-  <div class="card" onclick="openModal('Renewable Energy Grid')">
-    <span>☀️</span>
-    <h3>Renewable Energy</h3>
-    <p>Solar & wind powered smart grids.</p>
-  </div>
-
-  <div class="card" onclick="openModal('Public Transport Optimization')">
-    <span>🚌</span>
-    <h3>Public Transport</h3>
-    <p>Reduced congestion using data analytics.</p>
-  </div>
-
-  <div class="card" onclick="openModal('Water Distribution System')">
-    <span>💧</span>
-    <h3>Water Management</h3>
-    <p>Leak detection & smart metering.</p>
-  </div>
-
-  <div class="card" onclick="openModal('Emergency Dispatch System')">
-    <span>🚨</span>
-    <h3>Emergency Dispatch</h3>
-    <p>AI-assisted emergency response.</p>
-  </div>
+  <div class="card" onclick="openModal('waste')">♻️ Smart Waste Collection</div>
+  <div class="card" onclick="openModal('parking')">🅿 Smart Parking System</div>
+  <div class="card" onclick="openModal('energy')">☀ Renewable Energy Grid</div>
+  <div class="card" onclick="openModal('cargo')">📦 Port Cargo Scheduling</div>
+  <div class="card" onclick="openModal('transport')">🚌 Public Transport Optimization</div>
+  <div class="card" onclick="openModal('water')">💧 Water Distribution System</div>
+  <div class="card" onclick="openModal('emergency')">🚨 Emergency Dispatch System</div>
+  <div class="card" onclick="openModal('housing')">🏠 Smart Housing Allocation</div>
+  <div class="card" onclick="openModal('market')">📊 Smart Market Analyzer</div>
+  <div class="card" onclick="openModal('logistics')">🚚 Industrial Logistics</div>
 </div>
 
-<!-- MODAL -->
+<p style="text-align:center; font-size:18px; color:black; margin-top:20px; font-weight:500;">
+  👉 Click on each business idea to know more about it 👈
+</p>
+
 <div class="modal" id="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">✖</span>
     <h2 id="title"></h2>
-    <p id="desc"></p>
-    <button onclick="toggleCode()">View Sample Code</button>
-    <pre id="code">
-function smartCity() {
-  return "Efficient • Sustainable • Intelligent";
-}
-    </pre>
+    <div id="desc"></div>
+    <button onclick="toggleCode()">View Code</button>
+    <pre id="code"></pre>
   </div>
 </div>
-
-<script>
-function openModal(title) {
-  document.getElementById("title").innerText = title;
-  document.getElementById("desc").innerText =
-    "This smart city solution improves efficiency, sustainability, and quality of life using modern technologies.";
-  document.getElementById("modal").style.display = "flex";
-}
-
-function closeModal() {
-  document.getElementById("modal").style.display = "none";
-}
-
-function toggleCode() {
-  const code = document.getElementById("code");
-  code.style.display = code.style.display === "block" ? "none" : "block";
-}
-</script>
-
 
 <script>
 const data={
