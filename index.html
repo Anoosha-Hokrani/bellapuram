@@ -136,6 +136,8 @@ header p {
   padding: 35px;
   width: 90%;
   max-width: 720px;
+  max-height: 85vh;        /* ✅ limits height */
+  overflow-y: auto;       /* ✅ enables scroll */
   box-shadow: 0 0 50px var(--accent-soft);
   animation: zoomIn .5s ease;
 }
