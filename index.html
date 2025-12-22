@@ -150,44 +150,9 @@ button{
   <div class="card" onclick="openModal('logistics')"><span>🚚</span><h3>Industrial Logistics</h3><p>Supply chain</p></div>
 </div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">✖</span>
-    <h2 id="modalTitle"></h2>
-
-    <h3 class="section">Problem Statement</h3>
-    <p id="problem"></p>
-
-    <h3 class="section">System Approach</h3>
-    <p id="approach"></p>
-
-    <h3 class="section">Algorithms Used</h3>
-    <p id="algorithms"></p>
-
-    <button onclick="toggleCode()">View / Hide Code</button>
-
-    <div id="codeBox">
-      <pre id="code"></pre>
-    </div>
-  </div>
-</div>
-
-<script>
-/* INTERFACE LOGIC — WORKS WITH YOUR EXISTING const data */
-
-function openModal(key){
-  const d = data[key];
-  document.getElementById("modalTitle").innerText = d.title;
-  document.getElementById("problem").innerText = d.problem;
-  document.getElementById("approach").innerText = d.approach;
-  document.getElementById("algorithms").innerText = d.algorithms;
-  document.getElementById("code").innerText = d.code;
-  document.getElementById("modal").style.display = "flex";
-  document.body.style.overflow = "hidden";
-}
-
-
+<p style="text-align:center; font-size:18px; color:black; margin-top:20px; font-weight:500;">
+  👉 Click on each business idea to know more about it 👈
+</p>
 
 <div class="modal" id="modal">
   <div class="modal-content">
@@ -198,6 +163,7 @@ function openModal(key){
     <pre id="code"></pre>
   </div>
 </div>
+
 <script>
 const data={
   waste: {
