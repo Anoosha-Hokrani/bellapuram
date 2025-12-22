@@ -6,240 +6,165 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* ===================== ROOT ===================== */
-:root {
-  --bg-gradient: radial-gradient(circle at top, #0f172a, #020617 75%);
+:root{
+  --bg: radial-gradient(circle at top,#0f172a,#020617 75%);
   --glass: rgba(255,255,255,0.08);
-  --accent: #38bdf8;
-  --accent-soft: rgba(56,189,248,0.35);
-  --text-main: #e5f4ff;
-  --text-muted: #94a3b8;
+  --accent:#38bdf8;
+  --accent-soft:rgba(56,189,248,.35);
+  --text:#e5f4ff;
+  --muted:#94a3b8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:"Segoe UI",system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
 }
 
-/* ===================== GLOBAL ===================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Segoe UI", system-ui, sans-serif;
-  background: var(--bg-gradient);
-  color: var(--text-main);
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-/* ===== MOVING BACKGROUND GLOW ===== */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
+/* glow background */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
   background:
-    radial-gradient(circle at 20% 30%, rgba(56,189,248,0.12), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(14,165,233,0.12), transparent 45%);
-  animation: bgMove 20s infinite alternate ease-in-out;
-  z-index: -1;
+    radial-gradient(circle at 20% 30%,rgba(56,189,248,.12),transparent 40%),
+    radial-gradient(circle at 80% 70%,rgba(14,165,233,.12),transparent 45%);
+  animation:bgMove 20s infinite alternate ease-in-out;
+  z-index:-1;
+}
+@keyframes bgMove{to{transform:translateY(-40px)}}
+
+/* header */
+header{
+  text-align:center;
+  padding:80px 20px 60px;
+  animation:fadeDown 1s ease;
+}
+header h1{font-size:42px}
+header p{margin-top:10px;color:var(--muted);font-size:20px}
+.tagline{color:#7dd3fc;font-size:16px;margin-top:10px}
+
+/* title */
+.section-title{
+  text-align:center;
+  color:var(--accent);
+  font-size:32px;
+  margin:30px 0 10px;
 }
 
-@keyframes bgMove {
-  from { transform: translateY(0); }
-  to { transform: translateY(-40px); }
+/* grid */
+.grid{
+  max-width:1200px;
+  margin:auto;
+  padding:40px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
 }
 
-/* ===================== HEADER ===================== */
-header {
-  padding: 80px 20px 60px;
-  text-align: center;
-  animation: fadeDown 1.2s ease;
+/* card */
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(12px);
+  border-radius:22px;
+  padding:30px;
+  border:1px solid rgba(255,255,255,.06);
+  cursor:pointer;
+  transition:.4s;
+  opacity:0;
+}
+.card:hover{
+  transform:translateY(-12px) scale(1.04);
+  border-color:rgba(56,189,248,.6);
+  box-shadow:0 0 35px var(--accent-soft);
+}
+.card span{
+  font-size:34px;
+  display:block;
+  margin-bottom:15px;
+  animation:floatIcon 3s ease-in-out infinite;
+}
+@keyframes floatIcon{50%{transform:translateY(-6px)}}
+.card p{color:var(--muted);font-size:15px}
+
+/* modal */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,23,.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
+}
+.modal-content{
+  background:rgba(15,23,42,.95);
+  padding:35px;
+  width:90%;
+  max-width:750px;
+  max-height:85vh;
+  overflow-y:auto;
+  border-radius:22px;
+  animation:zoomIn .4s ease;
+}
+.close{
+  float:right;
+  cursor:pointer;
+  font-size:20px;
+  background:rgba(56,189,248,.15);
+  padding:6px 10px;
+  border-radius:50%;
+  color:var(--accent);
+}
+.close:hover{transform:rotate(90deg)}
+
+/* button */
+button{
+  margin-top:15px;
+  padding:12px 22px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+  cursor:pointer;
 }
 
-header h1 {
-  font-size: 42px;
+/* code box */
+#codeBox{display:none;position:relative}
+#codeBox span{
+  position:absolute;
+  top:10px;
+  right:12px;
+  cursor:pointer;
+  color:var(--accent);
+}
+pre{
+  background:#020617;
+  color:#a5f3fc;
+  padding:20px;
+  border-radius:14px;
+  margin-top:15px;
+  white-space:pre-wrap;
 }
 
-header p {
-  font-size: 20px;
-  color: var(--text-muted);
-  margin-top: 10px;
+/* back to top */
+#topBtn{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+  display:none;
+  cursor:pointer;
 }
+#topBtn.show{display:block}
 
-header .tagline {
-  margin-top: 12px;
-  font-size: 16px;
-  color: #7dd3fc;
-}
-
-/* ===================== TITLE ===================== */
-.section-title {
-  text-align: center;
-  font-size: 32px;
-  margin: 40px 0 10px;
-  color: var(--accent);
-}
-
-/* ===================== GRID ===================== */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 30px;
-  padding: 40px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-/* ===================== CARD ===================== */
-.card {
-  background: var(--glass);
-  border-radius: 22px;
-  padding: 30px;
-  backdrop-filter: blur(12px);
-  cursor: pointer;
-  border: 1px solid rgba(255,255,255,0.06);
-  transition: all 0.4s ease;
-  opacity: 0;
-}
-
-.card:hover {
-  transform: translateY(-12px) scale(1.04);
-  border-color: rgba(56,189,248,0.6);
-  box-shadow: 0 0 35px var(--accent-soft);
-}
-
-.card span {
-  font-size: 34px;
-  display: block;
-  margin-bottom: 18px;
-  animation: floatIcon 3s ease-in-out infinite;
-}
-
-.card h3 {
-  margin-bottom: 10px;
-}
-
-.card p {
-  color: var(--text-muted);
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-@keyframes floatIcon {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-/* ===================== MODAL ===================== */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(2,6,23,0.9);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-}
-
-.modal-content {
-  background: rgba(15,23,42,0.95);
-  border-radius: 22px;
-  padding: 35px;
-  width: 90%;
-  max-width: 720px;
-  max-height: 85vh;
-  overflow-y: auto;
-  box-shadow: 0 0 50px var(--accent-soft);
-  animation: zoomIn .5s ease;
-}
-
-.close {
-  float: right;
-  font-size: 20px;
-  cursor: pointer;
-  color: var(--accent);
-  background: rgba(56,189,248,0.15);
-  padding: 6px 10px;
-  border-radius: 50%;
-  transition: 0.3s;
-}
-
-.close:hover {
-  background: rgba(56,189,248,0.35);
-  transform: rotate(90deg);
-}
-
-/* ===================== BUTTON ===================== */
-button {
-  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-  border: none;
-  color: #020617;
-  padding: 12px 22px;
-  border-radius: 14px;
-  font-size: 15px;
-  cursor: pointer;
-  margin-top: 15px;
-}
-
-/* ===================== CODE BOX ===================== */
-#codeBox {
-  display: none;
-  position: relative;
-}
-
-#codeBox span {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  cursor: pointer;
-  font-size: 20px;
-  color: var(--accent);
-}
-
-pre {
-  background: #020617;
-  color: #a5f3fc;
-  padding: 20px;
-  border-radius: 14px;
-  margin-top: 15px;
-  white-space: pre-wrap;
-}
-
-/* ===================== BACK TO TOP ===================== */
-#topBtn {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  background: linear-gradient(135deg,#38bdf8,#0ea5e9);
-  border: none;
-  color: #020617;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  font-size: 20px;
-  cursor: pointer;
-  display: none;
-  box-shadow: 0 0 25px rgba(56,189,248,0.5);
-}
-
-#topBtn.show {
-  display: block;
-}
-
-/* ===================== ANIMATIONS ===================== */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes zoomIn {
-  from { transform: scale(0.7); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
+/* animations */
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1}}
+@keyframes zoomIn{from{transform:scale(.7);opacity:0}to{opacity:1}}
 </style>
 </head>
 
@@ -248,37 +173,36 @@ pre {
 <header>
   <h1>Anoosha Hokrani</h1>
   <p>Smart City Systems & Infrastructure – Bellasagaram</p>
-  <p class="tagline">Designing a sustainable, intelligent & connected urban future</p>
+  <div class="tagline">Sustainable • Intelligent • Connected Urban Future</div>
 </header>
 
 <h2 class="section-title">🌐 Visionary Smart City Business Ideas</h2>
 
 <div class="grid">
-  <div class="card" onclick="openModal('Smart Waste Collection & Recycling Management')"><span>♻️</span><h3>Smart Waste Collection</h3><p>IoT-enabled bins and optimized waste routes.</p></div>
-  <div class="card" onclick="openModal('Smart Parking System for Commercial & Entertainment Zone')"><span>🅿️</span><h3>Smart Parking</h3><p>Live availability and automated billing.</p></div>
-  <div class="card" onclick="openModal('Renewable Energy Grid Management (Solar + Wind)')"><span>☀️</span><h3>Renewable Energy Grid</h3><p>Smart integration of solar and wind power.</p></div>
-  <div class="card" onclick="openModal('Port Cargo Scheduling & Container Allocation')"><span>📦</span><h3>Port Cargo Scheduling</h3><p>Efficient container allocation at ports.</p></div>
-  <div class="card" onclick="openModal('Public Transport Fleet Optimization')"><span>🚌</span><h3>Public Transport Optimization</h3><p>Data-driven transport scheduling.</p></div>
-  <div class="card" onclick="openModal('Water Distribution System')"><span>💧</span><h3>Water Distribution</h3><p>Leak detection and smart metering.</p></div>
-  <div class="card" onclick="openModal('Emergency Response Dispatch System')"><span>🚨</span><h3>Emergency Dispatch</h3><p>AI-assisted emergency response.</p></div>
-  <div class="card" onclick="openModal('Smart Housing Allocation System (Residential Zone)')"><span>🏠</span><h3>Smart Housing Allocation</h3><p>Automated residential allocation.</p></div>
-  <div class="card" onclick="openModal('Smart Market & Commercial Zone Price Analyzer')"><span>📊</span><h3>Market Price Analyzer</h3><p>Real-time price analytics.</p></div>
-  <div class="card" onclick="openModal('Industrial Logistics & Supply Chain Manager')"><span>🚚</span><h3>Industrial Logistics</h3><p>Smart supply chain management.</p></div>
+  <div class="card" onclick="openModal('Smart Waste Collection & Recycling Management')"><span>♻️</span><h3>Smart Waste Collection</h3><p>IoT bins & optimized routes</p></div>
+  <div class="card" onclick="openModal('Smart Parking System for Commercial & Entertainment Zone')"><span>🅿️</span><h3>Smart Parking</h3><p>Live slots & billing</p></div>
+  <div class="card" onclick="openModal('Renewable Energy Grid Management (Solar + Wind)')"><span>☀️</span><h3>Renewable Energy</h3><p>Solar + wind integration</p></div>
+  <div class="card" onclick="openModal('Port Cargo Scheduling & Container Allocation')"><span>📦</span><h3>Port Cargo</h3><p>Smart container scheduling</p></div>
+  <div class="card" onclick="openModal('Public Transport Fleet Optimization')"><span>🚌</span><h3>Public Transport</h3><p>Fleet optimization</p></div>
+  <div class="card" onclick="openModal('Water Distribution System')"><span>💧</span><h3>Water Management</h3><p>Leak detection & metering</p></div>
+  <div class="card" onclick="openModal('Emergency Response Dispatch System')"><span>🚨</span><h3>Emergency Dispatch</h3><p>AI assisted response</p></div>
+  <div class="card" onclick="openModal('Smart Housing Allocation System (Residential Zone)')"><span>🏠</span><h3>Housing Allocation</h3><p>Automated residential allocation</p></div>
+  <div class="card" onclick="openModal('Smart Market & Commercial Zone Price Analyzer')"><span>📊</span><h3>Market Analyzer</h3><p>Price analytics</p></div>
+  <div class="card" onclick="openModal('Industrial Logistics & Supply Chain Manager')"><span>🚚</span><h3>Industrial Logistics</h3><p>Supply chain management</p></div>
 </div>
 
 <!-- MODAL -->
 <div class="modal" id="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">✖</span>
-    <h2 id="title"></h2>
-    <p id="desc"></p>
-
+    <h2 id="modalTitle"></h2>
+    <p>This system improves efficiency, sustainability and operational intelligence.</p>
     <button onclick="toggleCode()">View / Hide Code</button>
 
     <div id="codeBox">
       <span onclick="toggleCode()">✖</span>
       <pre>
-function smartCity() {
+function smartCity(){
   return "Efficient • Sustainable • Intelligent";
 }
       </pre>
@@ -286,48 +210,42 @@ function smartCity() {
   </div>
 </div>
 
-<button id="topBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆</button>
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆</button>
 
 <script>
-/* MODAL */
-function openModal(title) {
-  document.getElementById("title").innerText = title;
-  document.getElementById("desc").innerText =
-    "This smart city solution improves efficiency, sustainability, and quality of life.";
-  document.getElementById("modal").style.display = "flex";
+/* modal */
+function openModal(title){
+  document.getElementById("modalTitle").innerText = title;
+  document.getElementById("modal").style.display="flex";
+}
+function closeModal(){
+  document.getElementById("modal").style.display="none";
 }
 
-function closeModal() {
-  document.getElementById("modal").style.display = "none";
+/* code toggle */
+function toggleCode(){
+  const box=document.getElementById("codeBox");
+  box.style.display=box.style.display==="block"?"none":"block";
 }
 
-/* CODE TOGGLE */
-function toggleCode() {
-  const box = document.getElementById("codeBox");
-  box.style.display = box.style.display === "block" ? "none" : "block";
-}
-
-/* BACK TO TOP */
-window.addEventListener("scroll", () => {
+/* back to top */
+window.addEventListener("scroll",()=>{
   document.getElementById("topBtn")
-    .classList.toggle("show", window.scrollY > 300);
+    .classList.toggle("show",window.scrollY>300);
 });
 
-/* SCROLL REVEAL */
-const cards = document.querySelectorAll('.card');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.animation = "fadeUp 0.9s ease forwards";
+/* scroll reveal */
+const cards=document.querySelectorAll(".card");
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.style.animation="fadeUp .8s ease forwards";
     }
   });
-},{ threshold: 0.15 });
+},{threshold:.15});
+cards.forEach(c=>observer.observe(c));
+</script>
 
-cards.forEach(card => observer.observe(card));
- </div>
-</div>
-
-<script>
 
 
 const data={
