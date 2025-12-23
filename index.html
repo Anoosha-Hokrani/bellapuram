@@ -26,6 +26,47 @@
   justify-content: center;
   text-align: center;
   overflow: hidden;
+/* ===== BELLASAGARAM TITLE CARD ===== */
+.title-card-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 60px 0 20px;
+}
+
+.title-card {
+  width: 90%;
+  max-width: 1000px;
+  height: 380px;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.55)),
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+  background-size: cover;
+  background-position: center;
+  border-radius: 28px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.title-card h1 {
+  font-size: 72px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-shadow: 0 8px 30px rgba(0,0,0,0.6);
+}
+
+.title-card p {
+  position: absolute;
+  bottom: 28px;
+  font-size: 18px;
+  color: #e0f2fe;
+  opacity: 0.95;
+}
+
 }
 
 /* floating sea creatures */
@@ -200,6 +241,14 @@ button{
 
   <div class="grid">
     <!-- KEEP your existing 10 card divs exactly here -->
+
+<div class="title-card-wrapper">
+  <div class="title-card">
+    <h1>Bellasagaram</h1>
+    <p>Smart City Systems & Infrastructure Project</p>
+  </div>
+</div>
+
   </div>
 
 </div>
@@ -227,8 +276,12 @@ button{
     <span class="close" onclick="closeModal()">✖</span>
     <h2 id="title"></h2>
     <div id="desc"></div>
-    <button onclick="toggleCode()">View Code</button>
-    <pre id="code"></pre>
+    <div style="display:flex; gap:12px; margin-top:15px;">
+  <button onclick="toggleCode()">View Code</button>
+  <button onclick="viewFlowchart()">View Flowchart</button>
+</div>
+
+<pre id="code"></pre>
   </div>
 </div>
 
@@ -5230,6 +5283,55 @@ function openModal(key){
 }
 function closeModal(){document.getElementById('modal').style.display='none'}
 function toggleCode(){const c=document.getElementById('code');c.style.display=c.style.display==='none'?'block':'none'}
+
+
+let currentModule = "";
+
+/* MAP MODULE → FLOWCHART IMAGE */
+const flowcharts = {
+  waste: "flowchart/flowchart1.png",
+  parking: "flowchart/flowchart2.png",
+  energy: "flowchart/flowchart3.png",
+  cargo: "flowchart/flowchart4.png",
+  transport: "flowchart/flowchart5.png",
+  water: "flowchart/flowchart6.png",
+  emergency: "flowchart/flowchart7.png",
+  housing: "flowchart/flowchart8.png",
+  market: "flowchart/flowchart9.png",
+  logistics: "flowchart/flowchart10.png"
+};
+
+/* OPEN MODAL */
+function openModal(type){
+  currentModule = type;
+  document.getElementById("modal").style.display = "flex";
+  document.getElementById("title").innerText = type.toUpperCase();
+  document.getElementById("desc").innerHTML = "Detailed description here...";
+  document.getElementById("code").style.display = "none";
+}
+
+/* CLOSE MODAL */
+function closeModal(){
+  document.getElementById("modal").style.display = "none";
+}
+
+/* TOGGLE CODE */
+function toggleCode(){
+  const codeBox = document.getElementById("code");
+  codeBox.style.display = codeBox.style.display === "block" ? "none" : "block";
+}
+
+/* VIEW FLOWCHART */
+function viewFlowchart(){
+  const img = flowcharts[currentModule];
+  if(img){
+    window.open(img, "_blank");
+  } else {
+    alert("Flowchart not available");
+  }
+}
 </script>
+
+
 </body>
 </html>
