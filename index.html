@@ -31,27 +31,27 @@
 /* floating sea creatures */
 .sea{
   position:absolute;
+  z-index:3;           /* ABOVE background */
   opacity:1;
-  z-index:2;
-  animation:swim 35s linear infinite;
+  animation: swim 40s linear infinite;
+  pointer-events:none;
 }
 
 .fish{
-  width:120px;
+  width:110px;
   top:65%;
-  left:10px;   /* 👈 START INSIDE SCREEN */
+  left:40px;           /* START INSIDE VIEW */
 }
 
 .dolphin{
   width:220px;
-  top:20%;
-  left:20px;   /* 👈 START INSIDE SCREEN */
-  animation-delay:6s;
+  top:22%;
+  left:80px;           /* START INSIDE VIEW */
+  animation-delay:5s;
 }
-
-.hero { z-index:1; }
-.sea { z-index:2; }
-.hero-content { z-index:3; }
+.hero { z-index: 1; }
+.hero::before { z-index: 1; }
+.hero-content { z-index: 4; }
 
 @keyframes swim {
   from { transform: translateX(0); }
