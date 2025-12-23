@@ -276,12 +276,11 @@ button{
     <span class="close" onclick="closeModal()">✖</span>
     <h2 id="title"></h2>
     <div id="desc"></div>
-    <div style="display:flex; gap:12px; margin-top:15px;">
-  <button onclick="toggleCode()">View Code</button>
-  <button onclick="viewFlowchart()">View Flowchart</button>
-</div>
+    <button onclick="toggleCode()">View Code</button>
+    <button onclick="toggleFlowchart()">View Flowchart</button>
+<img id="flowchartImg" src="" alt="Flowchart" style="display:none; max-width:100%; margin-top:15px; border-radius:12px;">
 
-<pre id="code"></pre>
+    <pre id="code"></pre>
   </div>
 </div>
 
@@ -1235,6 +1234,8 @@ void loadFactoriesCSV(const char* fname) {
 **    f.close();**
 }
 `
+flowchart: "images/flowchart1.png"
+
   },
   parking: {
   title: 'Smart Parking System for Commercial & Entertainment Zones',
@@ -1508,7 +1509,8 @@ int main(){
 
 }
 
-`
+`flowchart: "images/flowchart2.png"
+
   },
   energy: {
   title: 'Renewable Energy Grid Management (Solar + Wind)',
@@ -1859,6 +1861,8 @@ int main() {
 **    return 0;**
 }
 `
+flowchart: "images/flowchart3.png"
+
   },
   cargo: {
   title: 'Port Cargo Scheduling & Container Allocation',
@@ -2388,6 +2392,8 @@ int main() {
 **    return 0;**
 }
 `
+flowchart: "images/flowchart4.png"
+
   },
   transport: {
   title: 'Public Transport Fleet Optimization',
@@ -2552,6 +2558,8 @@ int main() {
 **    return 0;**
 }
 `
+flowchart: "images/flowchart5.png"
+
   },
   water: {
   title: 'Water Distribution System',
@@ -2942,7 +2950,8 @@ int main(){
 **    return 0;**
 }
 
-`
+`flowchart: "images/flowchart6.png"
+
   },
   emergency: {
   title: 'Emergency Response Dispatch System (Hydrology)',
@@ -3765,7 +3774,8 @@ int main() {
 
 
 }
-`
+`flowchart: "images/flowchart7.png"
+
   },
   housing: {
   title: 'Smart Housing Allocation System',
@@ -4290,7 +4300,8 @@ int main() {
 }
 
 
-`
+`flowchart: "images/flowchart8.png"
+
   },
   market: {
   title: 'Smart Market & Commercial Zone Price Analyzer',
@@ -4530,7 +4541,8 @@ int main() {
 **    return 0;**
 }
 
-`
+`flowchart: "images/flowchart9.png"
+
   },
   logistics: {
   title: 'Industrial Logistics & Supply Chain Manager',
@@ -5270,29 +5282,36 @@ int main() {
 
 
 }
-`
+`flowchart: "images/flowchart10.png"
+
   }
 };
 
 function openModal(key){
   document.getElementById('modal').style.display='flex';
-  document.getElementById('title').innerText=data[key].title;
-  document.getElementById('desc').innerHTML=data[key].desc;
-  document.getElementById('code').innerText=data[key].code;
-  document.getElementById('code').style.display='none';
+  document.getElementById('title').innerText = data[key].title;
+  document.getElementById('desc').innerHTML = data[key].desc;
+  document.getElementById('code').innerText = data[key].code;
+  document.getElementById('code').style.display = 'none';
+
+  // set flowchart image
+  const img = document.getElementById('flowchartImg');
+  img.src = data[key].flowchart;
+  img.style.display = 'none'; // hide by default
 }
-function closeModal(){document.getElementById('modal').style.display='none'}
-function toggleCode(){const c=document.getElementById('code');c.style.display=c.style.display==='none'?'block':'none'}
 
+function closeModal(){
+  document.getElementById('modal').style.display='none';
+}
 
-<div style="display:flex; gap:12px; margin-top:15px;">
-  <button onclick="toggleCode()">View Code</button>
-  <button onclick="viewFlowchart()">View Flowchart</button>
-</div>
+function toggleCode(){
+  const c = document.getElementById('code');
+  c.style.display = c.style.display === 'none' ? 'block' : 'none';
+}
 
-<pre id="code"></pre>
-
-
-</script>
+function toggleFlowchart(){
+  const img = document.getElementById('flowchartImg');
+  img.style.display = img.style.display === 'none' ? 'block' : 'none';
+}</script>
 </body>
 </html>
