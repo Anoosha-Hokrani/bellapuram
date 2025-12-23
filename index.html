@@ -5285,53 +5285,14 @@ function closeModal(){document.getElementById('modal').style.display='none'}
 function toggleCode(){const c=document.getElementById('code');c.style.display=c.style.display==='none'?'block':'none'}
 
 
-let currentModule = "";
+<div style="display:flex; gap:12px; margin-top:15px;">
+  <button onclick="toggleCode()">View Code</button>
+  <button onclick="viewFlowchart()">View Flowchart</button>
+</div>
 
-/* MAP MODULE → FLOWCHART IMAGE */
-const flowcharts = {
-  waste: "flowchart/flowchart1.png",
-  parking: "flowchart/flowchart2.png",
-  energy: "flowchart/flowchart3.png",
-  cargo: "flowchart/flowchart4.png",
-  transport: "flowchart/flowchart5.png",
-  water: "flowchart/flowchart6.png",
-  emergency: "flowchart/flowchart7.png",
-  housing: "flowchart/flowchart8.png",
-  market: "flowchart/flowchart9.png",
-  logistics: "flowchart/flowchart10.png"
-};
+<pre id="code"></pre>
 
-/* OPEN MODAL */
-function openModal(type){
-  currentModule = type;
-  document.getElementById("modal").style.display = "flex";
-  document.getElementById("title").innerText = type.toUpperCase();
-  document.getElementById("desc").innerHTML = "Detailed description here...";
-  document.getElementById("code").style.display = "none";
-}
 
-/* CLOSE MODAL */
-function closeModal(){
-  document.getElementById("modal").style.display = "none";
-}
-
-/* TOGGLE CODE */
-function toggleCode(){
-  const codeBox = document.getElementById("code");
-  codeBox.style.display = codeBox.style.display === "block" ? "none" : "block";
-}
-
-/* VIEW FLOWCHART */
-function viewFlowchart(){
-  const img = flowcharts[currentModule];
-  if(img){
-    window.open(img, "_blank");
-  } else {
-    alert("Flowchart not available");
-  }
-}
 </script>
-
-
 </body>
 </html>
